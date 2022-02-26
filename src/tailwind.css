@@ -1,0 +1,186 @@
+
+
+/* padding */
+.pax-10{
+    padding: 10px;
+  }
+ .ptx-15{
+    padding-top: 15px;
+  }
+
+  /* line-height */
+  .lhe-2{
+    line-height: 2em;
+  }
+
+  /* font-weight */
+  .fw-600{
+    font-weight: 600; 
+  }
+
+/* bg-colors */
+  .bg-white{
+    background-color: white;   
+  }
+  .bg-crimson {
+    background-color: #ff236c;
+  }
+  
+  .bg-yellow {
+    background-color: #ffc259;
+  }
+  
+  .bg-violet {
+    background-color: #5d58ef;
+  }
+  
+  .bg-orange {
+    background-color: #ff7f59;
+  }
+
+  /* text-color */
+  .text-white{
+    color:white
+}
+
+/* fontsize */
+
+.fs-20x{
+    font-size: 20px;  
+  }
+ .fs-25x{
+        font-size: 25px;  
+    }
+.fs-3-5r {
+        font-size: 3.5rem;
+      }
+ .fs-50x {
+        font-size: 50px;
+      }
+.text-center{
+      text-align: center;
+  }
+
+/* width */
+.w-100{
+    width: 100%;
+}
+/* cards */
+.cards {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  
+  .card-in-sect {
+    width: 90%;
+    margin: auto;
+  }
+  
+  .card-round {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    width: 25vw;
+    height: 25vw;
+    border-radius: 50%;
+    margin: auto;
+  }
+  
+ 
+  
+  .card {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background: #fff;
+    margin: 2rem;
+    display: inline-block;
+    height: auto;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    border-radius: 22px 22px 22px 22px;
+    box-shadow: 0px 10px 60px -10px rgb(91 36 161 / 25%);
+  }
+
+  @media screen and (min-width: 600px) {
+    .cards{
+    width: 100%;
+    }
+     .card-in-sect {
+        width: 100%;
+        margin: auto;
+       }
+  .card {
+        margin: 1rem;
+        width: 30%;
+      }
+      .cul-card {
+        display: flex;
+      }
+    
+      .cul-card-in {
+        width: 25%;
+      }
+    }
+
+/* card-2 */
+ 
+  .cul-card {
+    width: 100%;
+    height: auto;
+    padding: 30px;
+  }
+  
+  .cul-card-in {
+    background: #fff;
+    padding: 20px;
+    display: inline-block;
+    height: auto;
+    position: relative;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .cul-card-head{
+    width: 100%;
+    text-align: center;
+  }
+  
+  /*slider */
+  .slider-container {
+    height: auto;
+    width: 100%;
+    padding: 20px;
+    color: white;
+    background-size: initial;
+    background-image: url("https://www.elegantthemes.com/layouts/wp-content/uploads/2018/11/day_care_bg_01.png"),
+      linear-gradient(135deg, #08aeea 0%, #2ad);
+  
+    border-radius: 38px 38px 38px 38px;
+  }
+  
+
+  .slider-head h2 {
+     font-size: 2rem;
+  }
+  
+  @media screen and (min-width: 600px) {
+  .slider-container {
+    padding: 50px;
+  }
+
+  .slider-head  {
+    font-size: 3rem;
+  }
+
+  .tester {
+    width: 80%;
+  }
+
+  .pax-md-50x {
+    padding: 50px;
+  }
+
+}

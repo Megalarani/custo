@@ -7,18 +7,19 @@ const defaults = {
       container: {
         label: "Container Styles",
         // value: "Hero hds-container bg-primary hds-text-color"
-        value: "culm"
+        value: "bg-white"
       },
       section: {
         label: "Section Styles",
         // value: "hds-section"
-        value: "curriculam-heading"
+        value: "cul-card-head"
       },
       text: {
         large_text_style: {
           label: "Large Text Style",
-          value: "hds-title__large mb-sm font-black"
+          value: "fs-3-5"
         },
+       
         large_text: {
           label: "Large Text",
           value: "Curiculum",
@@ -32,7 +33,7 @@ const defaults = {
       layout: {
         label: "Layout",
         // value: "grid grid-cols-1 md:grid-cols-2 md:gap-lg"
-        value: "container curriculam"
+        value: "container cul-card"
       }
     }
   },
@@ -40,11 +41,11 @@ const defaults = {
     data: {
       container: {
         label: "Container",
-        value: "curriculam-col"
+        value: "cul-card-in "
       },
      layout: {
         label: "layout",
-        value: "cardin"
+        value: "card-in-sect"
       },
         icon: {
             container:{
@@ -54,7 +55,7 @@ const defaults = {
       text: {
         large_text_style: {
           label: "Large Text Style",
-          value: "hds-title__large mb-sm font-black"
+          value: " pax-10 fs-20x"
         },
         large_text: {
           label: "Large Text",
@@ -63,7 +64,7 @@ const defaults = {
         },
         small_text_style: {
           label: "Small Text Style",
-          value: "hds-copy mb-lg md:mb-md"
+          value: "fs-20x"
         },
         small_text: {
           label: "Small Text",
@@ -78,11 +79,11 @@ const defaults = {
     data: {
       container: {
         label: "Container",
-        value: "curriculam-col"
+        value: "cul-card-in "
       },
      layout: {
         label: "layout",
-        value: "cardin"
+        value: "card-in-sect"
       },
         icon: {
             container:{
@@ -92,7 +93,7 @@ const defaults = {
       text: {
         large_text_style: {
           label: "Large Text Style",
-          value: "hds-title__large mb-sm font-black"
+          value: " pax-10 fs-20x"
         },
         large_text: {
           label: "Large Text",
@@ -101,7 +102,7 @@ const defaults = {
         },
         small_text_style: {
           label: "Small Text Style",
-          value: "hds-copy mb-lg md:mb-md"
+          value: "fs-20x"
         },
         small_text: {
           label: "Small Text",
@@ -116,21 +117,21 @@ const defaults = {
     data: {
       container: {
         label: "Container",
-        value: "curriculam-col"
+        value: "cul-card-in "
       },
      layout: {
         label: "layout",
-        value: "cardin"
+        value: "card-in-sect"
       },
         icon: {
             container:{
             label: "layout",
-            value: "cardin"}
+            value: "card-in-sect"}
          },
       text: {
         large_text_style: {
           label: "Large Text Style",
-          value: "hds-title__large mb-sm font-black"
+          value: " pax-10 fs-20x"
         },
         large_text: {
           label: "Art",
@@ -139,7 +140,7 @@ const defaults = {
         },
         small_text_style: {
           label: "Small Text Style",
-          value: "hds-copy mb-lg md:mb-md"
+          value: "fs-20x"
         },
         small_text: {
           label: "Small Text",
@@ -154,21 +155,23 @@ const defaults = {
     data: {
       container: {
         label: "Container",
-        value: "curriculam-col"
+  
+  
+        value: "cul-card-in "
       },
      layout: {
         label: "layout",
-        value: "cardin"
+        value: "card-in-sect"
       },
         icon: {
             container:{
             label: "layout",
-            value: "cardin"}
+            value: "card-in-sect"}
          },
       text: {
         large_text_style: {
           label: "Large Text Style",
-          value: "hds-title__large mb-sm font-black"
+          value: " pax-10 fs-20x"
         },
         large_text: {
           label: "Large Text",
@@ -177,7 +180,7 @@ const defaults = {
         },
         small_text_style: {
           label: "Small Text Style",
-          value: "hds-copy mb-lg md:mb-md"
+          value: "fs-20x"
         },
         small_text: {
           label: "Critical Thinking",

@@ -21,7 +21,7 @@ const defaults = {
       layout: {
         label: "Layout",
         // value: "grid grid-cols-1 md:grid-cols-2 md:gap-lg"
-        value: "cardin"
+        value: "card-in-sect"
       }
     }
   },
@@ -29,12 +29,12 @@ const defaults = {
     data: {
       container: {
         label: "Container",
-        value: ""
+        value: "card-round bg-crimson"
       },
       text: {
         large_text_style: {
           label: "Large Text Style",
-          value: "hds-title__large mb-sm font-black"
+          value: "ptx-15 fw-600"
         },
         large_text: {
           label: "Large Text",
@@ -43,7 +43,7 @@ const defaults = {
         },
         small_text_style: {
           label: "Small Text Style",
-          value: "hds-copy mb-lg md:mb-md"
+          value: "lhe-2"
         },
         small_text: {
           label: "Small Text",
@@ -58,21 +58,21 @@ const defaults = {
     data: {
       container: {
         label: "Container",
-        value: ""
+        value: "card-round bg-yellow "
       },
       text: {
         large_text_style: {
           label: "Large Text Style",
-          value: "hds-title__large mb-sm font-black"
+          value: "ptx-15 fw-600"
         },
         large_text: {
           label: "Large Text",
-          value: "Curriculam ",
+          value: "Curriculam",
           rte: true
         },
         small_text_style: {
           label: "Small Text Style",
-          value: "hds-copy mb-lg md:mb-md"
+          value: "lhe-2"
         },
         small_text: {
           label: "Small Text",
@@ -87,12 +87,12 @@ const defaults = {
     data: {
       container: {
         label: "Container",
-        value: ""
+        value: "card-round bg-violet fs-50x"
       },
       text: {
         large_text_style: {
           label: "Large Text Style",
-          value: "hds-title__large mb-sm font-black"
+          value: "ptx-15 fw-600"
         },
         large_text: {
           label: "Large Text",
@@ -101,7 +101,7 @@ const defaults = {
         },
         small_text_style: {
           label: "Small Text Style",
-          value: "hds-copy mb-lg md:mb-md"
+          value: "lhe-2"
         },
         small_text: {
           label: "Small Text",

@@ -7,17 +7,17 @@ const defaults = {
         container: {
           label: "Container Styles",
           // value: "Hero hds-container bg-primary hds-text-color"
-          value: "container test"
+          value: "container slider-container"
         },
         section: {
           label: "Section Styles",
           // value: "hds-section"
-          value: "test-text"
+          value: "text-center"
         },
         text: {
           large_text_style: {
             label: "Large Text Style",
-            value: "hds-title__large mb-sm font-black"
+            value: "text-white slider-head "
           },
           large_text: {
             label: "Large Text",
@@ -32,10 +32,10 @@ const defaults = {
         carousel1: {
             small_text_style: {
                 label: "Small Text Style",
-                value: "hds-copy mb-lg md:mb-md"
+                value: "text-white lhe-2 fs-20x pax-md-50x "
               },
               small_text: {
-                label: "Critical Thinking",
+                label: "slide1-text",
                 value:
                   "   It is a long established fact that a reader will be distracted",
                 rte: true
@@ -44,10 +44,10 @@ const defaults = {
           carousel2: {
             small_text_style: {
                 label: "Small Text Style",
-                value: "hds-copy mb-lg md:mb-md"
+                value: "text-white lhe-2 fs-20x pax-md-50x "
               },
               small_text: {
-                label: "Critical Thinking",
+                label: "Slide2-text",
                 value:
                   "   It is a long established fact that a reader will be distracted",
                 rte: true
@@ -56,10 +56,10 @@ const defaults = {
           carousel3: {
             small_text_style: {
                 label: "Small Text Style",
-                value: "hds-copy mb-lg md:mb-md"
+                value: "text-white lhe-2 fs-20x pax-md-50x "
               },
               small_text: {
-                label: "Critical Thinking",
+                label: "slide3-text",
                 value:
                   "   It is a long established fact that a reader will be distracted",
                 rte: true
