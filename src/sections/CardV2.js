@@ -13,6 +13,17 @@ const defaults = {
         label: "Section Styles",
         // value: "hds-section"
         value: "curriculam-heading"
+      },
+      text: {
+        large_text_style: {
+          label: "Large Text Style",
+          value: "hds-title__large mb-sm font-black"
+        },
+        large_text: {
+          label: "Large Text",
+          value: "Curiculum",
+          rte: true
+        },
       }
     }
   },
@@ -186,8 +197,15 @@ const CardV2 = ({ id }) => {
  
     return (
       <section class={_.section_styles.data.container.value}  id={id} >
-        <div class={_.section_styls.data.section.value}>
-          <h2>Curriculam</h2>
+        <div class={_.section_styles.data.section.value}>
+        {check(_.section_styles.data.text.large_text.value) && (
+              <h2
+                dangerouslySetInnerHTML={{
+                  __html: _.section_styles.data.text.large_text.value
+                }}
+                className={_.section_styles.data.text.large_text_style.value}
+              ></h2>
+            )}
         </div>
         <div class={_.layout.data.layout.value}>
           <div class={_.card1.data.container.value}>
