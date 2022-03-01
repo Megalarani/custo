@@ -42,7 +42,10 @@ const Sidebar = () => {
   ];
   return (
     <>
-      <div className="col-md-3 col-lg-2 left_col p-0">
+      <div
+        className="col-md-3 col-lg-2 left_col p-0 position-fixed"
+        style={{ top: 0, left: 0 }}
+      >
         <div className="scroll-view">
           <div className="nav_title">
             <h5 className="text-center m-0 px-1 py-2">

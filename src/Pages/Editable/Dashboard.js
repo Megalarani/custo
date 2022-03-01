@@ -13,11 +13,11 @@ const Dashboard = () => {
   let id = localStorage.getItem("editablecampuz");
   return (
     <>
-      <div className="main_container row">
+      <div className="main_container row justify-content-end">
         {/* Sidebar */}
         <Sidebar />
         {/* Outlet  */}
-        <div className="col-md-9 col-lg-10 right_col p-2" role="main">
+        <div className="col-md-9 col-lg-10 right_col p-0 pl-1" role="main">
           {/* Top Navigation */}
           <Navbar />
           <Routes>
