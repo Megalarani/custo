@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --primary: #dc3545;
+  --secondary: #fff;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+p,
+label,
+.row,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
 
-.App-header {
-  background-color: #282c34;
+.scroll-view {
   min-height: 100vh;
+  box-shadow: 5px 0 5px -5px #333;
+}
+
+.list-item a {
+  font-size: 14px;
+  color: var(--primary);
+  padding: 0.5rem;
   display: flex;
-  flex-direction: column;
+  width: 100%;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-decoration: none;
+  letter-spacing: 1.5px;
+}
+
+.list-item a svg {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 10px;
+}
+
+.list-item a.active {
   color: white;
+  font-weight: 100;
+  border: none;
+  background: rgb(255, 58, 58);
+  background: linear-gradient(
+    79deg,
+    rgba(255, 58, 58, 1) 0%,
+    rgba(247, 247, 247, 1) 100%,
+    rgba(242, 235, 234, 1) 100%
+  );
 }
 
-.App-link {
-  color: #61dafb;
+.list-item a:hover {
+  color: #fff;
+  background: linear-gradient(
+    90deg,
+    rgba(238, 8, 8, 1) 0%,
+    rgba(237, 237, 237, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  border: none;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.list-item a:hover i {
+  color: #fff;
+}
+
+.landing_logo {
+  width: 6%;
+  height: inherit;
+  margin-right: 1rem;
+}
+
+.intro-box {
+    color: #000;
+    padding: 1rem 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    text-decoration: none !important;
+}
+
+.intro-box .icon {
+    width: 9%;
+    margin-right: 10px;
+}
+
+.intro-box:hover {
+    color:  var(--primary);
 }
