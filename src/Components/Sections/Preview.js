@@ -1,11 +1,4 @@
 import React from "react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from "react-accessible-accordion";
 import Navbar1 from "./Navbar/Navbar1";
 import Hero1 from "./Hero/Hero1";
 import Hero2 from "./Hero/Hero2";
@@ -18,7 +11,7 @@ import Gallery1 from "./Gallery/Gallery1";
 import Slider1 from "./Testimonals/Slider1";
 import Footer1 from "./Footer/Footer1";
 
-const AllSections = () => {
+const Preview = () => {
   const items = [
     {
       heading: "Menubar",
@@ -57,29 +50,33 @@ const AllSections = () => {
       content: [{ component: Footer1, name: "Footer_1" }],
     },
   ];
+  const CreateComponent = ({ component }) => {
+    const Component = component;
+    return <Component />;
+  };
   return (
-    <div className="all-section-list bg-light col-2 p-0">
-      <h6 className="px-2 py-3 text-center text-uppercase">All Sections</h6>
-      {/* allowMultipleExpanded */}
-      {/* command for multiple expand - doesn't auto close */}
-      <Accordion allowZeroExpanded>
-        {items.map((item, index) => (
-          <AccordionItem key={index}>
-            <AccordionItemHeading>
-              <AccordionItemButton>{item.heading}</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              {item.content.map((section, index) => (
-                <p key={index} className="inner-accordion-list">
-                  {section.name}
-                </p>
-              ))}
-            </AccordionItemPanel>
-          </AccordionItem>
-        ))}
-      </Accordion>
+    <div className="col-10 p-2">
+      <h3 className="text-center p-2" style={{ color: "var(--primary)" }}>
+        Campuzone provides you with various options
+      </h3>
+      {items.map((single, index) => (
+        <div key={index * 11}>
+          <h6 className="text-primary text-capitalize px-2 py-3">
+            {single.heading}
+          </h6>
+          <div className="row">
+            {single.content.map((section, index) => (
+              <div key={`${section}` + `${index}`} className="col-6 p-2">
+                <iframe style={{width: "100%"}}>
+                  <CreateComponent component={section.component} />
+                </iframe>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default AllSections;
+export default Preview;

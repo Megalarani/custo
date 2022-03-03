@@ -10,7 +10,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className="navbar justify-content-end p-2 border-bottom">
+      <div className="navbar justify-content-end p-2 border-bottom" style={{height: "9vh"}}>
         <div className="row w-50 align-items-center justify-content-end">
           <p className="w-auto text-center">
             Welcome <span className="text-uppercase" style={{color: "var(--primary)"}}>{name}</span>
