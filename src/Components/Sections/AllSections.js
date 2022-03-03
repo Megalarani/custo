@@ -18,22 +18,21 @@ import Gallery1 from "./Gallery/Gallery1";
 import Slider1 from "./Testimonals/Slider1";
 import Footer1 from "./Footer/Footer1";
 
-const AllSections = () => {
-  const items = [];
+const AllSections = (props) => {
   return (
     <div className="all-section-list bg-light col-2 p-0">
       <h6 className="px-2 py-3 text-center text-uppercase">All Sections</h6>
       {/* allowMultipleExpanded */}
       {/* command for multiple expand - doesn't auto close */}
       <Accordion allowZeroExpanded>
-        {items.map((item, index) => (
+        {props.section.map((item, index) => (
           <AccordionItem key={index}>
             <AccordionItemHeading>
-              <AccordionItemButton>{item.heading}</AccordionItemButton>
+              <AccordionItemButton>{item.group}</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              {item.content.map((section, index) => (
-                <p key={index} className="inner-accordion-list">
+              {item.variants.map((section) => (
+                <p key={section.id} className="inner-accordion-list">
                   {section.name}
                 </p>
               ))}

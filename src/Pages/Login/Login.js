@@ -1,42 +1,26 @@
-import { useNavigate } from "react-router-dom";
-import {  auth } from "../../services/firebase";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import {  useState } from "react";
-import Dashboard from "../Editable/Dashboard";
+import { useState, useContext } from "react";
+import { AppContext } from "../../Context/Context";
 
 const Login = (props) => {
-  const navigate = useNavigate();
+  const { userAuthentication } = useContext(AppContext);
   const [loading, setloading] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
-  // const currentuser = useAuth();
-  // const emailRef = useRef();
-  // const passwordRef = useRef();
-  const clearErrors = () => {
-    setEmailError("");
-    setPasswordError("");
-  };
-  onAuthStateChanged(auth, (currentuser) => {
-    setUser(currentuser);
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
   });
-  console.log(user,"ak")
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const user = signInWithEmailAndPassword(auth, email, password).then(
-        (res) => {
-          localStorage.setItem("editablecampuz",user);
-          user && navigate("/admin");
-        }
-      );
-      console.log(user);
-    } catch (error) {
-      alert(error.message);
-      console.log(error);
-    }
+  const handleLogin = (e) => {
+    console.log(user);
+    userAuthentication(e, "login", user);
+  };
+  const onChangeHandler = (event) => {
+    event.preventDefault();
+    let val = event.target.value;
+    setUser((prevState) => {
+      return {
+        ...prevState,
+        [event.target.name]: val,
+      };
+    });
   };
   return (
     <>
@@ -52,42 +36,40 @@ const Login = (props) => {
               <label for="exampleInputEmail1 text-center ">Email address</label>
               <input
                 type="email"
+                name="email"
                 required
-                value={email}
+                value={user.email}
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
+                onChange={onChangeHandler}
                 // onChange={(e) => setEmail(e.target.valve)}
               />
-              <p className="errorMsg">{emailError}</p>
+              {/* <p className="errorMsg">{emailError}</p> */}
             </div>
             <div className="form-group">
               <label for="exampleInputPassword1 text-center ">Password</label>
               <input
                 type="password"
+                name="password"
                 required
                 class="form-control"
-                value={password}
+                value={user.password}
                 id="exampleInputPassword1"
                 placeholder="Password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
+                onChange={onChangeHandler}
                 // ref={passwordRef}
                 // onChange={(e) => setPassword(e.target.valve)}
               />
-              <p className="errorMsg">{passwordError}</p>
+              {/* <p className="errorMsg">{passwordError}</p> */}
             </div>
             <div className="btnContainer ">
               <button
                 onClick={handleLogin}
                 className="btn btn-danger px-3 mx-2"
               >
-             Log in
+                Log in
               </button>
             </div>
           </form>
