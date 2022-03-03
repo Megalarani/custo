@@ -1,44 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DraggableList from "../../Components/Layout/DraggableList";
-import Heros from "../../Components/Home/Home/Hero";
-import Card from "../../Components/Home/Home/Card";
-import About from "../../Components/Home/Home/About";
-import Video from "../../Components/Home/Home/Video";
-import Visit from "../../Components/Home/Home/Visit";
-import Preschool from "../../Components/Home/Home/Preschool";
-import Curriculum from "../../Components/Home/Home/Curriculum";
-import Testimonal from "../../Components/Home/Home/Testimonal";
-import Gallery from "../../Components/Home/Home/Gallery";
-import Contact from "../../Components/Home/Home/Contact";
-import { db } from "../../services/firebase";
-import { collection, getDocs } from "firebase/firestore";
-
 const Layout = () => {
   const [sectionsList, setSectionsList] = useState([]);
   const [layout, setLayout] = useState([]);
-  const [school, setSchool] = useState(null);
-  useEffect(() => {
-    // console.log("useeffect");
-    // let list = [];
-    // db.collection("school")
-    //   .get()
-    //   .then((data) => {
-    //     data.forEach((doc) => {
-    //       list.push(doc.data());
-    //     });
-    //     setSchool(list);
-    //   });
-    getData();
-  }, []);
-
-  async function getData() {
-    const querySnapshot = await getDocs(collection(db, "school"));
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      setSchool(doc.data());
-    });
-  }
   const items = [
     {
       heading: "Menubar",
@@ -80,15 +45,7 @@ const Layout = () => {
     }
     setSectionsList(tempArr);
   }
-  const Footer = () => {
-    return (
-      <footer>
-        <div class="ft-col">
-          <h2>Copyrights©Divicare </h2>
-        </div>
-      </footer>
-    );
-  };
+
   return (
     <>
       <div className="row">
@@ -99,21 +56,7 @@ const Layout = () => {
           >
             <DraggableList sectionsList={sectionsList} />
           </div>
-          <div className="col-10 p-0">
-            <section class="head">
-              <Heros school={school} />
-              <Card />
-            </section>
-            <About school={school} />
-            <Video school={school} />
-            <Visit />
-            <Preschool />
-            <Curriculum />
-            <Gallery school={school} />
-            <Testimonal school={school} />
-            <Contact school={school} />
-            <Footer />
-          </div>
+          <div className="col-10 p-0"></div>
         </DragDropContext>
       </div>
     </>

@@ -19,44 +19,7 @@ import Slider1 from "./Testimonals/Slider1";
 import Footer1 from "./Footer/Footer1";
 
 const AllSections = () => {
-  const items = [
-    {
-      heading: "Menubar",
-      content: [{ component: Navbar1, name: "Navbar_1" }],
-    },
-    {
-      heading: "Hero",
-      content: [
-        { component: Hero1, name: "Hero _1" },
-        { component: Hero2, name: "Hero _2" },
-        { component: Hero3, name: "Hero _3" },
-        { component: Hero4, name: "Hero _4" },
-      ],
-    },
-    {
-      heading: "Card",
-      content: [
-        { component: Card1, name: "Card _1" },
-        { component: Card2, name: "Card _2" },
-      ],
-    },
-    {
-      heading: "Gallery",
-      content: [{ component: Gallery1, name: "Gallery_1" }],
-    },
-    {
-      heading: "Testimonals",
-      content: [{ component: Slider1, name: "Slider_1" }],
-    },
-    {
-      heading: "Contact",
-      content: [{ component: Form1, name: "Form_1" }],
-    },
-    {
-      heading: "Footer",
-      content: [{ component: Footer1, name: "Footer_1" }],
-    },
-  ];
+  const items = [];
   return (
     <div className="all-section-list bg-light col-2 p-0">
       <h6 className="px-2 py-3 text-center text-uppercase">All Sections</h6>
