@@ -7,10 +7,11 @@ import About from "../../Components/Home/Home/About";
 import Video from "../../Components/Home/Home/Video";
 import Visit from "../../Components/Home/Home/Visit";
 import Preschool from "../../Components/Home/Home/Preschool";
+import Curriculum from "../../Components/Home/Home/Curriculum";
 import Testimonal from "../../Components/Home/Home/Testimonal";
 import Gallery from "../../Components/Home/Home/Gallery";
 import Contact from "../../Components/Home/Home/Contact";
-import { db } from "../services/firebase";
+import { db } from "../../services/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 const Layout = () => {
