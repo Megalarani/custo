@@ -22,12 +22,13 @@ const Login = (props) => {
   onAuthStateChanged(auth, (currentuser) => {
     setUser(currentuser);
   });
-  
+  console.log(user,"ak")
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const user = signInWithEmailAndPassword(auth, email, password).then(
         (res) => {
+          localStorage.setItem("editablecampuz",user);
           user && navigate("/admin");
         }
       );
