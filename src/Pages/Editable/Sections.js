@@ -1,5 +1,4 @@
 import React from "react";
-import "../../Css/User.css";
 import AllSections from "../../Components/Sections/AllSections";
 import Preview from "../../Components/Sections/Preview";
 

@@ -10,6 +10,8 @@ import Edit from "./Edit";
 import Settings from "./Settings";
 
 const Dashboard = () => {
+  const [section, setSection] = useState([]);
+  const [layout, setLayout] = useState([]);
   let id = localStorage.getItem("editablecampuz");
   return (
     <>
@@ -22,11 +24,18 @@ const Dashboard = () => {
           <Navbar />
           <Routes>
             <Route path="settings" element={<Settings />}></Route>
-            <Route path="edit" element={<Edit />}></Route>
-            <Route path="layout" element={<Layout />}></Route>
-            <Route path="sections" element={<Sections />}></Route>
+            <Route path="edit" element={<Edit layout={layout} />}></Route>
+            <Route path="layout" element={<Layout layout={layout} />}></Route>
+            <Route
+              path="sections"
+              element={<Sections section={section} />}
+            ></Route>
             <Route path="styleguide" element={<StyleGuide />}></Route>
-            <Route index path="dashboard" element={<Landing data={id} />}></Route>
+            <Route
+              index
+              path="dashboard"
+              element={<Landing data={id} />}
+            ></Route>
           </Routes>
         </div>
       </div>
