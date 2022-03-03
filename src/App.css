@@ -201,3 +201,13 @@ h6 {
   width: 3px;
   background-color: #ccc;
 }
+/* login */
+.Lg-form {
+  font-weight: 600;
+  height: 100vh;
+  background: rgb(255, 58, 58);
+}
+.Lg-form .btn {
+  background: rgb(255, 58, 58);
+
+}
