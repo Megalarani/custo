@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
+import { db } from "../../services/firebase";
+import { getDoc, setDoc, getDocs, doc } from "firebase/firestore";
 import Navbar from "../../Components/Navbar/Navbar";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Landing from "./Landing";
@@ -9,9 +11,33 @@ import Layout from "./Layout";
 import Edit from "./Edit";
 import Settings from "./Settings";
 
-const Dashboard = () => {
-  const [section, setSection] = useState([]);
-  const [layout, setLayout] = useState([]);
+const Dashboard = (props) => {
+  const [sections, setSections] = useState([]);
+  const [layoutlist, setLayoutlist] = useState([]);
+
+  useEffect(() => {
+    getlayout();
+    getsections();
+  }, []);
+  async function getsections() {
+    const docRef = doc(db, "sections", "AUr5VAcL3OwGlnHrbm5I");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setSections(docSnap.data());
+    } else {
+      console.log("No Such Document");
+    }
+  }
+  async function getlayout() {
+    const docRef = doc(db, "layout", "yprpJe1AkDdPMOqwtgRppoFgX8D3");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setLayoutlist(docSnap.data());
+    } else {
+      console.log("No Such Document");
+    }
+  }
+  console.log(layoutlist, "ak");
   let id = localStorage.getItem("editablecampuz");
   return (
     <>
@@ -24,11 +50,11 @@ const Dashboard = () => {
           <Navbar />
           <Routes>
             <Route path="settings" element={<Settings />}></Route>
-            <Route path="edit" element={<Edit layout={layout} />}></Route>
-            <Route path="layout" element={<Layout layout={layout} />}></Route>
+            <Route path="edit" element={<Edit layoutlist={layoutlist} />}></Route>
+            <Route path="layout" element={<Layout layoutlist={layoutlist} />}></Route>
             <Route
               path="sections"
-              element={<Sections section={section} />}
+              element={<Sections sections={sections} />}
             ></Route>
             <Route path="styleguide" element={<StyleGuide />}></Route>
             <Route
