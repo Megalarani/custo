@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DraggableList from "../../Components/Layout/DraggableList";
 import Heros from "../../Components/Home/Home/Hero";
@@ -9,6 +9,9 @@ import Visit from "../../Components/Home/Home/Visit";
 import Preschool from "../../Components/Home/Home/Preschool";
 import Testimonal from "../../Components/Home/Home/Testimonal";
 import Gallery from "../../Components/Home/Home/Gallery";
+import Contact from "../../Components/Home/Home/Contact";
+import { db } from "../services/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const Layout = () => {
   const [sectionsList, setSectionsList] = useState([]);
