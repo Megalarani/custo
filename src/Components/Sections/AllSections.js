@@ -6,6 +6,7 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
+import { LocalSections } from "../../utilitis/LocalSections";
 
 const AllSections = (props) => {
   return (
@@ -14,7 +15,7 @@ const AllSections = (props) => {
       {/* allowMultipleExpanded */}
       {/* command for multiple expand - doesn't auto close */}
       <Accordion allowZeroExpanded>
-        {props.data.map((item, index) => (
+        {LocalSections.map((item, index) => (
           <AccordionItem key={index}>
             <AccordionItemHeading>
               <AccordionItemButton>{item.group}</AccordionItemButton>
@@ -22,7 +23,7 @@ const AllSections = (props) => {
             <AccordionItemPanel>
               {item.variants.map((section) => (
                 <p key={section.id} className="inner-accordion-list">
-                  {section.name}
+                  {section.id}
                 </p>
               ))}
             </AccordionItemPanel>
