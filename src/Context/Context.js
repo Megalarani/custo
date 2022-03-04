@@ -1,43 +1,36 @@
 import React, { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../services/firebase";
 
-// const [user, setUser] = useState(null);
+const AuthContext = React.createContext({
+  user: "",
+  logout: () => {},
+});
 
-// onAuthStateChanged(auth, (currentuser) => {
-//   setUser(currentuser);
-// });
+export const AuthContextProvider = (props) => {
+  const [user, setUser] = useState("");
+  let navigate = useNavigate();
+  const logoutHandler = () => {
+    auth
+      .signOut()
+      .then(() => {
+        console.log("Signed out successfully!!!");
+        localStorage.removeItem("editablecampuz");
+        navigate("/", { replace: true });
+      })
+      .catch((e) => console.log(e));
+  };
 
-const userId = auth.currentUser;
-// const navigate = useNavigate();
-
-const userAuthentication = async (event, actionType, data) => {
-  event.preventDefault();
-  switch (actionType) {
-    case "login":
-      try {
-        signInWithEmailAndPassword(auth, data.email, data.password).then(
-          (res) => {
-            console.log("success");
-            localStorage.setItem("editablecampuz", userId.uid);
-            // navigate(`/${userId.uid}/dashboard`);
-          }
-        );
-        // console.log(user);
-      } catch (error) {
-        alert(error.message);
-        console.log(error);
-      }
-      return;
-    case "logout":
-      //   setUser();
-      localStorage.clear("editablecampuz");
-      return;
-    default:
-      return;
-  }
+  return (
+    <AuthContext.Provider
+      value={{
+        user: user,
+        logout: logoutHandler,
+      }}
+    >
+      {props.children}
+    </AuthContext.Provider>
+  );
 };
 
-export { userAuthentication };
-export const AppContext = createContext();
+export default AuthContext;

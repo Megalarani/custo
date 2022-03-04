@@ -5,8 +5,8 @@ import Preview from "../../Components/Sections/Preview";
 const Sections = (props) => {
   return (
     <div className="row p-0">
-      <AllSections section={props.section} />
-      <Preview section={props.section} />
+      <AllSections data={props.sections} />
+      <Preview data={props.sections} />
     </div>
   );
 };
