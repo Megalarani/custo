@@ -29,9 +29,10 @@ const Preview = (props) => {
           <div className="row">
             {single.variants.map((section) => (
               <div key={section.id} className="col-6 p-2">
-                {/* <iframe style={{width: "100%"}}>
-                </iframe> */}
+                <div  style={{zoom: "0.4"}}>
+           
                 <CreateComponent component={section.id} />
+                </div>
               </div>
             ))}
           </div>
