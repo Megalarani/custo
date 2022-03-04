@@ -7,7 +7,10 @@ const Preview = (props) => {
     return <Component />;
   };
   return (
-    <div className="col-10 p-2">
+    <div
+      className="col-10 p-2 special-scroll"
+      style={{ height: "91vh", overflowY: "auto" }}
+    >
       <h3 className="text-center p-2" style={{ color: "var(--primary)" }}>
         Campuzone provides you with various options
       </h3>
