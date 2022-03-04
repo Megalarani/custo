@@ -9,7 +9,7 @@ const Preview = (props) => {
   return (
     <div
       className="col-10 p-2 special-scroll"
-      style={{ height: "91vh", overflowY: "auto" }}
+      style={{ height: "91vh",overflowX: "hidden" ,overflowY: "auto" }}
     >
       <h3 className="text-center p-2" style={{ color: "var(--primary)" }}>
         Campuzone provides you with various options
@@ -21,8 +21,12 @@ const Preview = (props) => {
           </h6>
           <div className="row">
             {single.variants.map((section) => (
-              <div key={section.id} className="col-6 p-2">
-                <div id={section.id} style={{ zoom: "0.4" }}>
+              <div key={section.id} className="col-6 p-1">
+                <div
+                  className="p-2 border"
+                  id={section.id}
+                  style={{ zoom: "0.6" }}
+                >
                   <CreateComponent component={section.c} />
                 </div>
               </div>

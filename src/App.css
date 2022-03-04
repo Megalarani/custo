@@ -10,6 +10,10 @@ body {
   --secondary: #fff;
 }
 
+img {
+   max-width: 100%;
+}
+
 p,
 label,
 .row,

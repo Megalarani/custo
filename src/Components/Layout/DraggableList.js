@@ -1,53 +1,44 @@
 import React, { useState } from "react";
-import { Droppable, Draggable } from "react-beautiful-dnd";
-import styled from "styled-components";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from "react-accessible-accordion";
+import { LocalSections } from "../../utilitis/LocalSections";
 
 const DraggableList = (props) => {
-  const Item = styled.div`
-    display: flex;
-    color: #000;
-    user-select: none;
-    padding: 0.5rem;
-    align-items: flex-start;
-    align-content: flex-start;
-    line-height: 1.5;
-    border-radius: 3px;
-    background: #fff;
-  `;
+  const CreateComponent = ({ component }) => {
+    const Component = component;
+    return <Component />;
+  };
   return (
     <>
-      <Droppable droppableId="droppablearea">
-        {(provided, snapshot) => (
-          <div
-            className="droppablearea"
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {props.sectionsList.map((list, index) => (
-              <>
-                {/* <Item>{list}</Item> */}
-                <Draggable
-                  key={list}
-                  draggableId={list}
-                  index={index}
-                  renderClone
-                >
-                  {(provided) => (
-                    <Item
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
-                      {list}
-                    </Item>
-                  )}
-                </Draggable>
-              </>
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
+      <div className="all-section-list bg-light col-2 p-0">
+        <h6 className="px-2 py-3 text-center text-uppercase">All Sections</h6>
+        {/* allowMultipleExpanded */}
+        {/* command for multiple expand - doesn't auto close */}
+        <Accordion allowZeroExpanded>
+          {LocalSections.map((item, index) => (
+            <AccordionItem key={index}>
+              <AccordionItemHeading>
+                <AccordionItemButton>{item.group}</AccordionItemButton>
+              </AccordionItemHeading>
+              <AccordionItemPanel>
+                {item.variants.map((section) => (
+                  <div key={section.id}>
+                    <p className="pl-2 pb-0 inner-accordion-list">{section.id}</p>
+                    <div className="m-4 p-3 border border-primary" id={section.id} style={{ zoom: "0.2" }}>
+                      <CreateComponent component={section.c} />
+                    </div>
+                  </div>
+                ))}
+              </AccordionItemPanel>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
     </>
   );
 };
