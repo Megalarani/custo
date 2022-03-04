@@ -25,7 +25,7 @@ const AllSections = (props) => {
       {/* allowMultipleExpanded */}
       {/* command for multiple expand - doesn't auto close */}
       <Accordion allowZeroExpanded>
-        {props.section.map((item, index) => (
+        {props.data.map((item, index) => (
           <AccordionItem key={index}>
             <AccordionItemHeading>
               <AccordionItemButton>{item.group}</AccordionItemButton>

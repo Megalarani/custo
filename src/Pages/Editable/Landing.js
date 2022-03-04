@@ -22,7 +22,7 @@ const Landing = (props) => {
       <div className="row mt-4">
         <div className="col-md-5 p-1 pr-2">
           <Link
-            to={`/${props.id}/styleguide`}
+            to={`/${props.data}/styleguide`}
             className="intro-box row align-items-center mb-3"
           >
             <StyleIcon className="icon" />
@@ -30,7 +30,7 @@ const Landing = (props) => {
             <span className="ml-2">→</span>
           </Link>
           <Link
-            to={`/${props.id}/layout`}
+            to={`/${props.data}/layout`}
             className="intro-box row align-items-center"
           >
             <LayoutIcon className="icon" />

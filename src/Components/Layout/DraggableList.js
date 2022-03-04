@@ -25,7 +25,7 @@ const DraggableList = (props) => {
           >
             {props.sectionsList.map((list, index) => (
               <>
-                <Item>{list}</Item>
+                {/* <Item>{list}</Item> */}
                 <Draggable
                   key={list}
                   draggableId={list}

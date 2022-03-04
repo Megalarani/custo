@@ -1,21 +1,53 @@
 import { useState, useContext } from "react";
-import { AppContext } from "../../Context/Context";
+import AuthContext from "../../Context/Context";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../services/firebase";
 
 const Login = (props) => {
-  const { userAuthentication } = useContext(AppContext);
   const [loading, setloading] = useState(false);
-  const [user, setUser] = useState({
+  const [error, setError] = useState(null);
+  const [userCred, setUserCred] = useState({
     email: "",
     password: "",
   });
-  const handleLogin = (e) => {
-    console.log(user);
-    userAuthentication(e, "login", user);
+  const [user, setUser] = useState("");
+  const navigate = useNavigate();
+  const titleCase = (str) => {
+    return str
+      .split("-")
+      .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  };
+  onAuthStateChanged(auth, (currentuser) => {
+    setUser(currentuser);
+  });
+
+  const userId = auth.currentUser;
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (userCred.email === "") {
+      setError("Enter Email");
+    } else if (userCred.password === "") {
+      setError("Enter Password");
+    } else {
+      signInWithEmailAndPassword(auth, userCred.email, userCred.password)
+        .then((res) => {
+          console.log("success");
+          localStorage.setItem("editablecampuz", userId.uid);
+          user && navigate(`/${userId.uid}/dashboard`);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const message = errorCode.substring(5);
+          setError(titleCase(message));
+        });
+    }
   };
   const onChangeHandler = (event) => {
     event.preventDefault();
     let val = event.target.value;
-    setUser((prevState) => {
+    setUserCred((prevState) => {
       return {
         ...prevState,
         [event.target.name]: val,
@@ -38,7 +70,7 @@ const Login = (props) => {
                 type="email"
                 name="email"
                 required
-                value={user.email}
+                value={userCred.email}
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
@@ -48,14 +80,14 @@ const Login = (props) => {
               />
               {/* <p className="errorMsg">{emailError}</p> */}
             </div>
-            <div className="form-group">
+            <div className="form-group mb-0">
               <label for="exampleInputPassword1 text-center ">Password</label>
               <input
                 type="password"
                 name="password"
                 required
                 class="form-control"
-                value={user.password}
+                value={userCred.password}
                 id="exampleInputPassword1"
                 placeholder="Password"
                 onChange={onChangeHandler}
@@ -64,10 +96,15 @@ const Login = (props) => {
               />
               {/* <p className="errorMsg">{passwordError}</p> */}
             </div>
+            {error && (
+              <small className="text-danger text-right d-block pt-2">
+                {error}
+              </small>
+            )}
             <div className="btnContainer ">
               <button
                 onClick={handleLogin}
-                className="btn btn-danger px-3 mx-2"
+                className="btn btn-danger mt-2 px-3"
               >
                 Log in
               </button>
@@ -75,7 +112,6 @@ const Login = (props) => {
           </form>
         </div>
       </div>
-      {/* <Dashboard user={user}/> */}
     </>
   );
 };

@@ -12,8 +12,8 @@ import Edit from "./Edit";
 import Settings from "./Settings";
 
 const Dashboard = (props) => {
-  const [sections, setSections] = useState();
-  const [layoutlist, setLayoutlist] = useState();
+  const [sections, setSections] = useState(null);
+  const [layoutlist, setLayoutlist] = useState(null);
 
   useEffect(() => {
     getlayout();
@@ -23,7 +23,7 @@ const Dashboard = (props) => {
     const docRef = doc(db, "sections", "AUr5VAcL3OwGlnHrbm5I");
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setSections(docSnap.data());
+      setSections(docSnap.data().section);
     } else {
       console.log("No Such Document");
     }
@@ -37,8 +37,8 @@ const Dashboard = (props) => {
       console.log("No Such Document");
     }
   }
-  console.log(sections, layoutlist, "ak");
-  let id = localStorage.getItem("editablecampuz");
+  const id = localStorage.getItem("editablecampuz");
+  console.log(sections, layoutlist,id, "ak");
   return (
     <>
       <div className="main_container row justify-content-end">
@@ -52,7 +52,7 @@ const Dashboard = (props) => {
             <Route path="layout" element={<Layout />}></Route>
             <Route
               path="sections"
-              element={<Sections sections={sections} />}
+              element={sections && <Sections sections={sections} />}
             ></Route>
             <Route path="styleguide" element={<StyleGuide />}></Route>
             <Route
