@@ -19,7 +19,7 @@ const Preview = (props) => {
           <div className="row">
             {single.variants.map((section) => (
               <div key={section.id} className="col-6 p-2">
-                <div id={section.id}>
+                <div id={section.id} style={{ zoom: "0.4" }}>
                   <CreateComponent component={section.c} />
                 </div>
               </div>

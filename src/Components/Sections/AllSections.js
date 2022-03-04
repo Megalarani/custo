@@ -6,17 +6,6 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
-import Navbar1 from "./Navbar/Navbar1";
-import Hero1 from "./Hero/Hero1";
-import Hero2 from "./Hero/Hero2";
-import Hero3 from "./Hero/Hero3";
-import Hero4 from "./Hero/Hero4";
-import Form1 from "./Contact/Form1";
-import Card1 from "./Card/Card1";
-import Card2 from "./Card/Card2";
-import Gallery1 from "./Gallery/Gallery1";
-import Slider1 from "./Testimonals/Slider1";
-import Footer1 from "./Footer/Footer1";
 
 const AllSections = (props) => {
   return (
