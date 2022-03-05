@@ -1,17 +1,17 @@
 import React from "react";
-
+import styles from "./Hero2.module.css";
 const Hero2 = () => {
     const data = {
         container: {
-          style: "about container",
+          style:  `container ${styles.about}`,
           value: "",
         },
         heading: {
-          style: "",
+          style: `${styles.about_h2}`,
           value: "About Us",
         },
         paragraph:{
-            style:"",
+            style:`${styles.about_p}`,
             value:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout"
         }
       };

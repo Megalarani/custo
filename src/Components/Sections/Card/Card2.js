@@ -11,7 +11,7 @@ const Card2 = () => {
         value: "Curriculam"  
        },
        layout: {
-        style: `container${styles.curriculam}`,
+        style: `container ${styles.curriculam}`,
         value: "",
       },
         cards :{
@@ -41,8 +41,8 @@ const Card2 = () => {
        card3:{
     
        heading :{
-        style: "Art",
-        value: "" 
+        style: "",
+        value: "Art" 
        }, 
         paragraph: {
         style: "",
@@ -52,8 +52,8 @@ const Card2 = () => {
        card4:{
     
         heading :{
-         style: "Critical Thinking",
-         value: "" 
+         style: "",
+         value: "Critical Thinking" 
         }, 
          paragraph: {
          style: "",

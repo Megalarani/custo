@@ -10,10 +10,7 @@ const Card1 = () => {
        
         cards :{
             card1:{
-            layout: {
-                style: `col-md-3 ${styles.card}`,
-                value: "",
-              },
+         
         heading :{
         style: "",
         value: "Enrollement ",  
@@ -25,10 +22,7 @@ const Card1 = () => {
        }
     },
     card2:{
-       layout: {
-        style: `col-md-3  ${styles.card} ${styles.card2}`,
-        value: "",
-      },
+      
        heading :{
         style: "",
         value: "Curriculam",  
@@ -39,10 +33,7 @@ const Card1 = () => {
 
        }},
        card3:{
-       layout: {
-        style: `col-md-3 ${styles.card}`,
-        value: "",
-      },
+      
        heading :{
         style: "Programs",
         value: "" 
@@ -60,7 +51,7 @@ const Card1 = () => {
         <>
          <div class={data.container.style}>
             
-                <div class={data.cards.card1.layout.style}>
+                <div class={ `col-md-3  ${styles.card} `}>
                 <div class={`${styles.cardin}`}>
                 <div class= {`${styles.round} ${styles.ron1}`}  >
                     <i class="fa fa-pencil-square-o icon" aria-hidden="true"></i>
@@ -71,7 +62,7 @@ const Card1 = () => {
                   </p>
                 </div>
               </div> 
-              <div class={data.cards.card2.layout.style}>
+              <div class={ `col-md-3  ${styles.card} ${styles.card2}`}>
           <div class={`${styles.cardin}`}>
             <div class= {`${styles.round} ${styles.ron2}`}  >
               <i class="fa fa-file icon" aria-hidden="true"></i>
@@ -82,7 +73,7 @@ const Card1 = () => {
             </p>
           </div>
         </div>
-        <div class={data.cards.card3.layout.style}>
+        <div class={ `col-md-3  ${styles.card}`}>
           <div class= {`${styles.cardin}`} >
             <div class={`${styles.round} ${styles.ron3} ${styles.icon}`}>
               <i class="fa fa-calendar-o"></i>

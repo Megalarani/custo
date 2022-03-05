@@ -1,9 +1,9 @@
 import React from "react";
-
+import styles from "./Navbar1.module.css";
 const Navbar1 = () => {
     const data = {
         container: {
-          style: "navbar navbar-expand-md navbar-dark",
+          style: "navbar navbar-expand-md shadow",
           value: "",
         },
         headerlogo: {
@@ -11,27 +11,27 @@ const Navbar1 = () => {
           value: "/Images/mob.png",
         },
        menu1 :{
-        style:"nav-link",   
+        style: `nav-link ${styles.navlink}`,   
         value:"Home",
            
        },
        menu2 :{
-        style:"nav-link",   
+        style:`nav-link ${styles.navlink}`,   
         value:"About",
            
        },
        menu3 :{
-        style:"nav-link",   
+        style:`nav-link ${styles.navlink}`,   
         value:"Gallery",
            
        },
        menu4 :{
-        style:"nav-link",   
+        style:`nav-link ${styles.navlink}`,   
         value:"curriculam",
            
        },
        menu5 :{
-        style:"nav-link",   
+        style:`nav-link ${styles.navlink}`,   
         value:"Contact us",
            
        }
@@ -41,13 +41,13 @@ const Navbar1 = () => {
         <>
          <nav class={data.container.style}>
         {/* <!-- Brand --> */}
-        <div class={data.headerlogo.style}>
-          <img class="img-fluid" src={data.headerlogo.value}/>
+        <div class={`${styles.headerlogo}`}>
+          <img class= {`img-fluid ${styles.img_logo}`} src={data.headerlogo.value}/>
         </div>
 
         {/* <!-- Toggler/collapsibe Button --> */}
         <button
-          class="navbar-toggler"
+          class={`navbar-toggler ${styles.navbartog }`}
           type="button"
           data-toggle="collapse"
           data-target="#collapsibleNavbar"
@@ -56,7 +56,7 @@ const Navbar1 = () => {
         </button>
 
         {/* <!-- Navbar links --> */}
-        <div class="navbar-collapse" id="collapsibleNavbar">
+        <div class= {`navbar-collapse ${styles.navbarcollapse }`}  id="collapsibleNavbar">
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class={data.menu1.style} href="#Home">

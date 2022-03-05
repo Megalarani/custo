@@ -1,17 +1,17 @@
 import React from "react";
-
+import styles from "./Hero3.module.css";
 const Hero3 = () => {
     const data = {
         container: {
-          style: "col-10  boxen",
+          style: `col-10 ${styles.boxen}`,
           value: "",
         },
         heading: {
-          style: "",
+          style: `${styles.boxen_visitus_h2 }`,
           value: "Come Visit Us",
         },
         paragraph:{
-            style:"",
+            style:`${styles.boxen_visitus_p }`,
             value:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout"
         }
       };
@@ -21,11 +21,11 @@ const Hero3 = () => {
         <>
                <section>
             <div class={data.container.style}>
-                <div class="visitus">
+                <div class={` ${styles.visitus}`}>
                     <h2 className={data.heading.style}  > {data.heading.value}</h2>
                    
                     <p className={data.paragraph.style}>{data.paragraph.value} </p>
-                    <button type="button" class="btn btn-warning">Schedule a Tour</button>
+                    <button type="button" class={`btn btn-warning ${styles.boxen_visitus_btn}`}>Schedule a Tour</button>
                 </div>
             </div>
         </section>
