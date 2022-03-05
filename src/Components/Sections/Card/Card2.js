@@ -1,9 +1,9 @@
 import React from "react";
-
+import styles from "./Card2.module.css";
 const Card2 = () => {
     const data = {
         container: {
-          style: "curriculam-heading",
+          style: `${styles.curriculamheading}`,
           value: "",
         },
        heading :{
@@ -11,7 +11,7 @@ const Card2 = () => {
         value: "Curriculam"  
        },
        layout: {
-        style: "container curriculam",
+        style: `container${styles.curriculam}`,
         value: "",
       },
         cards :{
@@ -69,13 +69,13 @@ const Card2 = () => {
     return (
         <>
           <section class="culm" id="#curriculam">
-      <div class="curriculam-heading">
-        <h2>Curriculam</h2>
+      <div class={data.container.style}>
+        <h2 class={data.heading.style}>{data.heading.value}</h2>
       </div>
       <div class={data.layout.style}>
-        <div class="curriculam-col">
-          <div class="cardin">
-            <div class="round ron3 ">
+        <div class={`${styles.curriculamcol}`}>
+          <div class={`${styles.cardin}`}>
+            <div class={`${styles.round} ${styles.ron3}`}>
               <i class="fa fa-pencil-square icon" aria-hidden="true"></i>
             </div>
             <h2 className={data.cards.card1.heading.style} >{data.cards.card1.heading.value}</h2>
@@ -84,9 +84,9 @@ const Card2 = () => {
             </p>
           </div>
         </div>
-        <div class="curriculam-col">
-          <div class="cardin">
-            <div class="round ron1">
+        <div class={`${styles.curriculamcol}`}>
+          <div class={`${styles.cardin}`}>
+            <div class={`${styles.round} ${styles.ron1}`}>
               <i class="fa fa-flask icon" aria-hidden="true"></i>
             </div>
             <h2 className={data.cards.card2.heading.style}  >{data.cards.card2.heading.value}</h2>
@@ -95,9 +95,9 @@ const Card2 = () => {
             </p>
           </div>
         </div>
-        <div class="curriculam-col">
-          <div class="cardin">
-            <div class="round ron2 icon">
+        <div class={`${styles.curriculamcol}`}>
+          <div class={`${styles.cardin}`}>
+            <div class={`${styles.round} ${styles.ron2} ${styles.icon}` }>
               <i class="fa fa-picture-o" aria-hidden="true"></i>
             </div>
             <h2 className={data.cards.card3.heading.style} >{data.cards.card3.heading.value}</h2>
@@ -106,9 +106,9 @@ const Card2 = () => {
             </p>
           </div>
         </div>
-        <div class="curriculam-col">
-          <div class="cardin">
-            <div class="round ron4 icon">
+        <div class={`${styles.curriculamcol}`}>
+          <div class={`${styles.cardin}`}>
+            <div class={`${styles.round} ${styles.ron3} ${styles.icon}` }>
               <i class="fa fa-toggle-off" aria-hidden="true"></i>
             </div>
             <h2 className={data.cards.card4.heading.style} >{data.cards.card4.heading.value}</h2>

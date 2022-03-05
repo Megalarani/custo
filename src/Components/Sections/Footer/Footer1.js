@@ -1,9 +1,9 @@
 import React from "react";
-
+import styles from "./Footer.module.css";
 const Footer1 = () => {
   const data = {
     container: {
-      style: "ft-col",
+      style: `${styles.ftcol}`,
       value: "",
     },
     heading: {

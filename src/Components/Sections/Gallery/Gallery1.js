@@ -1,9 +1,9 @@
 import React from "react";
-
+import styles from "./Gallery.module.css";
 const Gallery1 = () => {
   const data = {
     container: {
-      styles: "gallery-heading",
+      styles: `${styles.galleryheading}`,
       value: "",
     },
     heading: {
@@ -36,15 +36,15 @@ const Gallery1 = () => {
   return (
     <>
       <section id="#Gallery">
-        <div class="gallery-heading">
-          <h2>Gallery</h2>
+        <div class={data.container.styles}>
+          <h2  class={data.heading.styles}>{data.heading.value}</h2>
         </div>
 
-        <div class="gallery">
+        <div class={`${styles.gallery}`}>
           {data.images.map((item, index) => (
             <a href="#" class="gal" key={index}>
-              <div class="gal-wrapper">
-                <div class="hidden-cover"></div>
+              <div class={`${styles.gal_wrapper} `}>
+                <div class={`${styles.hidden_cover} `}></div>
                 <img src={item.imgLink} alt={item.imgName} />
                 <h4>{item.imgName}</h4>
               </div>

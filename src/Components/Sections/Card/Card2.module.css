@@ -1,0 +1,99 @@
+
+.culm {
+    background-color: white;
+  }
+  
+  .curriculam {
+    width: 100%;
+    height: auto;
+    padding: 30px;
+  }
+  
+  .curriculamcol {
+    background: #fff;
+    padding: 20px;
+    display: inline-block;
+    height: auto;
+    position: relative;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .curriculamcol p {
+    font-size: 20px;
+  }
+  
+  .curriculamcol h2 {
+    padding: 10px;
+    font-size: 25px;
+  }
+  
+  .curriculamheading {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .curriculamheading h2 {
+    font-size: 3.5rem;
+  }
+
+  .cardin {
+    width: 90%;
+    margin: auto;
+  }
+  .ron1 {
+    background-color: #ff236c;
+  }
+  
+  .ron2 {
+    background-color: #ffc259;
+  }
+  
+  .ron3 {
+    background-color: #5d58ef;
+  }
+  
+  .ron4 {
+    background-color: #ff7f59;
+  }  
+
+  @media screen and (min-width: 600px) {
+  .cards {
+    width: 100%;
+  }
+
+  .cardin {
+    width: 100%;
+    margin: auto;
+  }
+
+  .round {
+    width: 8vw;
+    height: 8vw;
+  }
+
+  .card {
+    margin: 1rem;
+    width: 30%;
+  }
+
+  .card h2 {
+    padding-top: 15px;
+    font-weight: 600;
+  }
+
+  .card p {
+    line-height: 2em;
+  }
+
+  .card2 {
+    margin-bottom: 150px;
+  }
+  .curriculam {
+    display: flex;
+  }
+
+  .curriculam-col {
+    width: 25%;
+  }
+}

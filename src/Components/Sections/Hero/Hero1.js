@@ -1,5 +1,5 @@
 import React from "react";
-
+import styles from "./Hero1.module.css";
 
 const Hero1 = () => {
 
@@ -19,14 +19,14 @@ const Hero1 = () => {
   };
 
   return <>
-      <div class="hero" id="#Home">
+      <div class={`${styles.hero}`} id="#Home">
       <div class={data.container.style}>
         <img src="/Images/text.png" class="pretext" />
       </div>
-      <div class="texter container">
+      <div class={`container ${styles.texter}`}>
         <h2 className={data.heading.style}    >{data.heading.value}</h2>
         <p className={data.paragraph.style}  >{data.paragraph.value}</p>
-        <button type="button" class="btn">
+        <button type="button" class={` ${styles.btn}`}>
           GET STARTED
         </button>
       </div>
