@@ -45,6 +45,28 @@
   font-size: 3.5rem;
 }
 
+.inputHeading {
+  padding-top: 15px;
+  width: 100%;
+  font-weight: 600;
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: 0;
+  text-align: center;
+}
+
+.inputPara {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  line-height: 2em;
+  outline: 0;
+  text-align: center;
+}
+
 .cardin {
   width: 90%;
   margin: auto;
@@ -93,7 +115,7 @@
   .card p {
     line-height: 2em;
   }
-
+  
   .card2 {
     margin-bottom: 150px;
   }
