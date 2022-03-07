@@ -64,7 +64,10 @@ const Login = (props) => {
         .then((res) => {
           console.log("success");
           setloading(true);
-      alert("sucessfully registered")
+          setTimeout(() => {
+            alert("sucessfully registered")
+            }, 3000);
+   
       setSignup("registered")
         })
         .catch((error) => {
