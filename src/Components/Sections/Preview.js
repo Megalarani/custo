@@ -25,7 +25,7 @@ const Preview = (props) => {
                 <div
                   className="p-2 border"
                   id={section.id}
-                  style={{ zoom: "0.6" }}
+                  style={{ zoom: "0.5" }}
                 >
                   <CreateComponent component={section.c} />
                 </div>
