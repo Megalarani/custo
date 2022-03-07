@@ -1,9 +1,13 @@
-import React, { Component, useState, useEffect } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import React, { useContext, useState, useEffect } from "react";
 import DraggableList from "../../Components/Layout/DraggableList";
 import Preview from "../../Components/Layout/Preview";
+import AuthContext from "../../Context/Context";
 
 const Layout = () => {
+  const ctx = useContext(AuthContext);
+  useEffect(()=>{
+    ctx.updateIsEditable(false);
+  },[])
   const [sectionsList, setSectionsList] = useState([]);
   const [layout, setLayout] = useState([]);
   return (

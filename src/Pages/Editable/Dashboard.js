@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
-import { db } from "../../services/firebase";
-import { getDoc, setDoc, getDocs, doc } from "firebase/firestore";
 import Navbar from "../../Components/Navbar/Navbar";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Landing from "./Landing";
@@ -12,33 +10,6 @@ import Edit from "./Edit";
 import Settings from "./Settings";
 
 const Dashboard = (props) => {
-  const [sections, setSections] = useState(null);
-  const [layoutlist, setLayoutlist] = useState(null);
-
-  useEffect(() => {
-    getlayout();
-    getsections();
-  }, []);
-  async function getsections() {
-    const docRef = doc(db, "sections", "AUr5VAcL3OwGlnHrbm5I");
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setSections(docSnap.data().section);
-    } else {
-      console.log("No Such Document");
-    }
-  }
-  async function getlayout() {
-    const docRef = doc(db, "layout", "yprpJe1AkDdPMOqwtgRppoFgX8D3");
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setLayoutlist(docSnap.data());
-    } else {
-      console.log("No Such Document");
-    }
-  }
-  const id = localStorage.getItem("editablecampuz");
-  console.log(sections, layoutlist,id, "ak");
   return (
     <>
       <div className="main_container row justify-content-end">
@@ -50,15 +21,12 @@ const Dashboard = (props) => {
             <Route path="settings" element={<Settings />}></Route>
             <Route path="edit" element={<Edit />}></Route>
             <Route path="layout" element={<Layout />}></Route>
-            <Route
-              path="sections"
-              element={sections && <Sections sections={sections} />}
-            ></Route>
+            <Route path="sections" element={<Sections />}></Route>
             <Route path="styleguide" element={<StyleGuide />}></Route>
             <Route
               index
               path="dashboard"
-              element={<Landing data={id} />}
+              element={<Landing />}
             ></Route>
           </Routes>
         </div>

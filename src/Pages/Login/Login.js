@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../services/firebase";
 
 const Login = (props) => {
+  const ctx = useContext(AuthContext);
   const [loading, setloading] = useState(false);
   const [error, setError] = useState(null);
   const [userCred, setUserCred] = useState({
@@ -34,10 +35,12 @@ const Login = (props) => {
       signInWithEmailAndPassword(auth, userCred.email, userCred.password)
         .then((res) => {
           console.log("success");
-          localStorage.setItem("editablecampuz", userId.uid);
+          setloading(true);
+          ctx.setUserId(userId.uid);
           user && navigate(`/${userId.uid}/dashboard`);
         })
         .catch((error) => {
+          setloading(false);
           const errorCode = error.code;
           const message = errorCode.substring(5);
           setError(titleCase(message));

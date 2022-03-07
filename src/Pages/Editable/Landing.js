@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../Assests/logo.svg";
 import { ReactComponent as StyleIcon } from "../../Assests/style.svg";
 import { ReactComponent as LayoutIcon } from "../../Assests/layout.svg";
+import AuthContext from "../../Context/Context";
 
 const Landing = (props) => {
+  const ctx = useContext(AuthContext);
+  useEffect(() => {
+    ctx.updateIsEditable(false);
+  },[]);
   return (
     <div className="p-2">
       <div className="container-fluid p-0">
@@ -22,7 +27,7 @@ const Landing = (props) => {
       <div className="row mt-4">
         <div className="col-md-5 p-1 pr-2">
           <Link
-            to={`/${props.data}/styleguide`}
+            to={`/${ctx.userId}/styleguide`}
             className="intro-box row align-items-center mb-3"
           >
             <StyleIcon className="icon" />
@@ -30,7 +35,7 @@ const Landing = (props) => {
             <span className="ml-2">→</span>
           </Link>
           <Link
-            to={`/${props.data}/layout`}
+            to={`/${ctx.userId}/layout`}
             className="intro-box row align-items-center"
           >
             <LayoutIcon className="icon" />
