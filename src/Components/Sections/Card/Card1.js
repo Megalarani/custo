@@ -1,95 +1,120 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styles from "./Card1.module.css";
+import AuthContext from "../../../Context/Context";
+
 const Card1 = () => {
-    const data = {
-        container: {
-          style: `row ${styles.cards}`,
+  const ctx = useContext(AuthContext);
+  const data = {
+    container: {
+      style: `row ${styles.cards}`,
+      value: "",
+    },
+    cards: {
+      card1: {
+        heading: {
+          style: "",
+          value: "Enrollement ",
+        },
+        paragraph: {
+          style: "",
+          value:
+            "It is a long established fact that a reader will be distracted",
+        },
+      },
+      card2: {
+        heading: {
+          style: "",
+          value: "Curriculam",
+        },
+        paragraph: {
+          style: "",
+          value:
+            "  It is a long established fact that a reader will be distracted",
+        },
+      },
+      card3: {
+        heading: {
+          style: "Programs",
           value: "",
         },
-
-       
-        cards :{
-            card1:{
-         
-        heading :{
-        style: "",
-        value: "Enrollement ",  
-       }, 
         paragraph: {
-        style: "",
-        value: "It is a long established fact that a reader will be distracted",  
-
-       }
+          style: "",
+          value:
+            "  It is a long established fact that a reader will be distracted",
+        },
+      },
     },
-    card2:{
-      
-       heading :{
-        style: "",
-        value: "Curriculam",  
-       }, 
-        paragraph: {
-        style: "",
-        value: "  It is a long established fact that a reader will be distracted",  
+  };
 
-       }},
-       card3:{
-      
-       heading :{
-        style: "Programs",
-        value: "" 
-       }, 
-        paragraph: {
-        style: "",
-        value: "  It is a long established fact that a reader will be distracted",  
+  const [localData, setLocalData] = useState(ctx.websiteData.card1);
+  let Identifier = "card1";
+  console.log(localData, "local");
+  const onChangeHandler = (e, details, index) => {
+    setLocalData((prevState) => {
+      let updatedData = null;
+      if (e.target.id === "heading") {
+        updatedData = {
+          ...details,
+          heading: e.target.value,
+        };
+      } else {
+        updatedData = {
+          ...details,
+          content: e.target.value,
+        };
+      }
+      prevState[index] = updatedData;
+      return [...prevState];
+    });
+  };
 
-       }}
- }
-      };
-
-
-    return (
-        <>
-         <div class={data.container.style}>
-            
-                <div class={ `col-md-3  ${styles.card} `}>
-                <div class={`${styles.cardin}`}>
-                <div class= {`${styles.round} ${styles.ron1}`}  >
-                    <i class="fa fa-pencil-square-o icon" aria-hidden="true"></i>
-                  </div>
-                  <h2 >{data.cards.card1.heading.value} </h2>
-                  <p >{data.cards.card1.paragraph.style}<p/ >
-                  {data.cards.card1.paragraph.value}
+  return (
+    <>
+      {ctx.isEditable ? (
+        <div className="row py-3 justify-content-end">
+          <div className="saveButton" onClick={() => ctx.updateData(localData,Identifier)}>
+            Save
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      <div class={data.container.style}>
+        {localData.map((details, index) => (
+          <div class={`col-md-3  ${styles.card} `} key={index}>
+            <div class={`${styles.cardin}`}>
+              <div class={`${styles.round}`}>
+                <i class="fa fa-pencil-square-o icon" aria-hidden="true"></i>
+              </div>
+              {ctx.isEditable ? (
+                <>
+                  <input
+                    onChange={(e) => onChangeHandler(e, details, index)}
+                    className={`${styles.inputHeading}`}
+                    id="heading"
+                    value={details.heading}
+                  />
+                  <textarea
+                    onChange={(e) => onChangeHandler(e, details, index)}
+                    className={`${styles.inputPara}`}
+                    id="content"
+                    value={details.content}
+                  />
+                </>
+              ) : (
+                <>
+                  <h2>{details.heading}</h2>
+                  <p className={data.cards.card1.paragraph.style}>
+                    {details.content}
                   </p>
-                </div>
-              </div> 
-              <div class={ `col-md-3  ${styles.card} ${styles.card2}`}>
-          <div class={`${styles.cardin}`}>
-            <div class= {`${styles.round} ${styles.ron2}`}  >
-              <i class="fa fa-file icon" aria-hidden="true"></i>
+                </>
+              )}
             </div>
-            <h2 className={data.cards.card2.heading.style} >{data.cards.card2.heading.value}</h2>
-            <p className={data.cards.card2.paragraph.style}>
-            {data.cards.card2.paragraph.value}
-            </p>
           </div>
-        </div>
-        <div class={ `col-md-3  ${styles.card}`}>
-          <div class= {`${styles.cardin}`} >
-            <div class={`${styles.round} ${styles.ron3} ${styles.icon}`}>
-              <i class="fa fa-calendar-o"></i>
-            </div>
-            <h2 className={data.cards.card3.heading.style} >{data.cards.card3.heading.value}</h2>
-            <p className={data.cards.card3.paragraph.style}>
-            {data.cards.card3.paragraph.value}
-            </p>
-          </div>
-        </div>
-      
-      </div> 
-        
-        
-        </>
-    )
-}
+        ))}
+      </div>
+    </>
+  );
+};
 
 export default Card1;

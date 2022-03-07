@@ -1,128 +1,128 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styles from "./Card2.module.css";
+import AuthContext from "../../../Context/Context";
 const Card2 = () => {
-    const data = {
-        container: {
-          style: `${styles.curriculamheading}`,
-          value: "",
-        },
-       heading :{
-        style: "",
-        value: "Curriculam"  
-       },
-       layout: {
-        style: `container ${styles.curriculam}`,
-        value: "",
-      },
-        cards :{
-            card1:{
-           
-        heading :{
-        style: "",
-        value: "Reading/write ",  
-       }, 
-        paragraph: {
-        style: "",
-        value: "It is a long established fact that a reader will be distracted",  
-
-       }
+  const ctx = useContext(AuthContext);
+  const data = {
+    container: {
+      style: `${styles.curriculamheading}`,
+      value: "",
     },
-    card2:{
-  
-       heading :{
-        style: "",
-        value: "Maths/science",  
-       }, 
+    heading: {
+      style: "",
+      value: "Curriculam",
+    },
+    layout: {
+      style: `container ${styles.curriculam}`,
+      value: "",
+    },
+    cards: {
+      card1: {
+        heading: {
+          style: "",
+          value: "Reading/write ",
+        },
         paragraph: {
-        style: "",
-        value: "  It is a long established fact that a reader will be distracted",  
-
-       }},
-       card3:{
-    
-       heading :{
-        style: "",
-        value: "Art" 
-       }, 
+          style: "",
+          value:
+            "It is a long established fact that a reader will be distracted",
+        },
+      },
+      card2: {
+        heading: {
+          style: "",
+          value: "Maths/science",
+        },
         paragraph: {
-        style: "",
-        value: "  It is a long established fact that a reader will be distracted",  
+          style: "",
+          value:
+            "  It is a long established fact that a reader will be distracted",
+        },
+      },
+      card3: {
+        heading: {
+          style: "",
+          value: "Art",
+        },
+        paragraph: {
+          style: "",
+          value:
+            "  It is a long established fact that a reader will be distracted",
+        },
+      },
+      card4: {
+        heading: {
+          style: "",
+          value: "Critical Thinking",
+        },
+        paragraph: {
+          style: "",
+          value:
+            "  It is a long established fact that a reader will be distracted",
+        },
+      },
+    },
+  };
+  const [localData, setLocalData] = useState(ctx.websiteData.card2);
+  let Identifier = "card2";
+  console.log(localData, "local");
+  const onChangeHandler = (e, details, index) => {
+    setLocalData((prevState) => {
+      let updatedData = null;
+      if (e.target.id === "heading") {
+        updatedData = {
+          ...details,
+          heading: e.target.value,
+        };
+      } else {
+        updatedData = {
+          ...details,
+          content: e.target.value,
+        };
+      }
+      prevState[index] = updatedData;
+      return [...prevState];
+    });
+  };
 
-       }},
-       card4:{
-    
-        heading :{
-         style: "",
-         value: "Critical Thinking" 
-        }, 
-         paragraph: {
-         style: "",
-         value: "  It is a long established fact that a reader will be distracted",  
- 
-        }}
- }
-      };
-
-
-
-
-    return (
-        <>
-          <section class="culm" id="#curriculam">
-      <div class={data.container.style}>
-        <h2 class={data.heading.style}>{data.heading.value}</h2>
-      </div>
-      <div class={data.layout.style}>
-        <div class={`${styles.curriculamcol}`}>
-          <div class={`${styles.cardin}`}>
-            <div class={`${styles.round} ${styles.ron3}`}>
-              <i class="fa fa-pencil-square icon" aria-hidden="true"></i>
-            </div>
-            <h2 className={data.cards.card1.heading.style} >{data.cards.card1.heading.value}</h2>
-            <p className={data.cards.card1.paragraph.style}>
-             {data.cards.card1.paragraph.value}
-            </p>
+  return (
+    <>
+      {ctx.isEditable ? (
+        <div className="row py-3 justify-content-end">
+          <div
+            className="saveButton"
+            onClick={() => ctx.updateData(localData, Identifier)}
+          >
+            Save
           </div>
         </div>
-        <div class={`${styles.curriculamcol}`}>
-          <div class={`${styles.cardin}`}>
-            <div class={`${styles.round} ${styles.ron1}`}>
-              <i class="fa fa-flask icon" aria-hidden="true"></i>
-            </div>
-            <h2 className={data.cards.card2.heading.style}  >{data.cards.card2.heading.value}</h2>
-            <p className={data.cards.card2.paragraph.style}>
-             {data.cards.card2.paragraph.value}
-            </p>
-          </div>
+      ) : (
+        <></>
+      )}
+      <section class="culm" id="#curriculam">
+        <div class={data.container.style}>
+          <h2 class={data.heading.style}>{data.heading.value}</h2>
         </div>
-        <div class={`${styles.curriculamcol}`}>
-          <div class={`${styles.cardin}`}>
-            <div class={`${styles.round} ${styles.ron2} ${styles.icon}` }>
-              <i class="fa fa-picture-o" aria-hidden="true"></i>
+        <div class={data.layout.style}>
+          {localData.map((details, index) => (
+            <div class={`${styles.curriculamcol}`}>
+              <div class={`${styles.cardin}`}>
+                <div class={`${styles.round} ${styles.ron3}`}>
+                  <i class="fa fa-pencil-square icon" aria-hidden="true"></i>
+                </div>
+                <h2 className={data.cards.card1.heading.style}>
+                  {details.heading}
+                </h2>
+                <p className={data.cards.card1.paragraph.style}>
+                  {details.content}
+                </p>
+              </div>
             </div>
-            <h2 className={data.cards.card3.heading.style} >{data.cards.card3.heading.value}</h2>
-            <p className={data.cards.card3.paragraph.style}>
-             {data.cards.card3.paragraph.value}
-            </p>
-          </div>
+          ))}
         </div>
-        <div class={`${styles.curriculamcol}`}>
-          <div class={`${styles.cardin}`}>
-            <div class={`${styles.round} ${styles.ron3} ${styles.icon}` }>
-              <i class="fa fa-toggle-off" aria-hidden="true"></i>
-            </div>
-            <h2 className={data.cards.card4.heading.style} >{data.cards.card4.heading.value}</h2>
-            <p className={data.cards.card4.paragraph.style}>
-             {data.cards.card4.paragraph.value}
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-        
-        
-        </>
-    )
-}
+      </section>
+    </>
+  );
+};
 
 export default Card2;

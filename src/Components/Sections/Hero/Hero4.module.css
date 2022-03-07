@@ -1,7 +1,8 @@
 .preschool {
   margin-top: 0;
 }
-.head, .inputHeading {
+.head,
+.inputHeading {
   font-family: "Fredoka One", cursive;
   color: #333;
   font-weight: 500;
@@ -26,13 +27,13 @@
   border-radius: 0px 0px 150px 150px;
   overflow: hidden;
 }
-.preschool_text_p, .inputPara {
+.preschool_text_p,
+.inputPara {
   font-size: 20px;
   width: 100%;
   border: none;
   outline: 0;
-height:900px;
-
+  height: 900px;
 
   background: transparent;
 }
@@ -42,27 +43,23 @@ height:900px;
 }
 @media screen and (min-width: 600px) {
   .preschool {
-      margin-top: 0;
-    }
-  
-    .preschool .row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    .bot {
-      background-color: rgb(255, 255, 255);
-      width: 100%;
-    }
-  
-   
-  
-    .rt_pad {
-      padding-right: 0px;
-    }
+    margin-top: 0;
+  }
 
+  .preschool .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
+  .bot {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+  }
+
+  .rt_pad {
+    padding-right: 0px;
+  }
 }
 @media screen and (min-width: 900px) {
   .rt_pad {

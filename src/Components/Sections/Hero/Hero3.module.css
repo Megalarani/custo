@@ -1,61 +1,62 @@
 .boxen {
-    margin: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-  
-    width: 100%;
-    color: white;
-    max-width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    background-image: url(https://www.elegantthemes.com/layouts/wp-content/uploads/2018/11/day_care_bg_02.png),
-      linear-gradient(75deg, #ffbf86 0%, #ff5675 100%) !important;
-    background-position: center;
-  
-    border-radius: 38px 38px 38px 38px;
-  }
-  
-  .visitus {
-    text-align: center;
-    padding-bottom: 10px;
-  }
-  
-  .boxen_visitus_h2, .inputHeading  {
-    color: white;
-  border: none;
-  text-align: center;
-  width: 100%;
-  background: transparent;
-    font-size: 40px;
-    outline: 0;
-    line-height: 1.2em;
-  }
-  ::-webkit-scrollbar {
-    display: none;
-}
-  .boxen_visitus_p, .inputPara {
-    font-family: "Muli", sans-serif;
-  border: none;
-  width: 100%;
-  text-align: center;
-  background: transparent;
-    color: white;
-    outline: 0;
-    font-weight: 600;
-   
-  }
-  
-  .boxen_visitus_btn {
-    margin: auto;
-    background: #ffc259;
-    font-weight: 900;
-    color: white;
-    border-radius: 50px;
-  }
+  margin: auto;
+  margin-top: 0;
+  margin-bottom: 0;
 
-  @media screen and (min-width: 600px) {
+  width: 100%;
+  color: white;
+  max-width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url(https://www.elegantthemes.com/layouts/wp-content/uploads/2018/11/day_care_bg_02.png),
+    linear-gradient(75deg, #ffbf86 0%, #ff5675 100%) !important;
+  background-position: center;
+
+  border-radius: 38px 38px 38px 38px;
+}
+
+.visitus {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.boxen_visitus_h2,
+.inputHeading {
+  color: white;
+  border: none;
+  text-align: center;
+  width: 100%;
+  background: transparent;
+  font-size: 40px;
+  outline: 0;
+  line-height: 1.2em;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.boxen_visitus_p,
+.inputPara {
+  font-family: "Muli", sans-serif;
+  border: none;
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  color: white;
+  outline: 0;
+  font-weight: 600;
+}
+
+.boxen_visitus_btn {
+  margin: auto;
+  background: #ffc259;
+  font-weight: 900;
+  color: white;
+  border-radius: 50px;
+}
+
+@media screen and (min-width: 600px) {
   .boxen {
     height: 500px;
     padding: 50px;

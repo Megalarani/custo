@@ -1,73 +1,71 @@
-
 .culm {
-    background-color: white;
-  }
-  
-  .curriculam {
-    width: 100%;
-    height: auto;
+  background-color: white;
+}
 
-  }
-  .round {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    width: 25vw;
-    height: 25vw;
-    border-radius: 50%;
-    margin: auto;
-  }
-    
-  .curriculamcol {
-    background: #fff;
-    padding: 20px;
-    display: inline-block;
-    height: auto;
-    position: relative;
-    width: 100%;
-    text-align: center;
-  }
-  
-  .curriculamcol p {
-    font-size: 20px;
-  }
-  
-  .curriculamcol h2 {
-    padding: 10px;
-    font-size: 25px;
-  }
-  
-  .curriculamheading {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .curriculamheading h2 {
-    font-size: 3.5rem;
-  }
+.curriculam {
+  width: 100%;
+  height: auto;
+}
+.round {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: 25vw;
+  height: 25vw;
+  border-radius: 50%;
+  margin: auto;
+}
 
-  .cardin {
-    width: 90%;
-    margin: auto;
-  }
-  .ron1 {
-    background-color: #ff236c;
-  }
-  
-  .ron2 {
-    background-color: #ffc259;
-  }
-  
-  .ron3 {
-    background-color: #5d58ef;
-  }
-  
-  .ron4 {
-    background-color: #ff7f59;
-  }  
+.curriculamcol {
+  background: #fff;
+  padding: 20px;
+  display: inline-block;
+  height: auto;
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
 
-  @media screen and (min-width: 600px) {
+.curriculamcol p {
+  font-size: 20px;
+}
+
+.curriculamcol h2 {
+  padding: 10px;
+  font-size: 25px;
+}
+
+.curriculamheading {
+  width: 100%;
+  text-align: center;
+}
+
+.curriculamheading h2 {
+  font-size: 3.5rem;
+}
+
+.cardin {
+  width: 90%;
+  margin: auto;
+}
+.curriculam > .curriculamcol:first-child .round {
+  background-color: #5d58ef;
+}
+
+.curriculam > .curriculamcol:nth-child(2) .round {
+  background-color: #ff7f59;
+}
+
+.curriculam > .curriculamcol:nth-child(3) .round {
+  background-color: #ffc259;
+}
+
+.curriculam > .curriculamcol:nth-child(4) .round {
+  background-color: #ff236c;
+}
+
+@media screen and (min-width: 600px) {
   .cards {
     width: 100%;
   }

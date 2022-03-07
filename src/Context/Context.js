@@ -18,7 +18,6 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = (props) => {
-
   const [websiteData, setWebsiteData] = useState({
     heading1: "Divi Daycare",
     content1:
@@ -32,25 +31,75 @@ export const AuthContextProvider = (props) => {
     heading4: "Our Pre-School. Our Family. Our Community",
     content4:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout",
-    content5: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout",
-     address:"xxx, yyy, zzz - 123123",
-     phone:"99887 766554",
-     email:"sample@gmail.com", 
+    content5:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout",
+    card1: [
+      {
+        heading: "Enrollement",
+        content:
+          "It is a long established fact that a reader will be distracted",
+      },
+      {
+        heading: "Curriculam",
+        content:
+          "It is a long established fact that a reader will be distracted",
+      },
+      {
+        heading: "Programs",
+        content:
+          "It is a long established fact that a reader will be distracted",
+      },
+    ],
+    card2: [
+      {
+        heading: "Reading / Write",
+        content:
+          "It is a long established fact that a reader will be distracted",
+      },
+      {
+        heading: "Maths / Science",
+        content:
+          "It is a long established fact that a reader will be distracted",
+      },
+      {
+        heading: "Art",
+        content:
+          "It is a long established fact that a reader will be distracted",
+      },
+      {
+        heading: "Critical Thinkning",
+        content:
+          "It is a long established fact that a reader will be distracted",
+      },
+    ],
+    address: "xxx, yyy, zzz - 123123",
+    phone: "99887 766554",
+    email: "sample@gmail.com",
   });
   const [user, setUser] = useState("");
-  const [userId, setId] = useState("");
+  const [userId, setId] = useState(localStorage.getItem("EditableCampuz"));
   const [layoutFlow, setLayout] = useState(Layout);
   const [isEditable, setIsEditable] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(userId ? true : false);
   let navigate = useNavigate();
-  const updateData = (data) => {
-    let newArr = Object.keys(data);
-    var temp = newArr.map((i) => {
-      console.log("oldData", websiteData[i]);
-      websiteData[i] = data[i];
-      console.log("updatedData", data[i]);
-    });
+  console.log(userId, isLoggedIn);
+  useEffect(() => {}, []);
+  const updateData = (data, Identifier) => {
+    if (Array.isArray(data) === true) {
+      console.log("Array", Identifier, data);
+      websiteData[Identifier] = data;
+      console.log("updatedData", websiteData[Identifier]);
+    } else {
+      console.log("Object");
+      let newArr = Object.keys(data);
+      var temp = newArr.map((i) => {
+        console.log("oldData", websiteData[i]);
+        websiteData[i] = data[i];
+        console.log("updatedData", data[i]);
+      });
+    }
   };
+  console.log(websiteData, "info");
   const updateLayout = (data) => {
     setLayout(data);
   };
@@ -60,6 +109,7 @@ export const AuthContextProvider = (props) => {
   const setUserId = (uId) => {
     setIsLoggedIn(true);
     sessionStorage.setItem("EditableCampuz", uId);
+    localStorage.setItem("EditableCampuz", uId);
     setId(uId);
   };
   const logoutHandler = () => {
@@ -69,6 +119,7 @@ export const AuthContextProvider = (props) => {
         setIsLoggedIn(false);
         console.log("Signed out successfully!!!");
         sessionStorage.clear("editablecampuz");
+        localStorage.clear("editablecampuz");
         navigate("/login", { replace: true });
       })
       .catch((e) => console.log(e));

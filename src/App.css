@@ -244,6 +244,6 @@ h6 {
   cursor: pointer;
   width: 23%;
   border: none;
-  outline: 0;
+  outline: 0 !important;
   align-items: center;
 }

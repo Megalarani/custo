@@ -1,27 +1,26 @@
-
 .cardin {
-    width: 90%;
-    margin: auto;
-  }
-  
+  width: 90%;
+  margin: auto;
+}
+
 .cards {
-    justify-content: center;
-    display: flex;
-    align-items: center;
-  }
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
 .card {
-    padding-top: 100px;
-    padding-bottom: 100px;
-    background: #fff;
-    margin: 2rem;
-    display: inline-block;
-    height: auto;
-    position: relative;
-    width: 100%;
-    text-align: center;
-    border-radius: 22px 22px 22px 22px;
-    box-shadow: 0px 10px 60px -10px rgb(91 36 161 / 25%);
-  }
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background: #fff;
+  margin: 2rem;
+  display: inline-block;
+  height: auto;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  border-radius: 22px 22px 22px 22px;
+  box-shadow: 0px 10px 60px -10px rgb(91 36 161 / 25%);
+}
 .round {
   display: flex;
   align-items: center;
@@ -32,43 +31,59 @@
   border-radius: 50%;
   margin: auto;
 }
-  .ron1 {
-    background-color: #ff236c;
+.cards > .card:first-child .round {
+  background-color: #ff236c;
+}
+
+.cards > .card:nth-child(2) .round {
+  background-color: #ffc259;
+}
+
+.cards > .card:nth-child(3) .round {
+  background-color: #5d58ef;
+}
+
+.cards > .card:nth-child(4) .round {
+  background-color: #ff7f59;
+}
+
+.card h2,
+.card .inputHeading {
+  padding-top: 15px;
+  width: 100%;
+  font-weight: 600;
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: 0;
+  text-align: center;
+}
+
+.card p {
+  line-height: 2em;
+}
+.card textarea {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  line-height: 2em;
+  outline: 0;
+  text-align: center;
+}
+@media screen and (min-width: 600px) {
+  .cards {
+    width: 100%;
   }
-  
-  .ron2 {
-    background-color: #ffc259;
+
+  .cardin {
+    width: 100%;
+    margin: auto;
   }
-  
-  .ron3 {
-    background-color: #5d58ef;
+
+  .round {
+    width: 8vw;
+    height: 8vw;
   }
-  
-  .ron4 {
-    background-color: #ff7f59;
-  }
-  
-  .card h2 {
-    padding-top: 15px;
-    font-weight: 600;
-  }
-  
-  .card p {
-    line-height: 2em;
-  }
-  @media screen and (min-width: 600px) {
-   .cards {
-        width: 100%;
-      }
-    
-      .cardin {
-        width: 100%;
-        margin: auto;
-      }
-    
-      .round {
-        width: 8vw;
-        height: 8vw;
-      }
-    
-  }  
+}
