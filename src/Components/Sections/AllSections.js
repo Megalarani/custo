@@ -1,4 +1,6 @@
 import React from "react";
+import { useContext, useState } from "react";
+import { HashLink } from 'react-router-hash-link';
 import {
   Accordion,
   AccordionItem,
@@ -7,8 +9,9 @@ import {
   AccordionItemPanel,
 } from "react-accessible-accordion";
 import { LocalSections } from "../../utilitis/LocalSections";
-
+import AuthContext from "../../Context/Context";
 const AllSections = (props) => {
+  const ctx = useContext(AuthContext);
   return (
     <div className="all-section-list bg-light col-2 p-0">
       <h6 className="px-2 py-3 text-center text-uppercase">All Sections</h6>
@@ -22,9 +25,11 @@ const AllSections = (props) => {
             </AccordionItemHeading>
             <AccordionItemPanel>
               {item.variants.map((section) => (
+                <HashLink to={ `#${section.id}`}>
                 <p key={section.id} className="inner-accordion-list">
                   {section.id}
                 </p>
+                </HashLink>
               ))}
             </AccordionItemPanel>
           </AccordionItem>
