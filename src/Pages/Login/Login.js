@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import AuthContext from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../services/firebase";
-
+import Loader from "../../loader/Loader";
 const Login = (props) => {
   const ctx = useContext(AuthContext);
   const [loading, setloading] = useState(false);
@@ -13,6 +13,7 @@ const Login = (props) => {
     password: "",
   });
   const [user, setUser] = useState("");
+  const [signup,setSignup] = useState("");
   const navigate = useNavigate();
   const titleCase = (str) => {
     return str
@@ -35,15 +36,43 @@ const Login = (props) => {
       signInWithEmailAndPassword(auth, userCred.email, userCred.password)
         .then((res) => {
           console.log("success");
-          setloading(true);
+         
+            setloading(true);
           ctx.setUserId(userId.uid);
+          setTimeout(() => {
           user && navigate(`/${userId.uid}/dashboard`);
+          }, 3000);
+         
+         
         })
         .catch((error) => {
           setloading(false);
           const errorCode = error.code;
           const message = errorCode.substring(5);
           setError(titleCase(message));
+        });
+    }
+  };
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    if (userCred.email === "") {
+      setError("Enter Email");
+    } else if (userCred.password === "") {
+      setError("Enter Password");
+    } else {
+      createUserWithEmailAndPassword(auth, userCred.email, userCred.password)
+        .then((res) => {
+          console.log("success");
+          setloading(true);
+      alert("sucessfully registered")
+      setSignup("registered")
+        })
+        .catch((error) => {
+          setloading(false);
+          const errorCode = error.code;
+          const message = errorCode.substring(5);
+          setError(titleCase(message));
+          setSignup("")
         });
     }
   };
@@ -59,6 +88,11 @@ const Login = (props) => {
   };
   return (
     <>
+    {loading && (
+      <>
+      <Loader/>
+      </>
+    )}
       <div className="Lg-form w-100 d-flex align-items-center justify-content-center">
         <div className="col-lg-4 col-sm-5 p-5 shadow bg-white rounded">
           <img
@@ -111,6 +145,16 @@ const Login = (props) => {
               >
                 Log in
               </button>
+             
+              <button
+                onClick={handleSignup}
+                className="btn btn-danger mt-2 mx-2 px-3"
+              >
+               Register
+              </button>
+     
+    
+              
             </div>
           </form>
         </div>
