@@ -247,9 +247,7 @@ h6 {
   outline: 0 !important;
   align-items: center;
 }
-/*  */
-
-
+/*loader*/
 .loader-con{
   height: 100vh;
   width: 100%;
@@ -290,13 +288,10 @@ h6 {
   border-bottom: 30px solid #284D4D;
   animation-delay: 0.2s !important;
 }
-
-
 .sqaure{
   background-color:#DE4F2E;
   animation-delay: 0.5s !important;
 }
-
 @keyframes up {
   0%{
       transform: translateY(0px);
