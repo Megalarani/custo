@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AuthContext from "../../../Context/Context";
 import styles from "./Hero4.module.css";
 const Hero4 = () => {
@@ -18,26 +18,55 @@ const Hero4 = () => {
         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various version",
     },
   };
-
+  const [localData, setLocalData] = useState({
+    heading4: ctx.websiteData.heading4,
+    content4: ctx.websiteData.content4,
+  });
+  const onChangeHandler = (event) => {
+    let val = event.target.value;
+    setLocalData((prevState) => {
+      return {
+        ...prevState,
+        [event.target.id]: val,
+      };
+    });
+  };
   return (
     <>
+    {ctx.isEditable ? (
+        <div className="row py-3 justify-content-end">
+          <div className="saveButton" onClick={()=>ctx.updateData(localData)}>
+            Save
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <div class={data.container.style}>
         <div class="row m-0">
           <div class={`col-md-7 ${styles.boxen}`}>
             <div class={` ${styles.preschool_text}`}>
-              <h2
-                className={data.heading.style}
-                contentEditable={ctx.isEditable}
-              >
-                {" "}
-                {data.heading.value}
-              </h2>
-              <p
-                className={data.paragraph.style}
-                contentEditable={ctx.isEditable}
-              >
-                {data.paragraph.value}{" "}
-              </p>
+            {ctx.isEditable ? (
+            <>
+              <input
+                id="heading4"
+                className={`${styles.inputHeading}`}
+                onChange={onChangeHandler}
+                value={localData.heading4}
+              />
+              <textarea
+                id="content4"
+                className={`${styles.inputPara}`}
+                onChange={onChangeHandler}
+                value={localData.content4}
+              />
+            </>
+          ) : (
+            <>
+              <h2 className={data.heading.style}>{ctx.websiteData.heading4}</h2>
+              <p className={data.paragraph.style}>{ctx.websiteData.content4}</p>
+            </>
+          )}
             </div>
           </div>
           <div class={`col-md-5 ${styles.bot} ${styles.rt_pad}`}>

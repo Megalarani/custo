@@ -1,6 +1,9 @@
-import React from "react";
+
+import React, { useContext, useState } from "react";
+import AuthContext from "../../../Context/Context";
 import styles from "./Form1.module.css";
 const Form1 = () => {
+  const ctx = useContext(AuthContext);
   const data = {
     container: {
       style: ` ${styles.contact}`,
@@ -29,16 +32,57 @@ const Form1 = () => {
   
 
   }
-
+  const [localData, setLocalData] = useState({
+    address: ctx.websiteData.address,
+    phone: ctx.websiteData.phone,
+    email: ctx.websiteData.email,
+    content5:ctx.websiteData.content5
+  });
+  const onChangeHandler = (event) => {
+    let val = event.target.value;
+    setLocalData((prevState) => {
+      return {
+        ...prevState,
+        [event.target.id]: val,
+      };
+    });
+  };
   return (
+
+    
     <>
+     {ctx.isEditable ? (
+        <div className="row py-3 justify-content-end">
+          <div className="saveButton" onClick={()=>ctx.updateData(localData)}>
+            Save
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <section id="#contact">
         <section class={data.container.style}>
           <div class={`${styles.content}`}>
             <h2 className={data.heading.style} >{data.heading.value}</h2>
-            <p className={data.paragraph.style} >
-           {data.paragraph.value}
-            </p>
+            {ctx.isEditable ? (
+            <>
+            
+              <textarea
+                id="content5"
+                className={`${styles.inputPara}`}
+                onChange={onChangeHandler}
+                value={localData.content5}
+              />
+            </>
+          ) : (
+            <>
+              <p className={data.paragraph.style}>{ctx.websiteData.content5}</p>
+            </>
+          )}
+            
+            
+          
+           
           </div>
           <div class={`container ${styles.con}`}>
             <div class={`${styles.contactInfo}`} >
@@ -48,7 +92,22 @@ const Form1 = () => {
                 </div>
                 <div class={`${styles.text_address}`}>
                   <h3>Address</h3>
-                  <p className={data.address.style} >{data.address.value}</p>
+                
+                  {ctx.isEditable ? (
+            <>
+            
+              <textarea
+                id="address"
+                className={`${styles.inputtext}`}
+                onChange={onChangeHandler}
+                value={localData.address}
+              />
+            </>
+          ) : (
+            <>
+              <p className={data.address.style}>{ctx.websiteData.address}</p>
+            </>
+          )}
                 </div>
               </div>
 
@@ -61,7 +120,21 @@ const Form1 = () => {
                 </div>
                 <div class={`${styles.text_address}`}>
                   <h3>Phone</h3>
-                  <p className={data.phone.style} >{data.phone.value}</p>
+                  {ctx.isEditable ? (
+            <>
+            
+              <input
+                id="address"
+                className={`${styles.inputtext}`}
+                onChange={onChangeHandler}
+                value={localData.phone}
+              />
+            </>
+          ) : (
+            <>
+              <p className={data.phone.style}>{ctx.websiteData.phone}</p>
+            </>
+          )}
                 </div>
               </div>
 
@@ -71,7 +144,21 @@ const Form1 = () => {
                 </div>
                 <div class={`${styles.text_address}`}>
                   <h3>Email</h3>
-                  <p className={data.email.style}  >{data.email.value}</p>
+                  {ctx.isEditable ? (
+            <>
+            
+              <input
+                id="email"
+                className={`${styles.inputtext}`}
+                onChange={onChangeHandler}
+                value={localData.email}
+              />
+            </>
+          ) : (
+            <>
+              <p className={data.email.style}>{ctx.websiteData.email}</p>
+            </>
+          )}
                 </div>
               </div>
             </div>

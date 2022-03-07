@@ -18,6 +18,7 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = (props) => {
+
   const [websiteData, setWebsiteData] = useState({
     heading1: "Divi Daycare",
     content1:
@@ -31,6 +32,10 @@ export const AuthContextProvider = (props) => {
     heading4: "Our Pre-School. Our Family. Our Community",
     content4:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout",
+    content5: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout",
+     address:"xxx, yyy, zzz - 123123",
+     phone:"99887 766554",
+     email:"sample@gmail.com", 
   });
   const [user, setUser] = useState("");
   const [userId, setId] = useState("");

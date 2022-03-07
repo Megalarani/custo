@@ -20,8 +20,14 @@
     font-weight: 500px;
   }
   
- .content_p {
+ .content_p,.inputPara {
     font-weight: 500px;
+text-align: center;
+width: 680px;
+
+  background: transparent;
+  border: none;
+  outline: 0;
   }
   
   .contact .container {
@@ -66,10 +72,14 @@
     flex-direction: column;
     
   }
-  .text_address_p {
+  .text_address_p, .inputtext {
     font-size: 16px;
  
     font-weight: 300;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: 0;
   }
  .text_address_h3 {
     font-weight: 600;

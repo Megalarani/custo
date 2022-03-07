@@ -12,7 +12,7 @@ const EditableList = () => {
             className="row align-items-center  bg-light border-white justify-content-center p-2"
             key={item.id}
             style={{
-              border: "0.35rem solid",
+              border: "0.35rem solid ",
               borderBottom: "0",
               cursor: "pointer",
             }}
