@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styles from "./Slider1.module.css";
+import AuthContext from "../../../Context/Context";
 const Slider1 = () => {
+  const ctx = useContext(AuthContext);
     const data = {
         container: {
           style: `container ${styles.test}`,
@@ -16,10 +18,39 @@ const Slider1 = () => {
            paragraph3: "It is a long established fact that a reader will be distracted by the readable",
       }
        }
-   
+       const [localData, setLocalData] = useState(ctx.websiteData.slider1);
+       let Identifier = "slider1";
+       console.log(localData, "local");
+       const onChangeHandler = (e, details, index) => {
+         setLocalData((prevState) => {
+           let updatedData = null;
+           if (e.target.id === "heading") {
+             updatedData = {
+               ...details,
+               heading: e.target.value,
+             };
+           } else {
+             updatedData = {
+               ...details,
+               content: e.target.value,
+             };
+           }
+           prevState[index] = updatedData;
+           return [...prevState];
+         });
+       };
 
     return (
         <>
+          {ctx.isEditable ? (
+        <div className="row py-3 justify-content-end">
+          <div className="saveButton" onClick={() => ctx.updateData(localData,Identifier)}>
+            Save
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
           <section>
       <div class={data.container.style}>
         <div class="text-center ">
@@ -44,20 +75,31 @@ const Slider1 = () => {
                 data-slide-to="2"
               ></li>
             </ol>
-            <div class="carousel-inner">
-            <div class="carousel-inner">
-    <div class="carousel-item active">
-      <p>{data.slides.paragraph1}</p>
-    </div>
-    <div class="carousel-item">
-    <p>{data.slides.paragraph1}</p>
-    </div>
-    <div class="carousel-item">
-    <p>{data.slides.paragraph1}</p>
-    </div>
-  </div>
-                
-              <a class="carousel-control-prev"
+            
+        
+            {localData.map((details, index) => (
+              <div class="carousel-inner ">
+              {ctx.isEditable ? (
+                <>   <div class="carousel-item active">
+                    <textarea
+                    onChange={(e) => onChangeHandler(e, details, index)}
+                    className={`${styles.inputPara}`}
+                    id="content"
+                    value={details.content}
+                  />
+                   </div>
+                </>
+              ) : (
+                <>
+                <div class="carousel-item active">
+                  <p>
+                    {details.content}
+                  </p>
+                  </div>
+                  
+                </>
+              )}
+                 <a class="carousel-control-prev"
                 href="#carouselExampleIndicators"
                 role="button"
                 data-slide="prev">
@@ -80,7 +122,11 @@ const Slider1 = () => {
                 <span class="sr-only">Next</span>
               </a>
             </div>
-          </div>
+        
+    ))}
+  
+         </div>       
+           
         </div>
       </div>
     </section>

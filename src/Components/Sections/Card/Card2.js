@@ -69,17 +69,12 @@ const Card2 = () => {
   const onChangeHandler = (e, details, index) => {
     setLocalData((prevState) => {
       let updatedData = null;
-      if (e.target.id === "heading") {
-        updatedData = {
-          ...details,
-          heading: e.target.value,
-        };
-      } else {
+      if (e.target.id === "content") {
         updatedData = {
           ...details,
           content: e.target.value,
         };
-      }
+      } 
       prevState[index] = updatedData;
       return [...prevState];
     });

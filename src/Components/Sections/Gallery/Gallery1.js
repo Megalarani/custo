@@ -1,6 +1,8 @@
-import React from "react";
-import styles from "./Gallery.module.css";
+import React, { useContext, useState } from "react";
+import AuthContext from "../../../Context/Context";
+import styles from "./Gallery1.module.css";
 const Gallery1 = () => {
+  const ctx = useContext(AuthContext);
   const data = {
     container: {
       styles: `${styles.galleryheading}`,
@@ -33,20 +35,70 @@ const Gallery1 = () => {
       },
     ],
   };
+  const [localData, setLocalData] = useState(ctx.websiteData.gallery1);
+  let Identifier = "gallery1";
+  console.log(localData, "local");
+  const onChangeHandler = (e, details, index) => {
+    setLocalData((prevState) => {
+      let updatedData = null;
+      if (e.target.id === "imgName") {
+        updatedData = {
+          ...details,
+          imgName: e.target.value,
+        };
+      } else {
+        updatedData = {
+          ...details,
+          imgLink: e.target.value,
+        };
+      }
+      prevState[index] = updatedData;
+      return [...prevState];
+    });
+  };
+
   return (
     <>
+     {ctx.isEditable ? (
+        <div className="row py-3 justify-content-end">
+          <div className="saveButton" onClick={() => ctx.updateData(localData,Identifier)}>
+            Save
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <section id="#Gallery">
         <div class={data.container.styles}>
           <h2  class={data.heading.styles}>{data.heading.value}</h2>
         </div>
 
         <div class={`${styles.gallery}`}>
-          {data.images.map((item, index) => (
+          {localData.map((details, index) => (
             <a href="#" class="gal" key={index}>
               <div class={`${styles.gal_wrapper} `}>
                 <div class={`${styles.hidden_cover} `}></div>
-                <img src={item.imgLink} alt={item.imgName} />
-                <h4>{item.imgName}</h4>
+               
+                {ctx.isEditable ? (
+                <>
+                  
+                  <img src={details.imgLink} alt={details.imgName} />
+                  <input
+                    onChange={(e) => onChangeHandler(e, details, index)}
+                    className={`${styles.inputHeading}`}
+                    id="imgName"
+                    value={details.imgName}
+                  />
+                </>
+              ) : (
+                <>
+                  <img src={details.imgLink} alt={details.imgName} />
+                <h4>{details.imgName}</h4>
+               
+                </>
+              )}
+
+
               </div>
             </a>
           ))}

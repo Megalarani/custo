@@ -72,6 +72,46 @@ export const AuthContextProvider = (props) => {
           "It is a long established fact that a reader will be distracted",
       },
     ],
+    slider1: [
+      {
+      
+        content:
+          "It is a long established fact that a reader will be distracted",
+      },
+      {
+      
+        content:
+          "It is a long established fact that a reader will be distracted",
+      },
+      {
+       
+        content:
+          "It is a long established fact that a reader will be distracted",
+      },
+    ],
+    gallery1: [
+      {
+        imgName: "Sea",
+        imgLink:
+          "https://images.unsplash.com/photo-1600345957894-4854e82910ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1748&q=80",
+      },
+      {
+        imgName: "Sea",
+        imgLink:
+          "https://images.unsplash.com/photo-1600345957894-4854e82910ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1748&q=80",
+      },
+      {
+        imgName: "Sea",
+        imgLink:
+          "https://images.unsplash.com/photo-1600345957894-4854e82910ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1748&q=80",
+      },
+      {
+        imgName: "Sea",
+        imgLink:
+          "https://images.unsplash.com/photo-1600345957894-4854e82910ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1748&q=80",
+      },
+    ],
+  
     address: "xxx, yyy, zzz - 123123",
     phone: "99887 766554",
     email: "sample@gmail.com",
