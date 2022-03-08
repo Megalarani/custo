@@ -17,12 +17,13 @@
 }
 .inputPara {
   width: 100%;
-  border: none;
+  padding: 1rem;
   background: transparent;
   outline: 0;
   color: white;
   font-size: 20px;
   display: block;
+  border: 1px solid;
   text-align: justify;
 }
 

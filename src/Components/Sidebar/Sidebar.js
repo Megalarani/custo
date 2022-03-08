@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as DashboardIcon } from "../../Assests/dashboard.svg";
 import { ReactComponent as StyleIcon } from "../../Assests/style.svg";
 import { ReactComponent as SectionIcon } from "../../Assests/sections.svg";
 import { ReactComponent as LayoutIcon } from "../../Assests/layout.svg";
 import { ReactComponent as EditIcon } from "../../Assests/edit.svg";
+import { ReactComponent as GalleryIcon } from "../../Assests/gallery.svg";
 import { ReactComponent as SettingsIcon } from "../../Assests/settings.svg";
+import AuthContext from "../../Context/Context";
 
 const Sidebar = () => {
+  const ctx = useContext(AuthContext);
   const navMenuList = [
     {
       name: "Dashboard",
@@ -35,6 +38,11 @@ const Sidebar = () => {
       icon: EditIcon,
     },
     {
+      name: "Gallery",
+      path: "gallery",
+      icon: GalleryIcon,
+    },
+    {
       name: "Settings",
       path: "settings",
       icon: SettingsIcon,
@@ -48,8 +56,8 @@ const Sidebar = () => {
       >
         <div className="scroll-view">
           <div className="nav_title">
-            <h5 className="text-center m-0 px-1 py-2">
-              <span>Divi Day Care</span>
+            <h5 className="text-center text-capitalize m-0 px-1 py-2">
+              {ctx.user.schoolname}
             </h5>
           </div>
           <ul className="nav side-menu pt-2">

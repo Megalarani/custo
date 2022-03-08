@@ -33,9 +33,6 @@ const Hero2 = () => {
       };
     });
   };
-
-  console.log(data.heading.value, "heading");
-  console.log(data.paragraph.value, "para");
   return (
     <>
     {ctx.isEditable ? (

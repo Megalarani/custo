@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../services/firebase";
 import Loader from "../../loader/Loader";
+
 const Login = (props) => {
   const ctx = useContext(AuthContext);
   const [loading, setloading] = useState(false);
@@ -13,7 +14,7 @@ const Login = (props) => {
     password: "",
   });
   const [user, setUser] = useState("");
-  const [signup,setSignup] = useState("");
+  const [signup, setSignup] = useState("");
   const navigate = useNavigate();
   const titleCase = (str) => {
     return str
@@ -24,7 +25,6 @@ const Login = (props) => {
   onAuthStateChanged(auth, (currentuser) => {
     setUser(currentuser);
   });
-
   const userId = auth.currentUser;
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -35,15 +35,13 @@ const Login = (props) => {
     } else {
       signInWithEmailAndPassword(auth, userCred.email, userCred.password)
         .then((res) => {
-          console.log("success");
-         
-            setloading(true);
+          console.log("success1");
+          setloading(true);
           ctx.setUserId(userId.uid);
+          console.log("success2");
           setTimeout(() => {
-          user && navigate(`/${userId.uid}/dashboard`);
+            user && navigate(`/${userId.uid}/dashboard`);
           }, 3000);
-         
-         
         })
         .catch((error) => {
           setloading(false);
@@ -53,7 +51,7 @@ const Login = (props) => {
         });
     }
   };
-  
+
   const onChangeHandler = (event) => {
     event.preventDefault();
     let val = event.target.value;
@@ -66,11 +64,11 @@ const Login = (props) => {
   };
   return (
     <>
-    {loading && (
-      <>
-      <Loader/>
-      </>
-    )}
+      {loading && (
+        <>
+          <Loader />
+        </>
+      )}
       <div className="Lg-form w-100 d-flex align-items-center justify-content-center">
         <div className="col-lg-4 col-sm-5 p-5 shadow bg-white rounded">
           <img
@@ -123,7 +121,6 @@ const Login = (props) => {
               >
                 Log in
               </button>
-              
             </div>
           </form>
         </div>

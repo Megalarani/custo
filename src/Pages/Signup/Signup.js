@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import AuthContext from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
-import {  createUserWithEmailAndPassword} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebase";
 import Loader from "../../loader/Loader";
 const Signup = (props) => {
@@ -20,7 +20,6 @@ const Signup = (props) => {
       .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
       .join(" ");
   };
-  
 
   const userId = auth.currentUser;
   const handleSignup = async (e) => {
@@ -35,18 +34,15 @@ const Signup = (props) => {
           console.log("success");
           setloading(true);
           setTimeout(() => {
-            user && navigate("/login")
-            alert("sucessfully registered")
-            }, 3000);
-   
-     
+            user && navigate("/login");
+            alert("sucessfully registered");
+          }, 3000);
         })
         .catch((error) => {
           setloading(false);
           const errorCode = error.code;
           const message = errorCode.substring(5);
           setError(titleCase(message));
-        
         });
     }
   };
@@ -62,11 +58,11 @@ const Signup = (props) => {
   };
   return (
     <>
-    {loading && (
-      <>
-      <Loader/>
-      </>
-    )}
+      {loading && (
+        <>
+          <Loader />
+        </>
+      )}
       <div className="Lg-form w-100 d-flex align-items-center justify-content-center">
         <div className="col-lg-4 col-sm-5 p-5 shadow bg-white rounded">
           <img
@@ -75,7 +71,7 @@ const Signup = (props) => {
             alt="..."
           />
           <form>
-              <h3 className="text-center reg-head">Register</h3>
+            <h3 className="text-center reg-head">Register</h3>
             <div className="form-group">
               <label for="exampleInputEmail1 text-center ">Email address</label>
               <input
@@ -114,18 +110,14 @@ const Signup = (props) => {
               </small>
             )}
             <div className="btnContainer ">
-            
-             <div className="text-center my-2">
-              <button
-                onClick={handleSignup}
-                className="btn btn-danger mt-2 mx-2 px-3"
-              >
-               Register Now
-              </button>
-     </div>
-    
-    
-              
+              <div className="text-center my-2">
+                <button
+                  onClick={handleSignup}
+                  className="btn btn-danger mt-2 mx-2 px-3"
+                >
+                  Register Now
+                </button>
+              </div>
             </div>
           </form>
         </div>

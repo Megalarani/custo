@@ -4,7 +4,7 @@ import AuthContext from "../../Context/Context";
 
 const Navbar = () => {
   const ctx = useContext(AuthContext);
-  var name = "keerthi Raman";
+  let name = ctx.user.username;
   const [logoutOverlay, setLogoutOverlay] = useState(false);
   const ProfilePic = (name) => {
     var FirstLetter = name.match(/\b(\w)/g); // returns an array of first letter of each word
@@ -35,7 +35,7 @@ const Navbar = () => {
           </p>
           <div className="w-auto text-center ml-2">
             <div className="profile_img" onClick={logoutOverlayHandler}>
-              {ProfilePic(name)}
+              {name && ProfilePic(name)}
             </div>
           </div>
           {logoutOverlay && (

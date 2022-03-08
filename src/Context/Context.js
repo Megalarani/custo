@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../services/firebase";
 import { Layout } from "../utilitis/Layout";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 const AuthContext = React.createContext({
   user: "",
@@ -10,7 +12,11 @@ const AuthContext = React.createContext({
   isLoggedIn: false,
   isEditable: Boolean,
   websiteData: {},
+  getWebstieData: () => {},
+  getUserData: () => {},
+  getLayoutData: () => {},
   setUserId: () => {},
+  updateUser: () => {},
   updateData: () => {},
   updateIsEditable: () => {},
   updateLayout: () => {},
@@ -18,109 +24,49 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = (props) => {
-  const [websiteData, setWebsiteData] = useState({
-    heading1: "Divi Daycare",
-    content1:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout",
-    heading2: "About Us",
-    content2:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout",
-    heading3: "Come Visit Us",
-    content3:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout",
-    heading4: "Our Pre-School. Our Family. Our Community",
-    content4:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout",
-    content5:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout",
-    card1: [
-      {
-        heading: "Enrollement",
-        content:
-          "It is a long established fact that a reader will be distracted",
-      },
-      {
-        heading: "Curriculam",
-        content:
-          "It is a long established fact that a reader will be distracted",
-      },
-      {
-        heading: "Programs",
-        content:
-          "It is a long established fact that a reader will be distracted",
-      },
-    ],
-    card2: [
-      {
-        heading: "Reading / Write",
-        content:
-          "It is a long established fact that a reader will be distracted",
-      },
-      {
-        heading: "Maths / Science",
-        content:
-          "It is a long established fact that a reader will be distracted",
-      },
-      {
-        heading: "Art",
-        content:
-          "It is a long established fact that a reader will be distracted",
-      },
-      {
-        heading: "Critical Thinkning",
-        content:
-          "It is a long established fact that a reader will be distracted",
-      },
-    ],
-    slider1: [
-      {
-        content:
-          "It is a long established fact that a reader will be distracted1",
-      },
-      {
-        content:
-          "It is a long established fact that a reader will be distracted2",
-      },
-      {
-        content:
-          "It is a long established fact that a reader will be distracted3",
-      },
-    ],
-    gallery1: [
-      {
-        imgName: "Sea",
-        imgLink:
-          "https://images.unsplash.com/photo-1600345957894-4854e82910ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1748&q=80",
-      },
-      {
-        imgName: "Sea",
-        imgLink:
-          "https://images.unsplash.com/photo-1600345957894-4854e82910ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1748&q=80",
-      },
-      {
-        imgName: "Sea",
-        imgLink:
-          "https://images.unsplash.com/photo-1600345957894-4854e82910ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1748&q=80",
-      },
-      {
-        imgName: "Sea",
-        imgLink:
-          "https://images.unsplash.com/photo-1600345957894-4854e82910ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1748&q=80",
-      },
-    ],
-
-    address: "xxx, yyy, zzz - 123123",
-    phone: "99887 766554",
-    email: "sample@gmail.com",
-  });
+  let navigate = useNavigate();
+  const [websiteData, setWebsiteData] = useState(null);
   const [user, setUser] = useState("");
   const [userId, setId] = useState(localStorage.getItem("EditableCampuz"));
   const [layoutFlow, setLayout] = useState(Layout);
   const [isEditable, setIsEditable] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(userId ? true : false);
-  let navigate = useNavigate();
   console.log(userId, isLoggedIn);
   useEffect(() => {}, []);
+  // function to get user website data
+  async function getWebstieData() {
+    console.log("getWebstieData");
+    const docRef = doc(db, "websitedata", userId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setWebsiteData(docSnap.data());
+    } else {
+      console.log("No such document!");
+    }
+  }
+  // function to get user data
+  async function getUserData() {
+    console.log("getUserData");
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setUser(docSnap.data());
+    } else {
+      console.log("No such document!");
+    }
+  }
+  // function to get user website layout information
+  async function getLayoutData() {
+    console.log("getLayoutData");
+    const docRef = doc(db, "layout", userId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setLayout(docSnap.data());
+    } else {
+      console.log("No such document!");
+    }
+  }
+  console.log(websiteData, user, layoutFlow, "info");
   const updateData = (data, Identifier) => {
     if (Array.isArray(data) === true) {
       console.log("Array", Identifier, data);
@@ -135,28 +81,36 @@ export const AuthContextProvider = (props) => {
         console.log("updatedData", data[i]);
       });
     }
+    // update latest webstie data in firebase
   };
-  console.log(websiteData, "info");
+  const updateUser = (data) => {
+    setUser(data);
+  }
+  // function to update layout array
   const updateLayout = (data) => {
     setLayout(data);
   };
+  // toggles between editing
   const updateIsEditable = (data) => {
     setIsEditable(data);
   };
+  // function to update & set userId in local storage && session storage
   const setUserId = (uId) => {
     setIsLoggedIn(true);
     sessionStorage.setItem("EditableCampuz", uId);
     localStorage.setItem("EditableCampuz", uId);
-    setId(uId);
+    setId(uId); // set userId
   };
+  // logout function
   const logoutHandler = () => {
     auth
-      .signOut()
+      .signOut() // end user session in firebase
       .then(() => {
         setIsLoggedIn(false);
+        setId(); // empty user Id
         console.log("Signed out successfully!!!");
-        sessionStorage.clear("editablecampuz");
-        localStorage.clear("editablecampuz");
+        sessionStorage.clear("editablecampuz"); // removes item from session storage
+        localStorage.clear("editablecampuz"); // removes item from local storage
         navigate("/login", { replace: true });
       })
       .catch((e) => console.log(e));
@@ -165,17 +119,21 @@ export const AuthContextProvider = (props) => {
   return (
     <AuthContext.Provider
       value={{
-        user: user,
-        userId: userId,
-        isLoggedIn: isLoggedIn,
         setUserId: setUserId,
-        layoutFlow: layoutFlow,
         logout: logoutHandler,
-        updateLayout: updateLayout,
+        userId: userId,
+        user: user,
+        websiteData: websiteData,
+        layoutFlow: layoutFlow,
+        isLoggedIn: isLoggedIn,
         isEditable: isEditable,
         updateIsEditable: updateIsEditable,
-        websiteData: websiteData,
+        getWebstieData: getWebstieData,
+        getUserData: getUserData,
+        getLayoutData: getLayoutData,
+        updateUser: updateUser,
         updateData: updateData,
+        updateLayout: updateLayout,
       }}
     >
       {props.children}

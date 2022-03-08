@@ -92,7 +92,7 @@ const Slider1 = () => {
               <>
                 {localData.map((details, index) => (
                   <div className="row justify-content-center align-items-center mb-2">
-                    <span className="pr-4">{"Slider " + `${index + 1}`}</span>
+                    <h5 className="pr-4">{"Slider " + `${index + 1}`}</h5>
                     <textarea
                       key={index}
                       onChange={(e) => onChangeHandler(e, details, index)}

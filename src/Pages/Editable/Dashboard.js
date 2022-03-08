@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import Sidebar from "../../Components/Sidebar/Sidebar";
@@ -8,8 +8,15 @@ import Sections from "./Sections";
 import Layout from "./Layout";
 import Edit from "./Edit";
 import Settings from "./Settings";
+import AuthContext from "../../Context/Context";
 
 const Dashboard = (props) => {
+  const ctx = useContext(AuthContext);
+  useEffect(() => {
+    ctx.getWebstieData();
+    ctx.getUserData();
+    ctx.getLayoutData();
+  },[]);
   return (
     <>
       <div className="main_container row justify-content-end">
@@ -23,11 +30,7 @@ const Dashboard = (props) => {
             <Route path="layout" element={<Layout />}></Route>
             <Route path="sections" element={<Sections />}></Route>
             <Route path="styleguide" element={<StyleGuide />}></Route>
-            <Route
-              index
-              path="dashboard"
-              element={<Landing />}
-            ></Route>
+            <Route index path="dashboard" element={<Landing />}></Route>
           </Routes>
         </div>
       </div>

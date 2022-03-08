@@ -1,4 +1,4 @@
-import React, { useContext,useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../../Context/Context";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
@@ -56,10 +56,11 @@ const Settings = () => {
   }, []);
   const classes = useStyles();
   const [formValues, setFormValues] = useState({
-    username: ctx.user.name,
-    schoolName: ctx.user.school,
-    mobileNumber: ctx.user.mobile,
-    emailId: ctx.user.number,
+    username: ctx.user.username,
+    schoolname: ctx.user.schoolname,
+    phoneno: ctx.user.phoneno,
+    email: ctx.user.email,
+    password: ctx.user.password,
     oldPassword: "",
     newPassword: "",
   });
@@ -96,7 +97,24 @@ const Settings = () => {
             className={classes.actions}
             onClick={() => setEnableUsername(!enableUsername)}
           >
-           <span class="btn shadow text-white"  style={{background: "#dc3545", borderRadius:"20px"}}> <EditIcon style={{color:"white"}}/> Edit</span>
+            <span
+              class="btn px-4 py-1"
+              style={{
+                color: !enableUsername ? "#fff" : "#dc3545",
+                background: !enableUsername ? "#dc3545" : "#fff",
+                borderRadius: "20px",
+                boxShadow: "0 3px 6px #00000036",
+              }}
+            >
+              {" "}
+              Edit Details
+              <EditIcon
+                style={{
+                  fill: !enableUsername ? "#fff" : "#dc3545",
+                  marginLeft: "10px",
+                }}
+              />
+            </span>
           </div>
         </div>
         <div className={classes.row}>
@@ -106,13 +124,13 @@ const Settings = () => {
           </div>
           <div className={classes.input}>
             <GInput
-              id={"schoolName"}
-              value={formValues.mobileNumber}
+              id={"schoolname"}
+              value={formValues.schoolname}
               onInputChange={handleChange}
               variant="standard"
               disabled={!enableUsername}
               inputClass={classes.inputField}
-              placeholder="Mobile No"
+              placeholder="Enter School Name"
             />
           </div>
           <div className={classes.actions}></div>
@@ -124,8 +142,8 @@ const Settings = () => {
           </div>
           <div className={classes.input}>
             <GInput
-              id={"mobileNumber"}
-              value={formValues.mobileNumber}
+              id={"phoneno"}
+              value={formValues.phoneno}
               onInputChange={handleChange}
               variant="standard"
               disabled
@@ -142,8 +160,8 @@ const Settings = () => {
           </div>
           <div className={classes.input}>
             <GInput
-              id={"emailId"}
-              value={formValues.emailId}
+              id={"email"}
+              value={formValues.email}
               onInputChange={handleChange}
               variant="standard"
               disabled
@@ -185,7 +203,7 @@ const Settings = () => {
           <div className={classes.actions}></div>
         </div>
         <GButton
-          onClick={() => console.log("saved")}
+          onClick={() => ctx.updateUser(formValues)}
           label="Save"
           disabled={!enableSave}
           boxShadow
