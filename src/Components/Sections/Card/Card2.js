@@ -105,12 +105,31 @@ const Card2 = () => {
                 <div class={`${styles.round} ${styles.ron3}`}>
                   <i class="fa fa-pencil-square icon" aria-hidden="true"></i>
                 </div>
-                <h2 className={data.cards.card1.heading.style}>
-                  {details.heading}
-                </h2>
-                <p className={data.cards.card1.paragraph.style}>
-                  {details.content}
-                </p>
+                {ctx.isEditable ? (
+                  <>
+                    <input
+                      onChange={(e) => onChangeHandler(e, details, index)}
+                      className={`${styles.inputHeading}`}
+                      id="heading"
+                      value={details.heading}
+                    />
+                    <textarea
+                      onChange={(e) => onChangeHandler(e, details, index)}
+                      className={`${styles.inputPara}`}
+                      id="content"
+                      value={details.content}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <h2 className={data.cards.card1.heading.style}>
+                      {details.heading}
+                    </h2>
+                    <p className={data.cards.card1.paragraph.style}>
+                      {details.content}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           ))}

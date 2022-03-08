@@ -63,7 +63,7 @@
 .card p {
   line-height: 2em;
 }
-.card textarea {
+.inputPara {
   display: block;
   width: 100%;
   background: transparent;
