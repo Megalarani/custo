@@ -76,17 +76,17 @@ export const AuthContextProvider = (props) => {
       {
       
         content:
-          "It is a long established fact that a reader will be distracted",
+          "It is a long established fact that a reader will be distracted1",
       },
       {
       
         content:
-          "It is a long established fact that a reader will be distracted",
+          "It is a long established fact that a reader will be distracted2",
       },
       {
        
         content:
-          "It is a long established fact that a reader will be distracted",
+          "It is a long established fact that a reader will be distracted3",
       },
     ],
     gallery1: [
