@@ -1,48 +1,46 @@
 .test {
-    height: auto;
-    width: 100%;
-    padding: 20px;
-    color: white;
-    background-size: initial;
-    background-image: url("https://www.elegantthemes.com/layouts/wp-content/uploads/2018/11/day_care_bg_01.png"),
-      linear-gradient(135deg, #08aeea 0%, #2ad);
-  
-    border-radius: 38px 38px 38px 38px;
-  }
-  
-  .test_text_h2 {
-    text-align: center;
-    color: white;
-    font-size: 2rem;
-  }
-  .inputPara{
-    width: 100%;
-    border: none;
-    background: transparent;
-    outline: 0;
-    color: white;
-    font-size: 20px;
-    display: block;
+  height: auto;
+  width: 100%;
+  padding: 20px;
+  color: white;
+  background-size: initial;
+  background-image: url("https://www.elegantthemes.com/layouts/wp-content/uploads/2018/11/day_care_bg_01.png"),
+    linear-gradient(135deg, #08aeea 0%, #2ad);
+
+  border-radius: 38px 38px 38px 38px;
+}
+
+.test_text_h2 {
   text-align: center;
-  }
-  
-  .test_text_p {
-    color: white;
-    line-height: 2em;
-    font-size: 20px;
-  }
-  
-  @media screen and (min-width: 600px) {
+  color: white;
+  font-size: 2rem;
+}
+.inputPara {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: 0;
+  color: white;
+  font-size: 20px;
+  display: block;
+  text-align: justify;
+}
+
+.test_text_p {
+  color: white;
+  line-height: 2em;
+  font-size: 20px;
+}
+
+@media screen and (min-width: 600px) {
   .test {
     padding: 50px;
   }
 
- 
-
-  .test_text_h2  {
+  .test_text_h2 {
     color: white;
     font-size: 3rem;
-  padding: 30px;
+    padding: 30px;
   }
 
   .tester {
