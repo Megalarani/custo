@@ -1,0 +1,122 @@
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  button: {
+    padding: "0.35rem 0.7rem",
+    borderRadius: "25px",
+    fontSize: "0.75rem",
+    transition: "all 0.2s ease",
+    border: "none",
+    outline: "none",
+    textTransform: "initial",
+    "&:focus, &:active": {
+      border: "none",
+      outline: "none",
+    },
+    "&.Mui-disabled": {
+      background: "#F2F2F2",
+      color: "",
+    },
+  },
+  primary: {
+    background: "#dc3545",
+    color: "#fff",
+    "&:hover": {
+      background: "#fff",
+      color: "#dc3545",
+      "& $buttonTag": {
+        background: "#dc3545",
+        color: "#fff",
+      },
+    },
+    "& $buttonTag": {
+      background: "#fff",
+      color: "#dc3545",
+    },
+  },
+  buttonTag: {
+    fontSize: "0.65rem",
+    marginLeft: "10px",
+    borderRadius: "25px",
+    padding: "0.2rem 0.6rem",
+  },
+  outline: {
+    background: "#fff",
+    border: "1px solid",
+    padding: "0.25rem 1rem",
+    "&, $emphasis": {
+      color: "#5A2E8A",
+      "&:hover": {
+        background: "#5A2E8A",
+        color: "#fff",
+      },
+    },
+  },
+  boxShadow: {
+    boxShadow: "0 3px 6px #00000036",
+  },
+  paddingLeftRight: {
+    paddingLeft: "3rem",
+    paddingRight: "3rem",
+  },
+});
+
+export const GButton = (props) => {
+  const classes = useStyles();
+  const {
+    label,
+    onClick,
+    tagName,
+    inlineStyles,
+    disabled,
+    icon,
+    buttonType = "primary",
+    outline,
+    boxShadow,
+    isLong,
+  } = props;
+  let rootClass = classes.button;
+
+  switch (buttonType) {
+    case "primary":
+      rootClass = `${rootClass} ${classes.primary}`;
+      break;
+    case "secondary":
+      rootClass = `${rootClass} ${classes.secondary}`;
+      break;
+    case "warning":
+      rootClass = `${rootClass} ${classes.warning}`;
+      break;
+    case "emphasis":
+      rootClass = `${rootClass} ${classes.emphasis}`;
+      break;
+  }
+
+  if (outline) {
+    rootClass = `${rootClass} ${classes.outline}`;
+  }
+
+  if (boxShadow) {
+    rootClass = `${rootClass} ${classes.boxShadow}`;
+  }
+
+  if (isLong) {
+    rootClass = `${rootClass} ${classes.paddingLeftRight}`;
+  }
+
+  return (
+    <Button
+      size={"large"}
+      className={rootClass}
+      style={inlineStyles}
+      onClick={onClick}
+      disabled={disabled}
+      startIcon={icon ? icon : null}
+    >
+      {label}
+      {tagName && <span className={classes.buttonTag}>{tagName}</span>}
+    </Button>
+  );
+};

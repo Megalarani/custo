@@ -1,0 +1,39 @@
+.root {
+  width: 100%;
+  border-bottom: 1px solid;
+  padding-bottom: 3rem;
+}
+.row {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+.label {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 1rem;
+}
+/* color: colorsgrayFont; */
+.label p {
+  margin: 0;
+  /* color: colors.grayFont1, */
+  width: 50%;
+  font-size: 0.9rem;
+}
+.input {
+  width: 70%;
+  padding: 0 2rem;
+}
+.inputField {
+  margin-bottom: 1rem;
+}
+.actions {
+  width: 10%;
+  cursor: pointer;
+}
+.actions svg {
+  width: 2rem;
+  height: 2rem;
+}
