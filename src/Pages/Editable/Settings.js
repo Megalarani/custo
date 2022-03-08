@@ -96,7 +96,7 @@ const Settings = () => {
             className={classes.actions}
             onClick={() => setEnableUsername(!enableUsername)}
           >
-            <EditIcon />
+           <span class="btn shadow text-white"  style={{background: "#dc3545", borderRadius:"20px"}}> <EditIcon style={{color:"white"}}/> Edit</span>
           </div>
         </div>
         <div className={classes.row}>

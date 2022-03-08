@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import AuthContext from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import {  createUserWithEmailAndPassword} from "firebase/auth";
 import { auth } from "../../services/firebase";
 import Loader from "../../loader/Loader";
-const Login = (props) => {
+const Signup = (props) => {
   const ctx = useContext(AuthContext);
   const [loading, setloading] = useState(false);
   const [error, setError] = useState(null);
@@ -13,7 +13,6 @@ const Login = (props) => {
     password: "",
   });
   const [user, setUser] = useState("");
-  const [signup,setSignup] = useState("");
   const navigate = useNavigate();
   const titleCase = (str) => {
     return str
@@ -21,39 +20,36 @@ const Login = (props) => {
       .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
       .join(" ");
   };
-  onAuthStateChanged(auth, (currentuser) => {
-    setUser(currentuser);
-  });
+  
 
   const userId = auth.currentUser;
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     if (userCred.email === "") {
       setError("Enter Email");
     } else if (userCred.password === "") {
       setError("Enter Password");
     } else {
-      signInWithEmailAndPassword(auth, userCred.email, userCred.password)
+      createUserWithEmailAndPassword(auth, userCred.email, userCred.password)
         .then((res) => {
           console.log("success");
-         
-            setloading(true);
-          ctx.setUserId(userId.uid);
+          setloading(true);
           setTimeout(() => {
-          user && navigate(`/${userId.uid}/dashboard`);
-          }, 3000);
-         
-         
+            user && navigate("/login")
+            alert("sucessfully registered")
+            }, 3000);
+   
+     
         })
         .catch((error) => {
           setloading(false);
           const errorCode = error.code;
           const message = errorCode.substring(5);
           setError(titleCase(message));
+        
         });
     }
   };
-  
   const onChangeHandler = (event) => {
     event.preventDefault();
     let val = event.target.value;
@@ -79,6 +75,7 @@ const Login = (props) => {
             alt="..."
           />
           <form>
+              <h3 className="text-center reg-head">Register</h3>
             <div className="form-group">
               <label for="exampleInputEmail1 text-center ">Email address</label>
               <input
@@ -117,12 +114,17 @@ const Login = (props) => {
               </small>
             )}
             <div className="btnContainer ">
+            
+             <div className="text-center my-2">
               <button
-                onClick={handleLogin}
-                className="btn btn-danger mt-2 px-3"
+                onClick={handleSignup}
+                className="btn btn-danger mt-2 mx-2 px-3"
               >
-                Log in
+               Register Now
               </button>
+     </div>
+    
+    
               
             </div>
           </form>
@@ -131,4 +133,4 @@ const Login = (props) => {
     </>
   );
 };
-export default Login;
+export default Signup;
