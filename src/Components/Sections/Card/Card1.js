@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
 import styles from "./Card1.module.css";
 import AuthContext from "../../../Context/Context";
+import Loader from "../../../loader/Loader";
 
 const Card1 = () => {
+  const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
   const data = {
     container: {
@@ -54,6 +56,7 @@ const Card1 = () => {
       let updatedData = null;
       if (e.target.id === "heading") {
         updatedData = {
+  
           ...details,
           heading: e.target.value,
         };
@@ -66,19 +69,32 @@ const Card1 = () => {
       prevState[index] = updatedData;
       return [...prevState];
     });
+    
   };
 
   return (
     <>
       {ctx.isEditable ? (
         <div className="row py-3 justify-content-end">
-          <div className="saveButton" onClick={() => ctx.updateData(localData,Identifier)}>
+          <div className="saveButton" onClick={ () => {
+            setloading(true);
+            ctx.updateData(localData,Identifier)
+            setTimeout(() => {     
+            setloading(false);
+          }, 2000)
+          }}>
             Save
           </div>
         </div>
       ) : (
         <></>
       )}
+
+{loading && (
+      <>
+      <Loader/>
+      </>
+    )}
       <div class={data.container.style}>
         {localData.map((details, index) => (
           <div class={`col-md-3  ${styles.card} `} key={index}>

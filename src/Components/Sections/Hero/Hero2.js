@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../../Context/Context";
 import styles from "./Hero2.module.css";
+import Loader from "../../../loader/Loader";
 const Hero2 = () => {
+  const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
   const data = {
     container: {
@@ -38,13 +40,25 @@ const Hero2 = () => {
     <>
     {ctx.isEditable ? (
         <div className="row py-3 justify-content-end">
-          <div className="saveButton" onClick={()=>ctx.updateData(localData)}>
+          <div className="saveButton" onClick={()=>{
+            setloading(true);
+            ctx.updateData(localData)
+            setTimeout(() => {      
+            setloading(false);
+          }, 2000)
+             }}>
+            
             Save
           </div>
         </div>
       ) : (
         <></>
       )}
+       {loading && (
+      <>
+      <Loader/>
+      </>
+    )}
       <section id="#About">
         <div class={data.container.style}>
         {ctx.isEditable ? (

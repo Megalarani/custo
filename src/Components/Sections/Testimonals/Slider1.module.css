@@ -15,7 +15,16 @@
     color: white;
     font-size: 2rem;
   }
-  
+  .inputPara{
+    width: 100%;
+    border: none;
+    background: transparent;
+    outline: 0;
+    color: white;
+    font-size: 20px;
+    display: block;
+  text-align: center;
+  }
   
   .test_text_p {
     color: white;
