@@ -66,6 +66,42 @@ const Settings = () => {
   });
   const [enableUsername, setEnableUsername] = useState(false);
   const [enableSave, setEnableSave] = useState(false);
+  const [error, setError] = useState(null);
+  const submitHandler = ()=> {
+    if (formValues.username === "" || formValues.schoolname === "" ) {
+      setError("Please fill the fields");
+      console.log(error)
+    }
+    else if (formValues.oldPassword === "" || formValues.newPassword === "") {
+      console.log("why man")
+      ctx.updateUser({...formValues,
+        username: formValues.username,
+        schoolname: formValues.schoolname,    
+      }  )
+    }
+    else if ((formValues.newPassword === "" || !formValues.oldPassword === "") && (!formValues.newPassword === "" || !formValues.oldPassword === "")) {
+      setError("Please fill the two password  fields");
+      console.log(error)
+    }
+   else if (formValues.newPassword === formValues.oldPassword ){
+     setError("old password and new password are match")
+   }
+   else if(formValues.username === "" || formValues.schoolname === "" ){
+    ctx.updateUser({...formValues,
+      oldPassword: formValues.oldPassword,
+      newPassword: formValues.newPassword,    
+    }  )
+   }
+   else{
+    ctx.updateUser({...formValues,
+      username: formValues.username,
+      schoolname: formValues.schoolname,
+      oldPassword: formValues.oldPassword,
+      newPassword: formValues.newPassword,    
+    }  )
+   }
+  }
+  
 
   const handleChange = (inputObj) => {
     setFormValues({
@@ -203,7 +239,7 @@ const Settings = () => {
           <div className={classes.actions}></div>
         </div>
         <GButton
-          onClick={() => ctx.updateUser(formValues)}
+          onClick={() => submitHandler()}
           label="Save"
           disabled={!enableSave}
           boxShadow

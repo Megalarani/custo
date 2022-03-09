@@ -37,11 +37,11 @@ const Sidebar = () => {
       path: "edit",
       icon: EditIcon,
     },
-    {
-      name: "Gallery",
-      path: "gallery",
-      icon: GalleryIcon,
-    },
+    // {
+    //   name: "Gallery",
+    //   path: "gallery",
+    //   icon: GalleryIcon,
+    // },
     {
       name: "Settings",
       path: "settings",

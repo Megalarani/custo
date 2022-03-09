@@ -34,9 +34,11 @@ const Signup = (props) => {
           console.log("success");
           setloading(true);
           setTimeout(() => {
-            user && navigate("/login");
+             navigate("/login");
             alert("sucessfully registered");
+            setloading(false)
           }, 3000);
+          
         })
         .catch((error) => {
           setloading(false);
