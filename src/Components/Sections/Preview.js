@@ -6,6 +6,7 @@ const Preview = (props) => {
     const Component = component;
     return <Component />;
   };
+ 
   return (
     <div
       className="col-10 p-2 special-scroll"

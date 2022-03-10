@@ -1,15 +1,15 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Layout } from "../../utilitis/Layout";
 import AuthContext from "../../Context/Context";
-import { GButton } from "../../Components/Settings/GButton";
+import { db } from "../../services/firebase";
+import { doc, updateDoc } from "firebase/firestore";
 const Preview = () => {
   const ctx = useContext(AuthContext);
   const [mountedData, setMountedData] = useState([]);
-  const[layoutsorder, setLayoutsorder] = useState([]);
-  useEffect(()=>{
-    setMountedData(ctx.layoutFlow);
-  })
+  const [layoutsorder, setLayoutsorder] = useState([]);
+  useEffect(() => {
+    setMountedData(ctx.layoutFlow ? ctx.layoutFlow : []);
+  });
   const handleOnDragEnd = (movedItem) => {
     const newArr = Array.from(mountedData);
     const [reorderedItem] = newArr.splice(movedItem.source.index, 1);
@@ -21,8 +21,8 @@ const Preview = () => {
     const Component = component;
     return <Component />;
   };
-  function SaveLayout(){
-    
+  function SaveLayout() {
+    updateDoc(doc(db, "layout", ctx.userId), { layout: ctx.layoutData.layout });
   }
   return (
     <>
@@ -31,11 +31,20 @@ const Preview = () => {
         style={{ height: "91vh", overflowX: "hidden", overflowY: "auto" }}
       >
         <DragDropContext onDragEnd={handleOnDragEnd}>
-          <div className="row px-4 pt-2 pb-4 justify-content-between">
-            <button class="btn shadow text-white" onClick={SaveLayout} style={{background: "#dc3545", borderRadius:"20px"}}>Save<i class="fa fa-save mx-2"></i> </button>
-            <button class="btn shadow text-white" style={{background: "#dc3545", borderRadius:"20px"}}>Fullpage View<i class="fa fa-eye mx-2"></i></button>
-          
-         
+          <div className="row px-4  pt-2 pb-4 justify-content-between">
+            <button
+              class="btn px-5"
+              onClick={SaveLayout}
+              style={{ background: "#fff",color:"#dc3545", borderRadius: "20px", boxShadow: "0 3px 6px #00000036" }}
+            >
+              Save<i class="fa fa-save mx-2"></i>{" "}
+            </button>
+            <button
+              class="btn shadow px-3  "
+              style={{ background: "#fff",color:"#dc3545", borderRadius: "20px", boxShadow: "0 3px 6px #00000036" }}
+            >
+              Fullpage View<i class="fa fa-eye mx-2"></i>
+            </button>
           </div>
           <Droppable droppableId="mounted">
             {(provided) => (

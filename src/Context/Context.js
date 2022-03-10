@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../services/firebase";
 import { Layout } from "../utilitis/Layout";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 
 const AuthContext = React.createContext({
@@ -12,7 +12,7 @@ const AuthContext = React.createContext({
   isLoggedIn: false,
   isEditable: Boolean,
   websiteData: {},
-  getWebstieData: () => {},
+  getWebsiteData: () => {},
   getUserData: () => {},
   getLayoutData: () => {},
   setUserId: () => {},
@@ -36,8 +36,8 @@ export const AuthContextProvider = (props) => {
   console.log(userId, isLoggedIn);
   useEffect(() => {}, []);
   // function to get user website data
-  async function getWebstieData() {
-    console.log("getWebstieData");
+  async function getWebsiteData() {
+    console.log("getWebsiteData");
     const docRef = doc(db, "websitedata", userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -78,7 +78,7 @@ export const AuthContextProvider = (props) => {
       setLayoutFlow(newArr);
     }
   };
-  console.log(layoutFlow);
+
   const updateData = (data, Identifier) => {
     if (Array.isArray(data) === true) {
       console.log("Array", Identifier, data);
@@ -87,21 +87,35 @@ export const AuthContextProvider = (props) => {
     } else {
       console.log("Object");
       let newArr = Object.keys(data);
-      var temp = newArr.map((i) => {
+      var temp = newArr.map((i, index) => {
         console.log("oldData", websiteData[i]);
-        websiteData[i] = data[i];
-        console.log("updatedData", data[i]);
+       
+        console.log("updatedData", data);
+        // update latest webstie data in firebase
+        if (i === "heading1") {
+          updateDoc(doc(db, "websitedata", userId), {
+            // websiteData[i] = data[i];
+          });
+        }
       });
     }
-    // update latest webstie data in firebase
   };
   const updateUser = (data) => {
     setUser(data);
   };
   // function to update layout array
   const updateLayout = (data) => {
-    // setLayout(data);
+    setLayoutFlow(data);
+
+    var tempArr = [];
+    for (var i = 0; i < data.length; i++) {
+      tempArr = tempArr.concat(data[i].id);
+    }
+    setLayoutData({
+      layout: tempArr,
+    });
   };
+
   // toggles between editing
   const updateIsEditable = (data) => {
     setIsEditable(data);
@@ -137,11 +151,12 @@ export const AuthContextProvider = (props) => {
         user: user,
         websiteData: websiteData,
         layoutFlow: layoutFlow,
+        layoutData: layoutData,
         formLayout: formLayout,
         isLoggedIn: isLoggedIn,
         isEditable: isEditable,
         updateIsEditable: updateIsEditable,
-        getWebstieData: getWebstieData,
+        getWebsiteData: getWebsiteData,
         getUserData: getUserData,
         getLayoutData: getLayoutData,
         updateUser: updateUser,

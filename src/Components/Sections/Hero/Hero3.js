@@ -21,8 +21,8 @@ const Hero3 = () => {
     },
   };
   const [localData, setLocalData] = useState({
-    heading3: ctx.websiteData.heading3,
-    content3: ctx.websiteData.content3,
+    heading3:  ctx.websiteData && ctx.websiteData.heading3,
+    content3:  ctx.websiteData && ctx.websiteData.content3,
   });
   const onChangeHandler = (event) => {
     let val = event.target.value;
@@ -77,8 +77,8 @@ const Hero3 = () => {
             </>
           ) : (
             <>
-              <h2 className={data.heading.style}>{ctx.websiteData.heading3}</h2>
-              <p className={data.paragraph.style}>{ctx.websiteData.content3}</p>
+              <h2 className={ data.heading.style}>{ ctx.websiteData && ctx.websiteData.heading3}</h2>
+              <p className={data.paragraph.style}>{ ctx.websiteData && ctx.websiteData.content3}</p>
             </>
           )}
             <button

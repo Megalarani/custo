@@ -65,7 +65,7 @@ const Card2 = () => {
       },
     },
   };
-  const [localData, setLocalData] = useState(ctx.websiteData.card2);
+  const [localData, setLocalData] = useState( ctx.websiteData && ctx.websiteData.card2);
   let Identifier = "card2";
   console.log(localData, "local");
   const onChangeHandler = (e, details, index) => {

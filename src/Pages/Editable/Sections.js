@@ -6,12 +6,20 @@ import AuthContext from "../../Context/Context";
 const Sections = (props) => {
   const ctx = useContext(AuthContext);
   useEffect(() => {
+    // if (ctx.getWebstieData === null) {
+    //   ctx.getWebstieData();
+    //   ctx.getUserData();
+    //   ctx.getLayoutData();
+    //   setTimeout(() => {
+    //     ctx.formLayout();
+    //   }, 3000);
+    //  }
     ctx.updateIsEditable(false);
-  },[]);
+  }, []);
   return (
     <div className="row p-0">
-      <AllSections data={props.sections} />
-      <Preview data={props.sections} />
+      <AllSections  />
+      <Preview  />
     </div>
   );
 };

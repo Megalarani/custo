@@ -22,8 +22,8 @@ const Hero1 = () => {
     },
   };
   const [localData, setLocalData] = useState({
-    heading1: ctx.websiteData.heading1,
-    content1: ctx.websiteData.content1,
+    heading1: ctx.websiteData && ctx.websiteData.heading1,
+    content1: ctx.websiteData && ctx.websiteData.content1,
   });
   const onChangeHandler = (event) => {
     let val = event.target.value;
@@ -39,14 +39,14 @@ const Hero1 = () => {
     <>
       {ctx.isEditable ? (
         <div className="row py-3 justify-content-end">
-          <div className="saveButton" onClick={()=>{
+          <div className="saveButton" onClick={() => {
             setloading(true);
             ctx.updateData(localData)
-            setTimeout(() => {      
-            setloading(false);
-          }, 2000)
-             }}>
-            
+            setTimeout(() => {
+              setloading(false);
+            }, 2000)
+          }}>
+
             Save
           </div>
         </div>
@@ -54,10 +54,10 @@ const Hero1 = () => {
         <></>
       )}
       {loading && (
-      <>
-      <Loader/>
-      </>
-    )}
+        <>
+          <Loader />
+        </>
+      )}
       <div class={`${styles.hero}`} id="#Home">
         <div class={data.container.style}>
           <img src="/Images/text.png" class="pretext" />
@@ -80,8 +80,8 @@ const Hero1 = () => {
             </>
           ) : (
             <>
-              <h2 className={data.heading.style}>{ctx.websiteData.heading1}</h2>
-              <p className={data.paragraph.style}>{ctx.websiteData.content1}</p>
+              <h2 className={data.heading.style} >  {ctx.websiteData && ctx.websiteData.heading1}</h2>
+              <p className={data.paragraph.style}>{ctx.websiteData && ctx.websiteData.content1}</p>
             </>
           )}
           <button type="button" class={` ${styles.btn}`}>

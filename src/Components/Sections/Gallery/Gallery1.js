@@ -6,7 +6,7 @@ import Loader from "../../../loader/Loader";
 const Gallery1 = () => {
   const ctx = useContext(AuthContext);
   const [loading, setloading] = useState(false);
-  const [localData, setLocalData] = useState(ctx.websiteData.gallery1);
+  const [localData, setLocalData] = useState(ctx.websiteData && ctx.websiteData.gallery1);
   let Identifier = "gallery1";
   console.log(localData, "local");
   const onChangeHandler = (e, details, index) => {

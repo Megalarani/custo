@@ -13,6 +13,7 @@ const DraggableList = (props) => {
     const Component = component;
     return <Component />;
   };
+  
   return (
     <>
       <div className="all-section-list bg-light col-2 p-0">

@@ -7,9 +7,17 @@ import { ReactComponent as EditIcon } from "../../Assests/pencil.svg";
 const Edit = () => {
   const ctx = useContext(AuthContext);
   const [mountedComponent, setMountedComponent] = useState([]);
-  useEffect(()=>{
+  useEffect(() => {
+    // if (ctx.getWebstieData === null) {
+    //   ctx.getWebstieData();
+    //   ctx.getUserData();
+    //   ctx.getLayoutData();
+    //   setTimeout(() => {
+    //     ctx.formLayout();
+    //   }, 3000);
+    //  }
     ctx.updateIsEditable(true);
-  },[]);
+  }, []);
   if (mountedComponent.length === 0) {
     mountedComponent.push(ctx.layoutFlow[0]);
   }

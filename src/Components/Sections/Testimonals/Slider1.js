@@ -37,7 +37,7 @@ const Slider1 = () => {
         "It is a long established fact that a reader will be distracted by the readable",
     },
   };
-  const [localData, setLocalData] = useState(ctx.websiteData.slider1);
+  const [localData, setLocalData] = useState(ctx.websiteData && ctx.websiteData.slider1);
   let Identifier = "slider1";
   console.log(localData, "local");
   const onChangeHandler = (e, details, index) => {

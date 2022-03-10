@@ -90,7 +90,7 @@ const Signup = (props) => {
               />
               {/* <p className="errorMsg">{emailError}</p> */}
             </div>
-            <div className="form-group mb-0">
+            <div className="form-group ">
               <label for="exampleInputPassword1 text-center ">Password</label>
               <input
                 type="password"
@@ -111,6 +111,38 @@ const Signup = (props) => {
                 {error}
               </small>
             )}
+             <div className="form-group ">
+              <label for="exampleInputPassword1 text-center ">UserName</label>
+              <input
+                type="password"
+                name="password"
+                required
+                class="form-control"
+                value={userCred.password}
+                id="exampleInputPassword1"
+                placeholder="Password"
+                onChange={onChangeHandler}
+                // ref={passwordRef}
+                // onChange={(e) => setPassword(e.target.valve)}
+              />
+              {/* <p className="errorMsg">{passwordError}</p> */}
+            </div>
+            <div className="form-group ">
+              <label for="exampleInputPassword1 text-center ">SchoolName</label>
+              <input
+                type="password"
+                name="password"
+                required
+                class="form-control"
+                value={userCred.password}
+                id="exampleInputPassword1"
+                placeholder="Password"
+                onChange={onChangeHandler}
+                // ref={passwordRef}
+                // onChange={(e) => setPassword(e.target.valve)}
+              />
+              {/* <p className="errorMsg">{passwordError}</p> */}
+            </div>
             <div className="btnContainer ">
               <div className="text-center my-2">
                 <button

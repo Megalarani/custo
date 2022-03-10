@@ -4,7 +4,8 @@ import { ReactComponent as Logo } from "../../Assests/logo.svg";
 import { ReactComponent as StyleIcon } from "../../Assests/style.svg";
 import { ReactComponent as LayoutIcon } from "../../Assests/layout.svg";
 import AuthContext from "../../Context/Context";
-
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../services/firebase";
 const Landing = (props) => {
   const ctx = useContext(AuthContext);
   useEffect(() => {
@@ -17,12 +18,21 @@ const Landing = (props) => {
   //     "layout"
   //   );
   // }
+const checkdata={
+
+  h2:"tamil"
+}
+  function upload(){
+    updateDoc(doc(db, "websitedata", "yprpJe1AkDdPMOqwtgRppoFgX8D3"), {
+      websitedata:checkdata
+    });
+  }
   return (
     <div className="p-2">
       <div className="container-fluid p-0">
         <h1 className="text-center mb-1" style={{ color: "var(--primary)" }}>
           <Logo className="landing_logo" />
-          Campuzone Create your site.
+          Manage your site.
         </h1>
         <h2 className="text-center mb-3"></h2>
         <p>
@@ -31,6 +41,7 @@ const Landing = (props) => {
           premium features like Brand Kit, Background Remover, and more.
         </p>
       </div>
+      
       <div className="row mt-4">
         <div className="col-md-5 p-1 pr-2">
           <Link
@@ -52,6 +63,7 @@ const Landing = (props) => {
         </div>
         <div className="col-md-7 p-1">
           <img className="img-fluid" src="/Images/landing.jpg" alt="landing" />
+          <button onClick={upload} > upload</button>
         </div>
       </div>
     </div>
