@@ -9,6 +9,7 @@ import Layout from "./Layout";
 import Edit from "./Edit";
 import Settings from "./Settings";
 import AuthContext from "../../Context/Context";
+import Gallery from "./Gallery";
 
 const Dashboard = (props) => {
   const ctx = useContext(AuthContext);
@@ -27,6 +28,7 @@ const Dashboard = (props) => {
           <Navbar />
           <Routes>
             <Route path="settings" element={<Settings />}></Route>
+            <Route path="gallery" element={<Gallery />}></Route>
             <Route path="edit" element={<Edit />}></Route>
             <Route path="layout" element={<Layout />}></Route>
             <Route path="sections" element={<Sections />}></Route>
