@@ -16,6 +16,7 @@ const Dashboard = (props) => {
     ctx.getWebstieData();
     ctx.getUserData();
     ctx.getLayoutData();
+    ctx.formLayout();
   },[]);
   return (
     <>

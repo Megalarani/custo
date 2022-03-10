@@ -9,7 +9,14 @@ const Landing = (props) => {
   const ctx = useContext(AuthContext);
   useEffect(() => {
     ctx.updateIsEditable(false);
-  },[]);
+  }, []);
+  // let newArr = [];
+  // for (var i = 0; i < ctx.layoutFlow.layout.length; i++) {
+  //   console.log(
+  //     Layout.filter((x) => ctx.layoutFlow.layout[i] === x.id),
+  //     "layout"
+  //   );
+  // }
   return (
     <div className="p-2">
       <div className="container-fluid p-0">

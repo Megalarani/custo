@@ -8,8 +8,6 @@ const Layout = () => {
   useEffect(()=>{
     ctx.updateIsEditable(false);
   },[])
-  const [sectionsList, setSectionsList] = useState([]);
-  const [layout, setLayout] = useState([]);
   return (
     <>
       <div className="row">

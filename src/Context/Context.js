@@ -16,6 +16,7 @@ const AuthContext = React.createContext({
   getUserData: () => {},
   getLayoutData: () => {},
   setUserId: () => {},
+  formLayout: () => {},
   updateUser: () => {},
   updateData: () => {},
   updateIsEditable: () => {},
@@ -28,7 +29,8 @@ export const AuthContextProvider = (props) => {
   const [websiteData, setWebsiteData] = useState(null);
   const [user, setUser] = useState("");
   const [userId, setId] = useState(localStorage.getItem("EditableCampuz"));
-  const [layoutFlow, setLayout] = useState(Layout);
+  const [layoutData, setLayoutData] = useState(null);
+  const [layoutFlow, setLayoutFlow] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(userId ? true : false);
   console.log(userId, isLoggedIn);
@@ -61,12 +63,22 @@ export const AuthContextProvider = (props) => {
     const docRef = doc(db, "layout", userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setLayout(docSnap.data());
+      setLayoutData(docSnap.data());
     } else {
       console.log("No such document!");
     }
   }
-  console.log(websiteData, user, layoutFlow, "info");
+  const formLayout = () => {
+    var newArr = [];
+    if (layoutData !== null) {
+      for (var i = 0; i < layoutData.layout.length; i++) {
+        let tempArr = Layout.filter((x) => layoutData.layout[i] === x.id);
+        newArr = newArr.concat(tempArr);
+      }
+      setLayoutFlow(newArr);
+    }
+  };
+  console.log(layoutFlow);
   const updateData = (data, Identifier) => {
     if (Array.isArray(data) === true) {
       console.log("Array", Identifier, data);
@@ -85,10 +97,10 @@ export const AuthContextProvider = (props) => {
   };
   const updateUser = (data) => {
     setUser(data);
-  }
+  };
   // function to update layout array
   const updateLayout = (data) => {
-    setLayout(data);
+    // setLayout(data);
   };
   // toggles between editing
   const updateIsEditable = (data) => {
@@ -125,6 +137,7 @@ export const AuthContextProvider = (props) => {
         user: user,
         websiteData: websiteData,
         layoutFlow: layoutFlow,
+        formLayout: formLayout,
         isLoggedIn: isLoggedIn,
         isEditable: isEditable,
         updateIsEditable: updateIsEditable,
