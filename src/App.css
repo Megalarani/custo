@@ -219,7 +219,10 @@ h6 {
 .Lg-form {
   font-weight: 600;
   height: 100vh;
-  background: rgb(255, 58, 58);
+
+}
+.cz-form{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .Lg-form .btn {
   background: rgb(255, 58, 58);

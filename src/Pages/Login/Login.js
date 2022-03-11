@@ -40,7 +40,7 @@ const Login = (props) => {
           ctx.setUserId(userId.uid);
           console.log("success2");
           setTimeout(() => {
-            user && navigate(`/${userId.uid}/dashboard`);
+            user && navigate(`/${userId.uid}/home`);
           }, 3000);
         })
         .catch((error) => {
@@ -70,7 +70,7 @@ const Login = (props) => {
         </>
       )}
       <div className="Lg-form w-100 d-flex align-items-center justify-content-center">
-        <div className="col-lg-4 col-sm-5 p-5 shadow bg-white rounded">
+        <div className=" cz-form col-lg-4 col-sm-5 p-5  bg-white rounded">
           <img
             src="https://www.campuzone.com/logo2.png"
             class="rounded mx-auto d-block w-25"

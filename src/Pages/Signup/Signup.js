@@ -47,8 +47,15 @@ const Signup = (props) => {
       createUserWithEmailAndPassword(auth, userCred.email, userCred.password)
         .then((res) => {
           setloading(true);
-          console.log("success");
-         
+          var user = auth.currentUser;
+          console.log("success",user.uid);
+          setDoc(doc(db, "users", user.uid), {
+            username:userCred.username,
+            email:userCred.email,
+            phoneno:userCred.phoneno,
+            schoolname: userCred.schoolname,
+            password: userCred.password
+           });
         
           setTimeout(() => {
             navigate("/login");
@@ -83,8 +90,13 @@ const Signup = (props) => {
           <Loader />
         </>
       )}
-      <div className="Lg-form w-100  d-flex align-items-center justify-content-center">
-        <div className="col-lg-7 col-sm-6 my-2 p-5 shadow bg-white rounded">
+      <div className="Lg-form w-100  d-flex align-items-center justify-content-center"
+       style={{ 
+        backgroundImage: `url("Images/bg.jpg")`,
+        backgroundSize:"cover" 
+      }}>
+    
+        <div className=" cz-form col-lg-7 col-sm-6 my-2 p-5  bg-white rounded">
           <img
             src="https://www.campuzone.com/logo2.png"
             class="rounded mx-auto d-block "
@@ -100,6 +112,7 @@ const Signup = (props) => {
                   type="text"
                   name="username"
                   required
+                  maxlength="12"
                   class="form-control"
                   value={userCred.username}
                   id="exampleInputusername"
@@ -150,8 +163,9 @@ const Signup = (props) => {
               <div className="form-group col-sm-6">
                 <label for="exampleInputphone text-center ">PhoneNo</label>
                 <input
-                  type="text"
+                  type="number"
                   name="phoneno"
+                  maxlength="10"
                   required
                   class="form-control"
                   value={userCred.phoneno}
