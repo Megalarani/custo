@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage, db } from "../../services/firebase";
 import {
@@ -9,7 +9,10 @@ import {
   updateDoc,
   collection,
 } from "firebase/firestore";
+import AuthContext from "../../Context/Context";
+
 const Gallery = () => {
+  const ctx = useContext(AuthContext);
   useEffect(() => {
     // if (ctx.getWebstieData === null) {
     //   ctx.getWebstieData();

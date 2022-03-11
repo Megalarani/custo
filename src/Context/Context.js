@@ -89,13 +89,57 @@ export const AuthContextProvider = (props) => {
       let newArr = Object.keys(data);
       var temp = newArr.map((i, index) => {
         console.log("oldData", websiteData[i]);
-       
+         websiteData[i] = data[i];
         console.log("updatedData", data);
         // update latest webstie data in firebase
         if (i === "heading1") {
           updateDoc(doc(db, "websitedata", userId), {
-            // websiteData[i] = data[i];
+           heading1:data[i],
           });
+        }else if(i === "content1"){
+          updateDoc(doc(db, "websitedata", userId), {
+           content1:data[i],
+           }); 
+        }else if(i === "heading2"){
+          updateDoc(doc(db, "websitedata", userId), {
+           heading2:data[i],
+           }); 
+        }else if(i === "content2"){
+          updateDoc(doc(db, "websitedata", userId), {
+           content2:data[i],
+           }); 
+        }else if(i === "heading3"){
+          updateDoc(doc(db, "websitedata", userId), {
+            heading3:data[i],
+           }); 
+        }else if(i === "content3"){
+          updateDoc(doc(db, "websitedata", userId), {
+           content3:data[i],
+           }); 
+        }else if(i === "heading4"){
+          updateDoc(doc(db, "websitedata", userId), {
+            heading4:data[i],
+           }); 
+        }else if(i === "content4"){
+          updateDoc(doc(db, "websitedata", userId), {
+           content4:data[i],
+           }); 
+        }else if(i === "content5"){
+          updateDoc(doc(db, "websitedata", userId), {
+           content5:data[i],
+           }); 
+        }else if(i === "address"){
+          updateDoc(doc(db, "websitedata", userId), {
+           address:data[i],
+           }); 
+        }else if(i === "phone"){
+          updateDoc(doc(db, "websitedata", userId), {
+           phone:data[i],
+           }); 
+        }else if(i === "email"){
+          updateDoc(doc(db, "websitedata", userId), {
+           email:data[i],
+           }); 
         }
       });
     }

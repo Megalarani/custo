@@ -1,16 +1,23 @@
 import { useState, useContext } from "react";
 import AuthContext from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../services/firebase";
+import { createUserWithEmailAndPassword} from "firebase/auth";
+import { auth, db } from "../../services/firebase";
 import Loader from "../../loader/Loader";
+import { setDoc, doc } from "firebase/firestore";
+import { setUserId } from "firebase/analytics";
 const Signup = (props) => {
   const ctx = useContext(AuthContext);
   const [loading, setloading] = useState(false);
   const [error, setError] = useState(null);
+  const[uid,setUid]= useState();
   const [userCred, setUserCred] = useState({
     email: "",
     password: "",
+    confirmpassword:"",
+    username:"",
+    schoolname:"",
+    phoneno:"",
   });
   const [user, setUser] = useState("");
   const navigate = useNavigate();
@@ -28,17 +35,32 @@ const Signup = (props) => {
       setError("Enter Email");
     } else if (userCred.password === "") {
       setError("Enter Password");
-    } else {
+    } else if(userCred.password !== userCred.confirmpassword){
+      setError("password and confirm password not match");
+    }
+    else if (userCred.username===""|| userCred.schoolname===""||userCred.phoneno ===""){
+    setError("please enter the remaining fiedls")
+    }
+    else {
       createUserWithEmailAndPassword(auth, userCred.email, userCred.password)
         .then((res) => {
+
           console.log("success");
+        setUid(res.uid)
+        setDoc(doc(db, "users", res.uid), {
+          email:userCred.email,
+          password:userCred.password,
+          username:userCred.username,
+          schoolname:userCred.schoolname,
+          phoneno:userCred.phoneno
+          }); 
           setloading(true);
           setTimeout(() => {
              navigate("/login");
             alert("sucessfully registered");
             setloading(false)
           }, 3000);
-          
+        console.log(uid)
         })
         .catch((error) => {
           setloading(false);
@@ -65,16 +87,18 @@ const Signup = (props) => {
           <Loader />
         </>
       )}
-      <div className="Lg-form w-100 d-flex align-items-center justify-content-center">
-        <div className="col-lg-4 col-sm-5 p-5 shadow bg-white rounded">
+      <div className="Lg-form w-100  d-flex align-items-center justify-content-center">
+        <div className="col-lg-7 col-sm-6 my-2 p-5 shadow bg-white rounded">
           <img
             src="https://www.campuzone.com/logo2.png"
-            class="rounded mx-auto d-block w-25"
+            class="rounded mx-auto d-block "
             alt="..."
+            style={{width:"14%"}}
           />
           <form>
             <h3 className="text-center reg-head">Register</h3>
-            <div className="form-group">
+            <div className="row">
+            <div className="form-group col-sm-6">
               <label for="exampleInputEmail1 text-center ">Email address</label>
               <input
                 type="email"
@@ -90,7 +114,24 @@ const Signup = (props) => {
               />
               {/* <p className="errorMsg">{emailError}</p> */}
             </div>
-            <div className="form-group ">
+            <div className="form-group col-sm-6 ">
+              <label for="exampleInputusername text-center ">UserName</label>
+              <input
+                type="text"
+                name="username"
+                required
+                class="form-control"
+                value={userCred.username}
+                id="exampleInputusername"
+                placeholder="userName"
+                onChange={onChangeHandler}
+                // ref={passwordRef}
+                // onChange={(e) => setPassword(e.target.valve)}
+              />
+              {/* <p className="errorMsg">{passwordError}</p> */}
+            </div>
+            
+            <div className="form-group col-sm-6 ">
               <label for="exampleInputPassword1 text-center ">Password</label>
               <input
                 type="password"
@@ -106,50 +147,70 @@ const Signup = (props) => {
               />
               {/* <p className="errorMsg">{passwordError}</p> */}
             </div>
+            <div className="form-group col-sm-6 ">
+              <label for="exampleInputPassword2 text-center "> Confirm Password</label>
+              <input
+                type="password"
+                name="confirmpassword"
+                required
+                class="form-control"
+                value={userCred.confirmpassword}
+                id="exampleInputPassword1"
+                placeholder="Confirm Password"
+                onChange={onChangeHandler}
+                // ref={passwordRef}
+                // onChange={(e) => setPassword(e.target.valve)}
+              />
+              {/* <p className="errorMsg">{passwordError}</p> */}
+            </div>
+           
+           
+            <div className="form-group col-sm-6">
+              <label for="exampleInputschoolname text-center ">SchoolName</label>
+              <input
+                type="text"
+                name="schoolname"
+                required
+                class="form-control"
+                value={userCred.schoolname}
+                id="exampleInputschoolname"
+                placeholder="SchoolName"
+                onChange={onChangeHandler}
+                // ref={passwordRef}
+                // onChange={(e) => setPassword(e.target.valve)}
+              />
+              {/* <p className="errorMsg">{passwordError}</p> */}
+            </div>
+            <div className="form-group col-sm-6">
+              <label for="exampleInputphone text-center ">PhoneNo</label>
+              <input
+                type="text"
+                name="phoneno"
+                required
+                class="form-control"
+                value={userCred.phoneno}
+                id="exampleInputschoolname"
+                placeholder="PhoneNo"
+                onChange={onChangeHandler}
+                // ref={passwordRef}
+                // onChange={(e) => setPassword(e.target.valve)}
+              />
+              {/* <p className="errorMsg">{passwordError}</p> */}
+            </div>
             {error && (
               <small className="text-danger text-right d-block pt-2">
                 {error}
               </small>
             )}
-             <div className="form-group ">
-              <label for="exampleInputPassword1 text-center ">UserName</label>
-              <input
-                type="password"
-                name="password"
-                required
-                class="form-control"
-                value={userCred.password}
-                id="exampleInputPassword1"
-                placeholder="Password"
-                onChange={onChangeHandler}
-                // ref={passwordRef}
-                // onChange={(e) => setPassword(e.target.valve)}
-              />
-              {/* <p className="errorMsg">{passwordError}</p> */}
-            </div>
-            <div className="form-group ">
-              <label for="exampleInputPassword1 text-center ">SchoolName</label>
-              <input
-                type="password"
-                name="password"
-                required
-                class="form-control"
-                value={userCred.password}
-                id="exampleInputPassword1"
-                placeholder="Password"
-                onChange={onChangeHandler}
-                // ref={passwordRef}
-                // onChange={(e) => setPassword(e.target.valve)}
-              />
-              {/* <p className="errorMsg">{passwordError}</p> */}
             </div>
             <div className="btnContainer ">
               <div className="text-center my-2">
                 <button
                   onClick={handleSignup}
-                  className="btn btn-danger mt-2 mx-2 px-3"
+                  style={{borderRadius:"20px",fontWeight:"600", color:"#fff", boxShadow: "0 3px 6px #00000036",backgroundColor:"#dc3545"}}
+                  className="btn   mt-2 mx-2 px-3"
                 >
-                  Register Now
+               <i class="fa fa-graduation-cap mx-1" aria-hidden="true"></i> Register Now
                 </button>
               </div>
             </div>

@@ -3,9 +3,11 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import AuthContext from "../../Context/Context";
 import { db } from "../../services/firebase";
 import { doc, updateDoc } from "firebase/firestore";
+import Loader from "../../loader/Loader";
 const Preview = () => {
   const ctx = useContext(AuthContext);
   const [mountedData, setMountedData] = useState([]);
+  const [loading, setloading] = useState(false);
   const [layoutsorder, setLayoutsorder] = useState([]);
   useEffect(() => {
     setMountedData(ctx.layoutFlow ? ctx.layoutFlow : []);
@@ -22,10 +24,20 @@ const Preview = () => {
     return <Component />;
   };
   function SaveLayout() {
-    updateDoc(doc(db, "layout", ctx.userId), { layout: ctx.layoutData.layout });
+     setloading(true)
+     updateDoc(doc(db, "layout", ctx.userId), { layout: ctx.layoutData.layout });
+     setTimeout(() => {
+      setloading(false);
+    }, 2000);
+    
   }
   return (
     <>
+     {loading && (
+        <>
+          <Loader />
+        </>
+      )}
       <div
         className="col-10 p-2 special-scroll"
         style={{ height: "91vh", overflowX: "hidden", overflowY: "auto" }}
