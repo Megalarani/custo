@@ -28,35 +28,38 @@ const Signup = (props) => {
       .join(" ");
   };
 
-  const userId = auth.currentUser;
   const handleSignup = async (e) => {
     e.preventDefault();
+    setloading(true);
     if (userCred.email === "") {
       setError("Enter Email");
+      setloading(false);
     } else if (userCred.password === "") {
       setError("Enter Password");
+      setloading(false);
     } else if (userCred.password !== userCred.confirmpassword) {
       setError("password and confirm password not match");
+      setloading(false);
     } else if (
       userCred.username === "" ||
       userCred.schoolname === "" ||
       userCred.phoneno === ""
     ) {
       setError("please enter the remaining fields");
+      setloading(false);
     } else {
       createUserWithEmailAndPassword(auth, userCred.email, userCred.password)
         .then((res) => {
-          setloading(true);
           var user = auth.currentUser;
-          console.log("success",user.uid);
+          console.log("success", user.uid);
           setDoc(doc(db, "users", user.uid), {
-            username:userCred.username,
-            email:userCred.email,
-            phoneno:userCred.phoneno,
+            username: userCred.username,
+            email: userCred.email,
+            phoneno: userCred.phoneno,
             schoolname: userCred.schoolname,
-            password: userCred.password
-           });
-        
+            password: userCred.password,
+          });
+
           setTimeout(() => {
             navigate("/login");
             alert("sucessfully registered");
@@ -67,9 +70,9 @@ const Signup = (props) => {
         .catch((error) => {
           setloading(false);
           const errorCode = error.code;
-          console.log(errorCode)
-          // const message = errorCode.substring(5);
-          // setError(titleCase(errorCode));
+          console.log(errorCode, error);
+          const message = errorCode.substring(5);
+          setError(titleCase(message));
         });
     }
   };
@@ -90,12 +93,13 @@ const Signup = (props) => {
           <Loader />
         </>
       )}
-      <div className="Lg-form w-100  d-flex align-items-center justify-content-center"
-       style={{ 
-        backgroundImage: `url("Images/bg.jpg")`,
-        backgroundSize:"cover" 
-      }}>
-    
+      <div
+        className="Lg-form w-100  d-flex align-items-center justify-content-center"
+        style={{
+          backgroundImage: `url("Images/bg.jpg")`,
+          backgroundSize: "cover",
+        }}
+      >
         <div className=" cz-form col-lg-7 col-sm-6 my-2 p-5  bg-white rounded">
           <img
             src="https://www.campuzone.com/logo2.png"
@@ -106,7 +110,7 @@ const Signup = (props) => {
           <form>
             <h3 className="text-center reg-head">Register</h3>
             <div className="row">
-            <div className="form-group col-sm-6 ">
+              <div className="form-group col-sm-6 ">
                 <label for="exampleInputusername text-center ">UserName</label>
                 <input
                   type="text"
@@ -159,7 +163,7 @@ const Signup = (props) => {
                 />
                 {/* <p className="errorMsg">{emailError}</p> */}
               </div>
-             
+
               <div className="form-group col-sm-6">
                 <label for="exampleInputphone text-center ">PhoneNo</label>
                 <input
@@ -213,8 +217,6 @@ const Signup = (props) => {
                 {/* <p className="errorMsg">{passwordError}</p> */}
               </div>
 
-             
-            
               {error && (
                 <small className="text-danger text-right d-block pt-2">
                   {error}

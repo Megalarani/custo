@@ -9,14 +9,18 @@ import { useContext } from "react";
 import AuthContext from "./Context/Context";
 
 function App() {
-
   const ctx = useContext(AuthContext);
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route
+          path="/login"
+          element={
+            ctx.isLoggedIn ? <Navigate to={`/${ctx.userId}/home`} /> : <Login />
+          }
+        ></Route>
         <Route
           path="/:id/*"
           element={ctx.isLoggedIn ? <Dashboard /> : <Navigate to={`/login`} />}

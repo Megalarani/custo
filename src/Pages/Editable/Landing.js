@@ -11,20 +11,12 @@ const Landing = (props) => {
   useEffect(() => {
     ctx.updateIsEditable(false);
   }, []);
-  // let newArr = [];
-  // for (var i = 0; i < ctx.layoutFlow.layout.length; i++) {
-  //   console.log(
-  //     Layout.filter((x) => ctx.layoutFlow.layout[i] === x.id),
-  //     "layout"
-  //   );
-  // }
-const checkdata={
-
-  h2:"tamil"
-}
-  function upload(){
+  const checkdata = {
+    h2: "tamil",
+  };
+  function upload() {
     updateDoc(doc(db, "websitedata", "yprpJe1AkDdPMOqwtgRppoFgX8D3"), {
-      websitedata:checkdata
+      websitedata: checkdata,
     });
   }
   return (
@@ -41,7 +33,7 @@ const checkdata={
           premium features like Brand Kit, Background Remover, and more.
         </p>
       </div>
-      
+
       <div className="row mt-4">
         <div className="col-md-5 p-1 pr-2">
           <Link
@@ -63,7 +55,7 @@ const checkdata={
         </div>
         <div className="col-md-7 p-1">
           <img className="img-fluid" src="/Images/landing.jpg" alt="landing" />
-          <button onClick={upload} > upload</button>
+          <button onClick={upload}> upload</button>
         </div>
       </div>
     </div>

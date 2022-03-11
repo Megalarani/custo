@@ -14,7 +14,6 @@ const Login = (props) => {
     password: "",
   });
   const [user, setUser] = useState("");
-  const [signup, setSignup] = useState("");
   const navigate = useNavigate();
   const titleCase = (str) => {
     return str
@@ -25,25 +24,27 @@ const Login = (props) => {
   onAuthStateChanged(auth, (currentuser) => {
     setUser(currentuser);
   });
-  const userId = auth.currentUser;
   const handleLogin = async (e) => {
     e.preventDefault();
+    setloading(true);
     if (userCred.email === "") {
       setError("Enter Email");
+      setloading(false);
     } else if (userCred.password === "") {
       setError("Enter Password");
+      setloading(false);
     } else {
       signInWithEmailAndPassword(auth, userCred.email, userCred.password)
         .then((res) => {
-          console.log("success1");
-          setloading(true);
-          ctx.setUserId(userId.uid);
-          console.log("success2");
+          console.log("success");
+          ctx.setUserId(res.user.uid);
           setTimeout(() => {
-            user && navigate(`/${userId.uid}/home`);
+            user && navigate(`/${res.user.uid}/home`);
           }, 3000);
+          setloading(false);
         })
         .catch((error) => {
+          console.log("error",error);
           setloading(false);
           const errorCode = error.code;
           const message = errorCode.substring(5);
@@ -73,41 +74,40 @@ const Login = (props) => {
         <div className=" cz-form col-lg-4 col-sm-5 p-5  bg-white rounded">
           <img
             src="https://www.campuzone.com/logo2.png"
-            class="rounded mx-auto d-block w-25"
+            className="rounded mx-auto d-block w-25"
             alt="..."
           />
           <form>
             <div className="form-group">
-              <label for="exampleInputEmail1 text-center ">Email address</label>
+              <label htmlFor="exampleInputEmail1 text-center ">
+                Email address
+              </label>
               <input
                 type="email"
                 name="email"
                 required
                 value={userCred.email}
-                class="form-control"
+                className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
                 onChange={onChangeHandler}
-                // onChange={(e) => setEmail(e.target.valve)}
               />
-              {/* <p className="errorMsg">{emailError}</p> */}
             </div>
             <div className="form-group mb-0">
-              <label for="exampleInputPassword1 text-center ">Password</label>
+              <label htmlFor="exampleInputPassword1 text-center ">
+                Password
+              </label>
               <input
                 type="password"
                 name="password"
                 required
-                class="form-control"
+                className="form-control"
                 value={userCred.password}
                 id="exampleInputPassword1"
                 placeholder="Password"
                 onChange={onChangeHandler}
-                // ref={passwordRef}
-                // onChange={(e) => setPassword(e.target.valve)}
               />
-              {/* <p className="errorMsg">{passwordError}</p> */}
             </div>
             {error && (
               <small className="text-danger text-right d-block pt-2">

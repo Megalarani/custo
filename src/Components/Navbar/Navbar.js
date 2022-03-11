@@ -1,9 +1,10 @@
-import React, { useCallback, useContext, useState } from "react";
-import { ReactComponent as LogoutIcon } from "../../Assests/shutdown.svg";
+import React, { useContext, useState } from "react";
 import AuthContext from "../../Context/Context";
-import { NavLink } from "react-router-dom";
+import { NavbarOverlay } from "./NavbarOverlay";
+
 const Navbar = () => {
   const ctx = useContext(AuthContext);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   let name = ctx.user.username;
   const [logoutOverlay, setLogoutOverlay] = useState(false);
   const ProfilePic = (name) => {
@@ -12,18 +13,17 @@ const Navbar = () => {
     return Profile.toUpperCase();
     // console.log(Profile);
   };
-  const logoutOverlayHandler = () => {
-    setLogoutOverlay((prevState) => {
-      return !prevState;
-    });
-  };
   return (
     <>
       <div
         className="navbar justify-content-end p-2 border-bottom"
         style={{ height: "9vh" }}
       >
-        <div className="row w-50 align-items-center justify-content-end position-relative">
+        <div
+          className="row w-50 align-items-center justify-content-end position-relative"
+          onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+          style={{ cursor: "pointer" }}
+        >
           <p className="w-auto text-center">
             Welcome{" "}
             <span
@@ -34,26 +34,12 @@ const Navbar = () => {
             </span>
           </p>
           <div className="w-auto text-center ml-2">
-            <div className="profile_img" onClick={logoutOverlayHandler}>
-              {name && ProfilePic(name)}
-            </div>
+            <div className="profile_img">{name && ProfilePic(name)}</div>
           </div>
-          <div className="w-auto text-center ml-2">
-         
-            <NavLink to="/${ctx.userId}/settings">
-            <i class="fa fa-cog h4 my-1 " style={{color:"#dc3545"}} aria-hidden="true"></i> 
-                  </NavLink>
-           
-          
-          </div>
-          {logoutOverlay && (
-
-         <button className="logOutButton" onClick={ctx.logout}>
-              Logout
-              <LogoutIcon style={{ marginLeft: "15px", width: "15%" }} />
-            </button>
-          )}
-          
+          <NavbarOverlay
+            isOpen={isProfileMenuOpen}
+            onClose={() => setIsProfileMenuOpen(false)}
+          />
         </div>
       </div>
     </>

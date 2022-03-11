@@ -8,10 +8,9 @@ const Preview = () => {
   const ctx = useContext(AuthContext);
   const [mountedData, setMountedData] = useState([]);
   const [loading, setloading] = useState(false);
-  const [layoutsorder, setLayoutsorder] = useState([]);
   useEffect(() => {
     setMountedData(ctx.layoutFlow ? ctx.layoutFlow : []);
-  });
+  },[]);
   const handleOnDragEnd = (movedItem) => {
     const newArr = Array.from(mountedData);
     const [reorderedItem] = newArr.splice(movedItem.source.index, 1);
@@ -24,16 +23,15 @@ const Preview = () => {
     return <Component />;
   };
   function SaveLayout() {
-     setloading(true)
-     updateDoc(doc(db, "layout", ctx.userId), { layout: ctx.layoutData.layout });
-     setTimeout(() => {
+    setloading(true);
+    updateDoc(doc(db, "layout", ctx.userId), { layout: ctx.layoutData.layout });
+    setTimeout(() => {
       setloading(false);
     }, 2000);
-    
   }
   return (
     <>
-     {loading && (
+      {loading && (
         <>
           <Loader />
         </>
@@ -47,13 +45,23 @@ const Preview = () => {
             <button
               class="btn px-5"
               onClick={SaveLayout}
-              style={{ background: "#fff",color:"#dc3545", borderRadius: "20px", boxShadow: "0 3px 6px #00000036" }}
+              style={{
+                background: "#fff",
+                color: "#dc3545",
+                borderRadius: "20px",
+                boxShadow: "0 3px 6px #00000036",
+              }}
             >
               Save<i class="fa fa-save mx-2"></i>{" "}
             </button>
             <button
               class="btn shadow px-3  "
-              style={{ background: "#fff",color:"#dc3545", borderRadius: "20px", boxShadow: "0 3px 6px #00000036" }}
+              style={{
+                background: "#fff",
+                color: "#dc3545",
+                borderRadius: "20px",
+                boxShadow: "0 3px 6px #00000036",
+              }}
             >
               Fullpage View<i class="fa fa-eye mx-2"></i>
             </button>

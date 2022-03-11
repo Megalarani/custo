@@ -16,7 +16,6 @@ const AuthContext = React.createContext({
   getUserData: () => {},
   getLayoutData: () => {},
   setUserId: () => {},
-  formLayout: () => {},
   updateUser: () => {},
   updateData: () => {},
   updateIsEditable: () => {},
@@ -64,21 +63,16 @@ export const AuthContextProvider = (props) => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       setLayoutData(docSnap.data());
+      var newArr = [];
+      for (var i = 0; i < docSnap.data().layout.length; i++) {
+        let tempArr = Layout.filter((x) => docSnap.data().layout[i] === x.id);
+        newArr = newArr.concat(tempArr);
+      }
+      setLayoutFlow(newArr);
     } else {
       console.log("No such document!");
     }
   }
-  const formLayout = () => {
-    var newArr = [];
-    if (layoutData !== null) {
-      for (var i = 0; i < layoutData.layout.length; i++) {
-        let tempArr = Layout.filter((x) => layoutData.layout[i] === x.id);
-        newArr = newArr.concat(tempArr);
-      }
-      setLayoutFlow(newArr);
-    }
-  };
-
   const updateData = (data, Identifier) => {
     if (Array.isArray(data) === true) {
       console.log("Array", Identifier, data);
@@ -87,19 +81,19 @@ export const AuthContextProvider = (props) => {
       // upadte in db
       if (Identifier === "card1") {
         updateDoc(doc(db, "websitedata", userId), {
-         card1:data,
+          card1: data,
         });
-      }else if (Identifier === "card2") {
+      } else if (Identifier === "card2") {
         updateDoc(doc(db, "websitedata", userId), {
-         card2:data,
+          card2: data,
         });
-      }else if (Identifier === "slider1") {
+      } else if (Identifier === "slider1") {
         updateDoc(doc(db, "websitedata", userId), {
-         slider1:data,
+          slider1: data,
         });
-      }else if (Identifier === "gallery1") {
+      } else if (Identifier === "gallery1") {
         updateDoc(doc(db, "websitedata", userId), {
-         gallery1:data,
+          gallery1: data,
         });
       }
     } else {
@@ -107,57 +101,57 @@ export const AuthContextProvider = (props) => {
       let newArr = Object.keys(data);
       var temp = newArr.map((i, index) => {
         console.log("oldData", websiteData[i]);
-         websiteData[i] = data[i];
+        websiteData[i] = data[i];
         console.log("updatedData", data);
         // update latest webstie data in firebase
         if (i === "heading1") {
           updateDoc(doc(db, "websitedata", userId), {
-           heading1:data[i],
+            heading1: data[i],
           });
-        }else if(i === "content1"){
+        } else if (i === "content1") {
           updateDoc(doc(db, "websitedata", userId), {
-           content1:data[i],
-           }); 
-        }else if(i === "heading2"){
+            content1: data[i],
+          });
+        } else if (i === "heading2") {
           updateDoc(doc(db, "websitedata", userId), {
-           heading2:data[i],
-           }); 
-        }else if(i === "content2"){
+            heading2: data[i],
+          });
+        } else if (i === "content2") {
           updateDoc(doc(db, "websitedata", userId), {
-           content2:data[i],
-           }); 
-        }else if(i === "heading3"){
+            content2: data[i],
+          });
+        } else if (i === "heading3") {
           updateDoc(doc(db, "websitedata", userId), {
-            heading3:data[i],
-           }); 
-        }else if(i === "content3"){
+            heading3: data[i],
+          });
+        } else if (i === "content3") {
           updateDoc(doc(db, "websitedata", userId), {
-           content3:data[i],
-           }); 
-        }else if(i === "heading4"){
+            content3: data[i],
+          });
+        } else if (i === "heading4") {
           updateDoc(doc(db, "websitedata", userId), {
-            heading4:data[i],
-           }); 
-        }else if(i === "content4"){
+            heading4: data[i],
+          });
+        } else if (i === "content4") {
           updateDoc(doc(db, "websitedata", userId), {
-           content4:data[i],
-           }); 
-        }else if(i === "content5"){
+            content4: data[i],
+          });
+        } else if (i === "content5") {
           updateDoc(doc(db, "websitedata", userId), {
-           content5:data[i],
-           }); 
-        }else if(i === "address"){
+            content5: data[i],
+          });
+        } else if (i === "address") {
           updateDoc(doc(db, "websitedata", userId), {
-           address:data[i],
-           }); 
-        }else if(i === "phone"){
+            address: data[i],
+          });
+        } else if (i === "phone") {
           updateDoc(doc(db, "websitedata", userId), {
-           phone:data[i],
-           }); 
-        }else if(i === "email"){
+            phone: data[i],
+          });
+        } else if (i === "email") {
           updateDoc(doc(db, "websitedata", userId), {
-           email:data[i],
-           }); 
+            email: data[i],
+          });
         }
       });
     }
@@ -165,10 +159,10 @@ export const AuthContextProvider = (props) => {
   const updateUser = (data) => {
     setUser(data);
   };
+  console.log(user);
   // function to update layout array
   const updateLayout = (data) => {
     setLayoutFlow(data);
-
     var tempArr = [];
     for (var i = 0; i < data.length; i++) {
       tempArr = tempArr.concat(data[i].id);
@@ -184,10 +178,10 @@ export const AuthContextProvider = (props) => {
   };
   // function to update & set userId in local storage && session storage
   const setUserId = (uId) => {
+    setId(uId); // set userId
     setIsLoggedIn(true);
     sessionStorage.setItem("EditableCampuz", uId);
     localStorage.setItem("EditableCampuz", uId);
-    setId(uId); // set userId
   };
   // logout function
   const logoutHandler = () => {
@@ -214,7 +208,6 @@ export const AuthContextProvider = (props) => {
         websiteData: websiteData,
         layoutFlow: layoutFlow,
         layoutData: layoutData,
-        formLayout: formLayout,
         isLoggedIn: isLoggedIn,
         isEditable: isEditable,
         updateIsEditable: updateIsEditable,

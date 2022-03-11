@@ -48,6 +48,13 @@ const useStyles = makeStyles({
       height: "0.75rem",
     },
   },
+  errorMsg: {
+    fontSize: "0.75rem",
+    position: "absolute",
+    top: "-2.75rem",
+    right: 0,
+    color: "#dc3545",
+  },
 });
 
 const Settings = () => {
@@ -68,41 +75,66 @@ const Settings = () => {
   const [enableUsername, setEnableUsername] = useState(false);
   const [enableSave, setEnableSave] = useState(false);
   const [error, setError] = useState(null);
-  const submitHandler = ()=> {
-    if (formValues.username === "" || formValues.schoolname === "" ) {
-      setError("Please fill the fields");
-      console.log(error)
-    }
-    else if (formValues.oldPassword === "" || formValues.newPassword === "") {
-      console.log("why man")
-      ctx.updateUser({...formValues,
+  const submitHandler = () => {
+    if (formValues.username === "") {
+      setError("User Name cannot be empty");
+    } else if (formValues.schoolname === "") {
+      setError("School Name cannot be empty");
+    } else if (formValues.oldPassword === "" && formValues.newPassword === "") {
+      console.log("no password change");
+      ctx.updateUser({
+        ...formValues,
         username: formValues.username,
-        schoolname: formValues.schoolname,    
-      }  )
+        schoolname: formValues.schoolname,
+      });
+      setError();
+      setEnableSave(false);
+      setEnableUsername(!enableUsername);
+    } else if (formValues.oldPassword === "" && formValues.newPassword !== "") {
+      setError("Enter old password");
+    } else if (formValues.oldPassword !== formValues.password) {
+      setError("Incorrect password");
+    } else if (formValues.oldPassword !== "" && formValues.newPassword === "") {
+      setError("Create a new password to continue");
+    } else if (formValues.newPassword === formValues.oldPassword) {
+      setError("New password cannot be your old password");
+    } else if (
+      formValues.oldPassword !== "" &&
+      formValues.newPassword !== "" &&
+      formValues.username === ctx.user.username &&
+      formValues.schoolname === ctx.user.schoolname
+    ) {
+      console.log("Password alone changed");
+      ctx.updateUser({
+        ...formValues,
+        password: formValues.newPassword,
+      });
+      setFormValues({
+        ...formValues,
+        newPassword: "",
+        oldPassword: "",
+      });
+      setError();
+      setEnableSave(false);
+      setEnableUsername(!enableUsername);
+    } else {
+      console.log("All data's changed");
+      ctx.updateUser({
+        ...formValues,
+        username: formValues.username,
+        schoolname: formValues.schoolname,
+        password: formValues.newPassword,
+      });
+      setFormValues({
+        ...formValues,
+        newPassword: "",
+        oldPassword: "",
+      });
+      setError();
+      setEnableSave(false);
+      setEnableUsername(!enableUsername);
     }
-    else if ((formValues.newPassword === "" || !formValues.oldPassword === "") && (!formValues.newPassword === "" || !formValues.oldPassword === "")) {
-      setError("Please fill the two password  fields");
-      console.log(error)
-    }
-   else if (formValues.newPassword === formValues.oldPassword ){
-     setError("old password and new password are match")
-   }
-   else if(formValues.username === "" || formValues.schoolname === "" ){
-    ctx.updateUser({...formValues,
-      oldPassword: formValues.oldPassword,
-      newPassword: formValues.newPassword,    
-    }  )
-   }
-   else{
-    ctx.updateUser({...formValues,
-      username: formValues.username,
-      schoolname: formValues.schoolname,
-      oldPassword: formValues.oldPassword,
-      newPassword: formValues.newPassword,    
-    }  )
-   }
-  }
-  
+  };
 
   const handleChange = (inputObj) => {
     setFormValues({
@@ -130,7 +162,6 @@ const Settings = () => {
               placeholder="Username"
             />
           </div>
-         
         </div>
         <div className={classes.row}>
           <div className={classes.label}>
@@ -217,44 +248,46 @@ const Settings = () => {
           </div>
           <div className={classes.actions}></div>
         </div>
-        <div className="row">
-        <div className="col-md-8">
-        <GButton
-          onClick={() => submitHandler()}
-          label="Save"
-          disabled={!enableSave}
-          boxShadow
-          isLong
-        />
+        <div className="text-center p-2 position-relative">
+          {error && (
+            <Typography className={classes.errorMsg}>{error}</Typography>
+          )}
         </div>
-        <div class="col-md-3">
-             <div
-            className={classes.actions}
-           
-            onClick={() => setEnableUsername(!enableUsername)}
-          >
-            <span
-              class="btn px-4 py-1"
-              style={{
-                color: !enableUsername ? "#fff" : "#dc3545",
-                background: !enableUsername ? "#dc3545" : "#fff",
-                borderRadius: "20px",
-                boxShadow: "0 3px 6px #00000036",
-              }}
+        <div className="row">
+          <div className="col-md-8">
+            <GButton
+              onClick={() => submitHandler()}
+              label="Save"
+              disabled={!enableSave}
+              boxShadow
+              isLong
+            />
+          </div>
+          <div class="col-md-3">
+            <div
+              className={classes.actions}
+              onClick={() => setEnableUsername(!enableUsername)}
             >
-              {" "}
-              Edit Details
-              <EditIcon
+              <span
+                class="btn px-4 py-1"
                 style={{
-                  fill: !enableUsername ? "#fff" : "#dc3545",
-                  marginLeft: "10px",
+                  color: !enableUsername ? "#fff" : "#dc3545",
+                  background: !enableUsername ? "#dc3545" : "#fff",
+                  borderRadius: "20px",
+                  boxShadow: "0 3px 6px #00000036",
                 }}
-              />
-            </span>
+              >
+                {" "}
+                Edit Details
+                <EditIcon
+                  style={{
+                    fill: !enableUsername ? "#fff" : "#dc3545",
+                    marginLeft: "10px",
+                  }}
+                />
+              </span>
+            </div>
           </div>
-          
-          </div>
-      
         </div>
       </div>
     </>

@@ -14,16 +14,14 @@ import Gallery from "./Gallery";
 const Dashboard = (props) => {
   const ctx = useContext(AuthContext);
   useEffect(() => {
-  
-      ctx.getWebsiteData();
-      ctx.getUserData();
-      ctx.getLayoutData();
-      setTimeout(() => {
-        ctx.formLayout();
-      }, 1000);
-
+    ctx.getWebsiteData();
+    ctx.getUserData();
+    ctx.getLayoutData();
+    // ctx.formLayout();
+    // setTimeout(() => {
+    // }, 1000);
   }, []);
- 
+
   return (
     <>
       <div className="main_container row justify-content-end">

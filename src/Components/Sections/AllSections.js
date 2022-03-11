@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext, useState } from "react";
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from "react-router-hash-link";
 import {
   Accordion,
   AccordionItem,
@@ -25,10 +25,10 @@ const AllSections = (props) => {
             </AccordionItemHeading>
             <AccordionItemPanel>
               {item.variants.map((section) => (
-                <HashLink to={ `#${section.id}`}>
-                <p key={section.id} className="inner-accordion-list">
-                  {section.id}
-                </p>
+                <HashLink to={`#${section.id}`} key={section.id}>
+                  <p key={section.id} className="inner-accordion-list">
+                    {section.id}
+                  </p>
                 </HashLink>
               ))}
             </AccordionItemPanel>
