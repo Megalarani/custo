@@ -84,6 +84,24 @@ export const AuthContextProvider = (props) => {
       console.log("Array", Identifier, data);
       websiteData[Identifier] = data;
       console.log("updatedData", websiteData[Identifier]);
+      // upadte in db
+      if (Identifier === "card1") {
+        updateDoc(doc(db, "websitedata", userId), {
+         card1:data,
+        });
+      }else if (Identifier === "card2") {
+        updateDoc(doc(db, "websitedata", userId), {
+         card2:data,
+        });
+      }else if (Identifier === "slider1") {
+        updateDoc(doc(db, "websitedata", userId), {
+         slider1:data,
+        });
+      }else if (Identifier === "gallery1") {
+        updateDoc(doc(db, "websitedata", userId), {
+         gallery1:data,
+        });
+      }
     } else {
       console.log("Object");
       let newArr = Object.keys(data);

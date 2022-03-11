@@ -13,8 +13,8 @@ const Sidebar = () => {
   const ctx = useContext(AuthContext);
   const navMenuList = [
     {
-      name: "Dashboard",
-      path: "dashboard",
+      name: "Home",
+      path: "home",
       icon: DashboardIcon,
     },
     {
@@ -42,11 +42,11 @@ const Sidebar = () => {
     //   path: "gallery",
     //   icon: GalleryIcon,
     // },
-    {
-      name: "Settings",
-      path: "settings",
-      icon: SettingsIcon,
-    },
+    // {
+    //   name: "Settings",
+    //   path: "settings",
+    //   icon: SettingsIcon,
+    // },
   ];
   return (
     <>
@@ -66,7 +66,7 @@ const Sidebar = () => {
                 <li className="list-item d-block w-100" key={menuItem.name}>
                   <NavLink to={menuItem.path}>
                     {menuItem.icon && <menuItem.icon />}
-                    {menuItem.name}
+                  <div className="set">{menuItem.name}</div>  
                   </NavLink>
                 </li>
               );

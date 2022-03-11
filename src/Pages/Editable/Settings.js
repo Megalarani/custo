@@ -42,6 +42,7 @@ const useStyles = makeStyles({
   actions: {
     width: "10%",
     cursor: "pointer",
+
     "& svg": {
       width: "0.75rem",
       height: "0.75rem",
@@ -129,29 +130,7 @@ const Settings = () => {
               placeholder="Username"
             />
           </div>
-          <div
-            className={classes.actions}
-            onClick={() => setEnableUsername(!enableUsername)}
-          >
-            <span
-              class="btn px-4 py-1"
-              style={{
-                color: !enableUsername ? "#fff" : "#dc3545",
-                background: !enableUsername ? "#dc3545" : "#fff",
-                borderRadius: "20px",
-                boxShadow: "0 3px 6px #00000036",
-              }}
-            >
-              {" "}
-              Edit Details
-              <EditIcon
-                style={{
-                  fill: !enableUsername ? "#fff" : "#dc3545",
-                  marginLeft: "10px",
-                }}
-              />
-            </span>
-          </div>
+         
         </div>
         <div className={classes.row}>
           <div className={classes.label}>
@@ -238,6 +217,8 @@ const Settings = () => {
           </div>
           <div className={classes.actions}></div>
         </div>
+        <div className="row">
+        <div className="col-md-8">
         <GButton
           onClick={() => submitHandler()}
           label="Save"
@@ -245,6 +226,36 @@ const Settings = () => {
           boxShadow
           isLong
         />
+        </div>
+        <div class="col-md-3">
+             <div
+            className={classes.actions}
+           
+            onClick={() => setEnableUsername(!enableUsername)}
+          >
+            <span
+              class="btn px-4 py-1"
+              style={{
+                color: !enableUsername ? "#fff" : "#dc3545",
+                background: !enableUsername ? "#dc3545" : "#fff",
+                borderRadius: "20px",
+                boxShadow: "0 3px 6px #00000036",
+              }}
+            >
+              {" "}
+              Edit Details
+              <EditIcon
+                style={{
+                  fill: !enableUsername ? "#fff" : "#dc3545",
+                  marginLeft: "10px",
+                }}
+              />
+            </span>
+          </div>
+          
+          </div>
+      
+        </div>
       </div>
     </>
   );

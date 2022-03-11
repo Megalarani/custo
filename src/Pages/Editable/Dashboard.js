@@ -38,7 +38,7 @@ const Dashboard = (props) => {
             <Route path="layout" element={<Layout />}></Route>
             <Route path="sections" element={<Sections />}></Route>
             <Route path="styleguide" element={<StyleGuide />}></Route>
-            <Route index path="dashboard" element={<Landing />}></Route>
+            <Route index path="home" element={<Landing />}></Route>
           </Routes>
         </div>
       </div>

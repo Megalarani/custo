@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState } from "react";
 import { ReactComponent as LogoutIcon } from "../../Assests/shutdown.svg";
 import AuthContext from "../../Context/Context";
-
+import { NavLink } from "react-router-dom";
 const Navbar = () => {
   const ctx = useContext(AuthContext);
   let name = ctx.user.username;
@@ -38,12 +38,22 @@ const Navbar = () => {
               {name && ProfilePic(name)}
             </div>
           </div>
+          <div className="w-auto text-center ml-2">
+         
+            <NavLink to="/${ctx.userId}/settings">
+            <i class="fa fa-cog h4 my-1 " style={{color:"#dc3545"}} aria-hidden="true"></i> 
+                  </NavLink>
+           
+          
+          </div>
           {logoutOverlay && (
-            <button className="logOutButton" onClick={ctx.logout}>
+
+         <button className="logOutButton" onClick={ctx.logout}>
               Logout
               <LogoutIcon style={{ marginLeft: "15px", width: "15%" }} />
             </button>
           )}
+          
         </div>
       </div>
     </>
