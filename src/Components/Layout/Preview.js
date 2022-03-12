@@ -10,7 +10,7 @@ const Preview = () => {
   const [loading, setloading] = useState(false);
   useEffect(() => {
     setMountedData(ctx.layoutFlow ? ctx.layoutFlow : []);
-  },[]);
+  },[mountedData]);
   const handleOnDragEnd = (movedItem) => {
     const newArr = Array.from(mountedData);
     const [reorderedItem] = newArr.splice(movedItem.source.index, 1);

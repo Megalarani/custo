@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import Sidebar from "../../Components/Sidebar/Sidebar";
@@ -10,20 +10,28 @@ import Edit from "./Edit";
 import Settings from "./Settings";
 import AuthContext from "../../Context/Context";
 import Gallery from "./Gallery";
+import Loader from "../../loader/Loader";
 
 const Dashboard = (props) => {
+  const [loading, setLoading] = useState(true);
   const ctx = useContext(AuthContext);
   useEffect(() => {
     ctx.getWebsiteData();
     ctx.getUserData();
     ctx.getLayoutData();
-    // ctx.formLayout();
-    // setTimeout(() => {
-    // }, 1000);
+    setLoading(false);
+    window.addEventListener("beforeunload", alertUser);
+    return () => {
+      window.removeEventListener("beforeunload", alertUser);
+    };
   }, []);
-
+  const alertUser = (e) => {
+    setLoading(true);
+    console.log("reloaded");
+  };
   return (
     <>
+      {loading && <Loader />}
       <div className="main_container row justify-content-end">
         <Sidebar />
         <div className="col-md-9 col-lg-10 right_col p-0 pl-1" role="main">

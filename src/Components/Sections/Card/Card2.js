@@ -65,7 +65,9 @@ const Card2 = () => {
       },
     },
   };
-  const [localData, setLocalData] = useState( ctx.websiteData && ctx.websiteData.card2);
+  const [localData, setLocalData] = useState(
+    ctx.websiteData ? ctx.websiteData.card2 : []
+  );
   let Identifier = "card2";
   console.log(localData, "local");
   const onChangeHandler = (e, details, index) => {
@@ -76,7 +78,7 @@ const Card2 = () => {
           ...details,
           content: e.target.value,
         };
-      } 
+      }
       prevState[index] = updatedData;
       return [...prevState];
     });
@@ -86,13 +88,16 @@ const Card2 = () => {
     <>
       {ctx.isEditable ? (
         <div className="row py-3 justify-content-end">
-         <div className="saveButton" onClick={ () => {
-            setloading(true);
-            ctx.updateData(localData,Identifier)
-            setTimeout(() => {      
-            setloading(false);
-          }, 2000)
-          }}>
+          <div
+            className="saveButton"
+            onClick={() => {
+              setloading(true);
+              ctx.updateData(localData, Identifier);
+              setTimeout(() => {
+                setloading(false);
+              }, 2000);
+            }}
+          >
             Save
           </div>
         </div>
@@ -100,17 +105,17 @@ const Card2 = () => {
         <></>
       )}
       {loading && (
-      <>
-      <Loader/>
-      </>
-    )}
+        <>
+          <Loader />
+        </>
+      )}
       <section class="culm" id="#curriculam">
         <div class={data.container.style}>
           <h2 class={data.heading.style}>{data.heading.value}</h2>
         </div>
         <div class={data.layout.style}>
           {localData.map((details, index) => (
-            <div class={`${styles.curriculamcol}`}>
+            <div class={`${styles.curriculamcol}`} key={index}>
               <div class={`${styles.cardin}`}>
                 <div class={`${styles.round} ${styles.ron3}`}>
                   <i class="fa fa-pencil-square icon" aria-hidden="true"></i>
