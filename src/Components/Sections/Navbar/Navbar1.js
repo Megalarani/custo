@@ -3,7 +3,7 @@ import styles from "./Navbar1.module.css";
 const Navbar1 = () => {
   const data = {
     container: {
-      style: "navbar navbar-expand-md shadow",
+      style: "navbar navbar-expand-md shadow  navbar-light bg-lignt",
       value: "",
     },
     headerlogo: {

@@ -4,6 +4,7 @@ import AuthContext from "../../Context/Context";
 import { db } from "../../services/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import Loader from "../../loader/Loader";
+import { NavLink } from "react-router-dom";
 const Preview = () => {
   const ctx = useContext(AuthContext);
   const [mountedData, setMountedData] = useState([]);
@@ -54,6 +55,8 @@ const Preview = () => {
             >
               Save<i class="fa fa-save mx-2"></i>{" "}
             </button>
+           
+            <NavLink to="/" target="_blank">
             <button
               class="btn shadow px-3  "
               style={{
@@ -65,6 +68,7 @@ const Preview = () => {
             >
               Fullpage View<i class="fa fa-eye mx-2"></i>
             </button>
+                  </NavLink>
           </div>
           <Droppable droppableId="mounted">
             {(provided) => (

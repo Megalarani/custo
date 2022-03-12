@@ -21,7 +21,7 @@ const Slider1 = () => {
   };
   const data = {
     container: {
-      style: `container ${styles.test}`,
+      style: ` col-md-9 col-lg-7 m-auto ${styles.test}`,
       value: "",
     },
     heading: {

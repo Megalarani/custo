@@ -49,7 +49,7 @@ const Card1 = () => {
   };
 
   const [localData, setLocalData] = useState(
-    ctx.websiteData ? ctx.websiteData.card1 : []
+   ctx.websiteData ? ctx.websiteData.card1 : []
   );
   let Identifier = "card1";
   console.log(localData, "local");
