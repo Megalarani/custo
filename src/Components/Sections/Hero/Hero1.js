@@ -58,11 +58,11 @@ const Hero1 = () => {
           <Loader />
         </>
       )}
-      <div class={`${styles.hero}`} id="#Home">
-        <div class={data.container.style}>
-          <img src="/Images/text.png" class="pretext" />
+      <div className={`${styles.hero}`} id="#Home">
+        <div className={data.container.style}>
+          <img src="/Images/text.png" className="pretext" />
         </div>
-        <div class={`container ${styles.texter}`}>
+        <div className={`container ${styles.texter}`}>
           {ctx.isEditable ? (
             <>
               <input
@@ -84,16 +84,16 @@ const Hero1 = () => {
               <p className={data.paragraph.style}>{ctx.websiteData && ctx.websiteData.content1}</p>
             </>
           )}
-          <button type="button" class={` ${styles.btn}`}>
+          <button type="button" className={` ${styles.btn}`}>
             GET STARTED
           </button>
         </div>
 
         <img
           src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIydnciIHZpZXdCb3g9IjAgMCAxMjgwIDE0MCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjZmZmZmZmIj48cGF0aCBkPSJNMTI4MCA4NmMtMTkuOS0xNy4yMS00MC4wOC0zOS42OS03OS44OS0zOS42OS01Ny40OSAwLTU2LjkzIDQ2LjU5LTExNSA0Ni41OS01My42MSAwLTU5Ljc2LTM5LjYyLTExNS42LTM5LjYyQzkyMy43IDUzLjI3IDkyNC4yNiA4NyA4NTMuODkgODdjLTg5LjM1IDAtNzguNzQtODctMTg4LjItODdDNTU0IDAgNTQzLjk1IDEyMS44IDQyMy4zMiAxMjEuOGMtMTAwLjUyIDAtMTE3Ljg0LTU0Ljg4LTE5MS41Ni01NC44OC03Ny4wNiAwLTEwMCA0OC41Ny0xNTEuNzUgNDguNTctNDAgMC02MC0xMi4yMS04MC0yOS41MXY1NEgxMjgweiIvPjwvZz48L3N2Zz4"
-          class="wave"
+          className="wave"
         />
-        <img src="/Images/1.png" class="house" />
+        <img src="/Images/1.png" className="house" />
       </div>
     </>
   );

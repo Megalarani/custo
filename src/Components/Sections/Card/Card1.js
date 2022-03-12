@@ -97,12 +97,12 @@ const Card1 = () => {
           <Loader />
         </>
       )}
-      <div class={data.container.style}>
+      <div className={data.container.style}>
         {localData.map((details, index) => (
-          <div class={`col-md-3  ${styles.card} `} key={index}>
-            <div class={`${styles.cardin}`}>
-              <div class={`${styles.round}`}>
-                <i class="fa fa-pencil-square-o icon" aria-hidden="true"></i>
+          <div className={`col-md-3  ${styles.card} `} key={index}>
+            <div className={`${styles.cardin}`}>
+              <div className={`${styles.round}`}>
+                <i className="fa fa-pencil-square-o icon" aria-hidden="true"></i>
               </div>
               {ctx.isEditable ? (
                 <>

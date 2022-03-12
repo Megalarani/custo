@@ -47,7 +47,6 @@ export const AuthContextProvider = (props) => {
   }
   // function to get user data
   async function getUserData() {
-    console.log("getUserData");
     const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -58,7 +57,6 @@ export const AuthContextProvider = (props) => {
   }
   // function to get user website layout information
   async function getLayoutData() {
-    console.log("getLayoutData");
     const docRef = doc(db, "layout", userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -77,7 +75,6 @@ export const AuthContextProvider = (props) => {
     if (Array.isArray(data) === true) {
       console.log("Array", Identifier, data);
       websiteData[Identifier] = data;
-      console.log("updatedData", websiteData[Identifier]);
       // upadte in db
       if (Identifier === "card1") {
         updateDoc(doc(db, "websitedata", userId), {
@@ -100,9 +97,7 @@ export const AuthContextProvider = (props) => {
       console.log("Object");
       let newArr = Object.keys(data);
       var temp = newArr.map((i, index) => {
-        console.log("oldData", websiteData[i]);
         websiteData[i] = data[i];
-        console.log("updatedData", data);
         // update latest webstie data in firebase
         if (i === "heading1") {
           updateDoc(doc(db, "websitedata", userId), {

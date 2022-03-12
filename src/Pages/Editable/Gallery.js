@@ -29,7 +29,7 @@ const Gallery = () => {
   const [gallerytype, setGallerytype] = useState(null);
 
   const [galdata, setGaldata] = useState(null);
-  console.log(media, "medi");
+
 
   const handleUpload = (e) => {
     setMediaError(null);
@@ -131,7 +131,7 @@ const Gallery = () => {
           galdata.images.map((data, index) => {
             return (
               <div>
-                <img key={index} class="all watch" src={data.pic} />
+                <img key={index} className="all watch" src={data.pic} />
               </div>
             );
           })}
@@ -202,7 +202,7 @@ const Gallery = () => {
         </div>
 
         <h2 className="text-center mt-5">Gallery</h2>
-        <ul class="switcher">
+        <ul className="switcher">
           <li data-cat=".all" onClick={Allmedia}>
             All
           </li>
@@ -215,7 +215,7 @@ const Gallery = () => {
           </li>
         </ul>
 
-        <div class="gallery mx-2">{ui}</div>
+        <div className="gallery mx-2">{ui}</div>
       </section>
     </>
   );

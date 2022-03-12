@@ -109,16 +109,16 @@ const Card2 = () => {
           <Loader />
         </>
       )}
-      <section class="culm" id="#curriculam">
-        <div class={data.container.style}>
-          <h2 class={data.heading.style}>{data.heading.value}</h2>
+      <section className="culm" id="#curriculam">
+        <div className={data.container.style}>
+          <h2 className={data.heading.style}>{data.heading.value}</h2>
         </div>
-        <div class={data.layout.style}>
+        <div className={data.layout.style}>
           {localData.map((details, index) => (
-            <div class={`${styles.curriculamcol}`} key={index}>
-              <div class={`${styles.cardin}`}>
-                <div class={`${styles.round} ${styles.ron3}`}>
-                  <i class="fa fa-pencil-square icon" aria-hidden="true"></i>
+            <div className={`${styles.curriculamcol}`} key={index}>
+              <div className={`${styles.cardin}`}>
+                <div className={`${styles.round} ${styles.ron3}`}>
+                  <i className="fa fa-pencil-square icon" aria-hidden="true"></i>
                 </div>
                 {ctx.isEditable ? (
                   <>

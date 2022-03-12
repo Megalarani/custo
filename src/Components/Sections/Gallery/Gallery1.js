@@ -67,10 +67,10 @@ const Gallery1 = () => {
         </>
       )}
       <section id="#Gallery">
-        <div class={data.container.styles}>
-          <h2 class={data.heading.styles}>{data.heading.value}</h2>
+        <div className={data.container.styles}>
+          <h2 className={data.heading.styles}>{data.heading.value}</h2>
         </div>
-        <div class={`${styles.gallery}`}>
+        <div className={`${styles.gallery}`}>
           {ctx.isEditable ? (
             <>
               {localData.map((details, index) => (
@@ -102,9 +102,9 @@ const Gallery1 = () => {
           ) : (
             <>
               {localData.map((details, index) => (
-                <a href="#" class="gal" key={index}>
+                <a href="#" className="gal" key={index}>
                   <div className={`${styles.gal_wrapper} `}>
-                    <div class={`${styles.hidden_cover} `}></div>
+                    <div className={`${styles.hidden_cover} `}></div>
                     <img src={details.imgLink} alt={details.imgName} />
                     <h4>{details.imgName}</h4>
                   </div>

@@ -58,8 +58,8 @@ const Hero3 = () => {
       </>
     )}
       <section>
-        <div class={data.container.style}>
-          <div class={` ${styles.visitus}`}>
+        <div className={data.container.style}>
+          <div className={` ${styles.visitus}`}>
           {ctx.isEditable ? (
             <>
               <input
@@ -83,7 +83,7 @@ const Hero3 = () => {
           )}
             <button
               type="button"
-              class={`btn btn-warning ${styles.boxen_visitus_btn}`}
+              className={`btn btn-warning ${styles.boxen_visitus_btn}`}
             >
               Schedule a Tour
             </button>

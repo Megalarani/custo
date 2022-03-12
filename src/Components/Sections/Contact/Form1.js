@@ -73,8 +73,8 @@ const Form1 = () => {
         </>
       )}
       <section id="#contact">
-        <section class={data.container.style}>
-          <div class={`${styles.content}`}>
+        <section className={data.container.style}>
+          <div className={`${styles.content}`}>
             <h2 className={data.heading.style}>{data.heading.value}</h2>
             {ctx.isEditable ? (
               <>
@@ -93,13 +93,13 @@ const Form1 = () => {
               </>
             )}
           </div>
-          <div class={`container ${styles.con}`}>
-            <div class={`${styles.contactInfo}`}>
-              <div class={`${styles.box}`}>
-                <div class={`${styles.icon_address}`}>
-                  <i class="fa fa-location-arrow ico" aria-hidden="true"></i>
+          <div className={`container ${styles.con}`}>
+            <div className={`${styles.contactInfo}`}>
+              <div className={`${styles.box}`}>
+                <div className={`${styles.icon_address}`}>
+                  <i className="fa fa-location-arrow ico" aria-hidden="true"></i>
                 </div>
-                <div class={`${styles.text_address}`}>
+                <div className={`${styles.text_address}`}>
                   <h3>Address</h3>
 
                   {ctx.isEditable ? (
@@ -121,14 +121,14 @@ const Form1 = () => {
                 </div>
               </div>
 
-              <div class={`${styles.box}`}>
-                <div class={`${styles.icon_address}`}>
+              <div className={`${styles.box}`}>
+                <div className={`${styles.icon_address}`}>
                   <i
-                    class="fa fa-volume-control-phone ico"
+                    className="fa fa-volume-control-phone ico"
                     aria-hidden="true"
                   ></i>
                 </div>
-                <div class={`${styles.text_address}`}>
+                <div className={`${styles.text_address}`}>
                   <h3>Phone</h3>
                   {ctx.isEditable ? (
                     <>
@@ -149,11 +149,11 @@ const Form1 = () => {
                 </div>
               </div>
 
-              <div class={`${styles.box}`}>
-                <div class={`${styles.icon_address}`}>
-                  <i class="fa fa-envelope ico" aria-hidden="true"></i>
+              <div className={`${styles.box}`}>
+                <div className={`${styles.icon_address}`}>
+                  <i className="fa fa-envelope ico" aria-hidden="true"></i>
                 </div>
-                <div class={`${styles.text_address}`}>
+                <div className={`${styles.text_address}`}>
                   <h3>Email</h3>
                   {ctx.isEditable ? (
                     <>
@@ -175,22 +175,22 @@ const Form1 = () => {
               </div>
             </div>
 
-            <div class={`${styles.ContactForm}`}>
+            <div className={`${styles.ContactForm}`}>
               <form>
                 <h2>Send Us A Message</h2>
-                <div class={`${styles.inputbox}`}>
+                <div className={`${styles.inputbox}`}>
                   <label>Name</label>
                   <input type="text" required="required" />
                 </div>
-                <div class={`${styles.inputbox}`}>
+                <div className={`${styles.inputbox}`}>
                   <label>Email</label>
                   <input type="text" required="required" />
                 </div>
-                <div class={`${styles.inputbox}`}>
+                <div className={`${styles.inputbox}`}>
                   <label>Your Message</label>
                   <textarea required="required" />
                 </div>
-                <div class={`${styles.inputbox}`}>
+                <div className={`${styles.inputbox}`}>
                   <input type="submit" value="Send" />
                 </div>
               </form>

@@ -34,53 +34,53 @@ const Navbar1 = () => {
 
   return (
     <>
-      <nav class={data.container.style}>
+      <nav className={data.container.style}>
         {/* <!-- Brand --> */}
-        <div class={`${styles.headerlogo}`}>
+        <div className={`${styles.headerlogo}`}>
           <img
-            class={`img-fluid ${styles.img_logo}`}
+            className={`img-fluid ${styles.img_logo}`}
             src={data.headerlogo.value}
           />
         </div>
 
         {/* <!-- Toggler/collapsibe Button --> */}
         <button
-          class={`navbar-toggler ${styles.navbartog}`}
+          className={`navbar-toggler ${styles.navbartog}`}
           type="button"
           data-toggle="collapse"
           data-target="#collapsibleNavbar"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
 
         {/* <!-- Navbar links --> */}
         <div
-          class={`navbar-collapse ${styles.navbarcollapse}`}
+          className={`navbar-collapse ${styles.navbarcollapse}`}
           id="collapsibleNavbar"
         >
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class={data.menu1.style} href="#Home">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a className={data.menu1.style} href="#Home">
                 {data.menu1.value}
               </a>
             </li>
-            <li class="nav-item">
-              <a class={data.menu2.style} href="#About">
+            <li className="nav-item">
+              <a className={data.menu2.style} href="#About">
                 {data.menu2.value}
               </a>
             </li>
-            <li class="nav-item">
-              <a class={data.menu3.style} href="#Gallery">
+            <li className="nav-item">
+              <a className={data.menu3.style} href="#Gallery">
                 {data.menu3.value}
               </a>
             </li>
-            <li class="nav-item">
-              <a class={data.menu4.style} href="#curriculam">
+            <li className="nav-item">
+              <a className={data.menu4.style} href="#curriculam">
                 {data.menu4.value}
               </a>
             </li>
-            <li class="nav-item">
-              <a class={data.menu5.style} href="#contact">
+            <li className="nav-item">
+              <a className={data.menu5.style} href="#contact">
                 {data.menu5.value}
               </a>
             </li>

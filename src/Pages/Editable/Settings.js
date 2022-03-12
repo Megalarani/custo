@@ -63,7 +63,7 @@ const Settings = () => {
   useEffect(() => {
     ctx.updateIsEditable(false);
   }, []);
-  const classes = useStyles();
+  const classNamees = useStyles();
   const [formValues, setFormValues] = useState({
     username: ctx.user.username,
     schoolname: ctx.user.schoolname,
@@ -107,7 +107,7 @@ const Settings = () => {
       formValues.username === ctx.user.username &&
       formValues.schoolname === ctx.user.schoolname
     ) {
-      console.log("Password alone changed");
+      
       setloading(true)
       ctx.updateUser({
         ...formValues,
@@ -122,7 +122,7 @@ const Settings = () => {
       setEnableSave(false);
       setEnableUsername(!enableUsername);
     } else {
-      console.log("All data's changed");
+    
       setloading(true)
       ctx.updateUser({
         ...formValues,
@@ -159,84 +159,84 @@ const Settings = () => {
           <Loader />
         </>
       )}
-      <div className={classes.root}>
-        <div className={classes.row}>
-          <div className={classes.label}>
+      <div className={classNamees.root}>
+        <div className={classNamees.row}>
+          <div className={classNamees.label}>
             <Typography>Username</Typography>
             <span>:</span>
           </div>
-          <div className={classes.input}>
+          <div className={classNamees.input}>
             <GInput
               id={"username"}
               value={formValues.username}
               onInputChange={handleChange}
               variant="standard"
               disabled={!enableUsername}
-              inputClass={classes.inputField}
+              inputclassName={classNamees.inputField}
               placeholder="Username"
             />
           </div>
         </div>
-        <div className={classes.row}>
-          <div className={classes.label}>
+        <div className={classNamees.row}>
+          <div className={classNamees.label}>
             <Typography>School Name</Typography>
             <span>:</span>
           </div>
-          <div className={classes.input}>
+          <div className={classNamees.input}>
             <GInput
               id={"schoolname"}
               value={formValues.schoolname}
               onInputChange={handleChange}
               variant="standard"
               disabled={!enableUsername}
-              inputClass={classes.inputField}
+              inputclassName={classNamees.inputField}
               placeholder="Enter School Name"
             />
           </div>
-          <div className={classes.actions}></div>
+          <div className={classNamees.actions}></div>
         </div>
-        <div className={classes.row}>
-          <div className={classes.label}>
+        <div className={classNamees.row}>
+          <div className={classNamees.label}>
             <Typography>Mobile No</Typography>
             <span>:</span>
           </div>
-          <div className={classes.input}>
+          <div className={classNamees.input}>
             <GInput
               id={"phoneno"}
               value={formValues.phoneno}
               onInputChange={handleChange}
               variant="standard"
               disabled
-              inputClass={classes.inputField}
+              inputclassName={classNamees.inputField}
               placeholder="Mobile No"
             />
           </div>
-          <div className={classes.actions}></div>
+          <div className={classNamees.actions}></div>
         </div>
-        <div className={classes.row}>
-          <div className={classes.label}>
+        <div className={classNamees.row}>
+          <div className={classNamees.label}>
             <Typography>Email</Typography>
             <span>:</span>
           </div>
-          <div className={classes.input}>
+          <div className={classNamees.input}>
             <GInput
               id={"email"}
               value={formValues.email}
               onInputChange={handleChange}
               variant="standard"
               disabled
-              inputClass={classes.inputField}
+              inputclassName={classNamees.inputField}
               placeholder="Email"
             />
           </div>
-          <div className={classes.actions}></div>
+          <div className={classNamees.actions}></div>
         </div>
-        <div className={classes.row} style={{ marginBottom: "2rem" }}>
-          <div className={classes.label}>
+        <div className={classNamees.row} style={{ marginBottom: "2rem" }}>
+          <div className={classNamees.label}>
             <Typography>Change Password</Typography>
             <span>:</span>
           </div>
-          <div className={classes.input}>
+          <div className={classNamees.input}>
             <GInput
               id={"oldPassword"}
               value={formValues.oldPassword}
@@ -244,7 +244,7 @@ const Settings = () => {
               variant="standard"
               type="password"
               disabled={!enableUsername}
-              inputClass={classes.inputField}
+              inputclassName={classNamees.inputField}
               placeholder="Old Password"
               maxLength={15}
             />
@@ -255,16 +255,16 @@ const Settings = () => {
               variant="standard"
               type="password"
               disabled={!enableUsername}
-              inputClass={classes.inputField}
+              inputclassName={classNamees.inputField}
               placeholder="New Password"
               maxLength={15}
             />
           </div>
-          <div className={classes.actions}></div>
+          <div className={classNamees.actions}></div>
         </div>
         <div className="text-center p-2 position-relative">
           {error && (
-            <Typography className={classes.errorMsg}>{error}</Typography>
+            <Typography className={classNamees.errorMsg}>{error}</Typography>
           )}
         </div>
         <div className="row">
@@ -277,13 +277,13 @@ const Settings = () => {
               isLong
             />
           </div>
-          <div class="col-md-3">
+          <div className="col-md-3">
             <div
-              className={classes.actions}
+              className={classNamees.actions}
               onClick={() => setEnableUsername(!enableUsername)}
             >
               <span
-                class="btn px-4 py-1"
+                className="btn px-4 py-1"
                 style={{
                   color: !enableUsername ? "#fff" : "#dc3545",
                   background: !enableUsername ? "#dc3545" : "#fff",

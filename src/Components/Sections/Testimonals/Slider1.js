@@ -87,8 +87,8 @@ const Slider1 = () => {
         </>
       )}
       <section>
-        <div class={data.container.style}>
-          <div class="text-center ">
+        <div className={data.container.style}>
+          <div className="text-center ">
             <h2 className={data.heading.style}>{data.heading.value}</h2>
             {ctx.isEditable ? (
               <>
