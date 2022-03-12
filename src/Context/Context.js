@@ -4,7 +4,7 @@ import { auth } from "../services/firebase";
 import { Layout } from "../utilitis/Layout";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
-
+import {  updatePassword } from "firebase/auth";
 const AuthContext = React.createContext({
   user: "",
   userId: "",
@@ -158,14 +158,17 @@ export const AuthContextProvider = (props) => {
   };
   const updateUser = (data) => {
     setUser(data);
-    console.log("succes1", data)
-     updateDoc(doc(db, "users", userId), {
-        username:data.username,
-        schoolname:data.schoolname,
-        password: data.password
-     });
-      console.log("succes2", user)
-  };
+    updateDoc(doc(db, "users", userId), 
+        data
+     )
+    // function to update new passsowrd 
+     if (data.newPassword !==""){
+     updatePassword(auth.currentUser, data.newPassword).then(() => {
+    alert("New password was changed")
+    }).catch((error) => {
+   console.log(error)
+    });}    
+ ;}
   console.log(user);
   // function to update layout array
   const updateLayout = (data) => {
