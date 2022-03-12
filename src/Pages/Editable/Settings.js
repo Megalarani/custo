@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../../Context/Context";
+
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import { GInput } from "../../Components/Settings/GInput";
 import { GButton } from "../../Components/Settings/GButton";
 import { ReactComponent as EditIcon } from "../../Assests/pencil.svg";
-
+import Loader from "../../loader/Loader";
 const useStyles = makeStyles({
   root: {
     width: "70%",
@@ -75,6 +76,7 @@ const Settings = () => {
   const [enableUsername, setEnableUsername] = useState(false);
   const [enableSave, setEnableSave] = useState(false);
   const [error, setError] = useState(null);
+  const [loading, setloading] = useState(false);
   const submitHandler = () => {
     if (formValues.username === "") {
       setError("User Name cannot be empty");
@@ -82,6 +84,7 @@ const Settings = () => {
       setError("School Name cannot be empty");
     } else if (formValues.oldPassword === "" && formValues.newPassword === "") {
       console.log("no password change");
+      setloading(true)
       ctx.updateUser({
         ...formValues,
         username: formValues.username,
@@ -105,6 +108,7 @@ const Settings = () => {
       formValues.schoolname === ctx.user.schoolname
     ) {
       console.log("Password alone changed");
+      setloading(true)
       ctx.updateUser({
         ...formValues,
         password: formValues.newPassword,
@@ -119,6 +123,7 @@ const Settings = () => {
       setEnableUsername(!enableUsername);
     } else {
       console.log("All data's changed");
+      setloading(true)
       ctx.updateUser({
         ...formValues,
         username: formValues.username,
@@ -134,6 +139,10 @@ const Settings = () => {
       setEnableSave(false);
       setEnableUsername(!enableUsername);
     }
+    setTimeout(() => {
+      setloading(false)
+    }, 3000);
+   
   };
 
   const handleChange = (inputObj) => {
@@ -145,6 +154,11 @@ const Settings = () => {
   };
   return (
     <>
+     {loading && (
+        <>
+          <Loader />
+        </>
+      )}
       <div className={classes.root}>
         <div className={classes.row}>
           <div className={classes.label}>

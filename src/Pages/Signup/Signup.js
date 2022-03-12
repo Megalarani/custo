@@ -94,9 +94,9 @@ const Signup = (props) => {
         </>
       )}
       <div
-        className="Lg-form w-100  d-flex align-items-center justify-content-center"
+        className="Lg-form w-100 bg-danger  d-flex align-items-center justify-content-center"
         style={{
-          backgroundImage: `url("Images/bg.jpg")`,
+          // backgroundImage: `url("Images/bg.webp")`,
           backgroundSize: "cover",
         }}
       >
