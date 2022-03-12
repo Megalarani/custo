@@ -70,7 +70,7 @@ const Login = (props) => {
           <Loader />
         </>
       )}
-      <div className="Lg-form w-100 d-flex align-items-center justify-content-center">
+      <div className="Lg-form bg-danger  w-100 d-flex align-items-center justify-content-center">
         <div className=" cz-form col-lg-4 col-sm-5 p-5  bg-white rounded">
           <img
             src="https://www.campuzone.com/logo2.png"

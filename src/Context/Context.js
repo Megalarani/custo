@@ -158,6 +158,13 @@ export const AuthContextProvider = (props) => {
   };
   const updateUser = (data) => {
     setUser(data);
+    console.log("succes1", data)
+     updateDoc(doc(db, "users", userId), {
+        username:data.username,
+        schoolname:data.schoolname,
+        password: data.password
+     });
+      console.log("succes2", user)
   };
   console.log(user);
   // function to update layout array
