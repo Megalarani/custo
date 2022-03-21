@@ -4,13 +4,17 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./Context/Context";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthContextProvider>
-        <App />
-      </AuthContextProvider>
+      <DndProvider backend={HTML5Backend}>
+        <AuthContextProvider>
+          <App />
+        </AuthContextProvider>
+      </DndProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

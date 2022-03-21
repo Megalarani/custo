@@ -14,8 +14,13 @@ const Edit = () => {
     mountedComponent.push(ctx.layoutFlow[0]);
   }
   const onMount = (id) => {
-    const toEdit = ctx.layoutFlow.filter((x) => x.id === id);
-    setMountedComponent(toEdit);
+    // const toEdit = ctx.layoutFlow.filter((x) => x.id === id);
+    // setMountedComponent(toEdit);
+    console.log(ctx.layoutFlow[id]);
+    setMountedComponent((prevState)=>{
+      prevState = [];
+      return [...prevState,ctx.layoutFlow[id]];
+    })
   };
   const CreateComponent = ({ component }) => {
     const Component = component;
@@ -26,11 +31,11 @@ const Edit = () => {
       <div className="row">
         <div className="all-section-list col-2 p-0">
           {ctx.layoutFlow &&
-            ctx.layoutFlow.map((item) => (
+            ctx.layoutFlow.map((item,index) => (
               <div
                 className="row align-items-center  bg-light border-white justify-content-center p-2"
-                key={item.id}
-                onClick={() => onMount(item.id)}
+                key={index}
+                onClick={() => onMount(index)}
                 style={{
                   border: "0.35rem solid",
                   borderBottom: "0",

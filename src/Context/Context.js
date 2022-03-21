@@ -20,6 +20,7 @@ const AuthContext = React.createContext({
   updateData: () => {},
   updateIsEditable: () => {},
   updateLayout: () => {},
+  addLayout: () => {},
   logout: () => {},
 });
 
@@ -177,6 +178,14 @@ export const AuthContextProvider = (props) => {
     });
   };
 
+  const addLayout = (data) => {
+    console.log("Added",data);
+    setLayoutFlow((prevState)=>{
+      return [...prevState,data];
+    })
+  }
+  console.log(layoutFlow)
+
   // toggles between editing
   const updateIsEditable = (data) => {
     setIsEditable(data);
@@ -222,6 +231,7 @@ export const AuthContextProvider = (props) => {
         updateUser: updateUser,
         updateData: updateData,
         updateLayout: updateLayout,
+        addLayout: addLayout
       }}
     >
       {props.children}
