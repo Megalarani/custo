@@ -88,24 +88,24 @@ const useStyles = makeStyles({
 
 export const NavbarOverlay = (props) => {
   const ctx = useContext(AuthContext);
-  const classes = useStyles();
+  const classNamees = useStyles();
   const { isOpen, onClose } = props;
   return (
     <>
-      <div className={`${classes.root} ${isOpen ? classes.open : ""}`}>
-        <div className={classes.wrapper}>
-          <NavLink to={`/${ctx.userId}/settings`} className={classes.listItem}>
+      <div className={`${classNamees.root} ${isOpen ? classNamees.open : ""}`}>
+        <div className={classNamees.wrapper}>
+          <NavLink to={`/${ctx.userId}/settings`} className={classNamees.listItem}>
             <Typography>Settings</Typography>
             <SettingsIcon />
           </NavLink>
-          <div className={classes.listItem} onClick={ctx.logout}>
+          <div className={classNamees.listItem} onClick={ctx.logout}>
             <Typography>Logout</Typography>
             <LogoutIcon />
           </div>
         </div>
       </div>
       <div
-        className={`${classes.overlay} ${isOpen ? classes.overlayOpen : ""}`}
+        className={`${classNamees.overlay} ${isOpen ? classNamees.overlayOpen : ""}`}
         onClick={onClose}
       >
         Overlay

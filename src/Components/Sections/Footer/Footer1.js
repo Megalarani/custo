@@ -14,7 +14,7 @@ const Footer1 = () => {
   return (
     <>
       <footer>
-        <div class={data.container.style}>
+        <div className={data.container.style}>
           <h2 className={data.heading.style}>{data.heading.value}</h2>
         </div>
       </footer>

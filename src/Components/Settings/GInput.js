@@ -58,7 +58,7 @@ const useStyles = makeStyles({
 });
 
 export const GInput = (props) => {
-  const classes = useStyles();
+  const classNamees = useStyles();
   const {
     onInputChange,
     placeholder = "",
@@ -68,7 +68,7 @@ export const GInput = (props) => {
     id,
     value,
     Icon,
-    inputClass,
+    inputclassName,
     maxLength,
     minLength,
   } = props;
@@ -81,10 +81,10 @@ export const GInput = (props) => {
   };
 
   return (
-    <div className={(classes.root, inputClass ? inputClass : "")}>
-      {Icon && <Icon className={classes.textIcon} />}
+    <div className={(classNamees.root, inputclassName ? inputclassName : "")}>
+      {Icon && <Icon className={classNamees.textIcon} />}
       <TextField
-        className={(classes.textField, Icon ? classes.textFieldWithIcon : "")}
+        className={(classNamees.textField, Icon ? classNamees.textFieldWithIcon : "")}
         margin={"none"}
         onChange={onLocalChange}
         disabled={disabled}

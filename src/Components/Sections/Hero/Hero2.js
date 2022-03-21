@@ -57,7 +57,7 @@ const Hero2 = () => {
       </>
     )}
       <section id="#About">
-        <div class={data.container.style}>
+        <div className={data.container.style}>
         {ctx.isEditable ? (
             <>
               <input

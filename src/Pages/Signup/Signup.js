@@ -103,7 +103,7 @@ const Signup = (props) => {
         <div className=" cz-form col-lg-7 col-sm-6 my-2 p-5  bg-white rounded">
           <img
             src="https://www.campuzone.com/logo2.png"
-            class="rounded mx-auto d-block "
+            className="rounded mx-auto d-block "
             alt="..."
             style={{ width: "14%" }}
           />
@@ -117,7 +117,7 @@ const Signup = (props) => {
                   name="username"
                   required
                   maxlength="12"
-                  class="form-control"
+                  className="form-control"
                   value={userCred.username}
                   id="exampleInputusername"
                   placeholder="userName"
@@ -135,7 +135,7 @@ const Signup = (props) => {
                   type="text"
                   name="schoolname"
                   required
-                  class="form-control"
+                  className="form-control"
                   value={userCred.schoolname}
                   id="exampleInputschoolname"
                   placeholder="SchoolName"
@@ -154,7 +154,7 @@ const Signup = (props) => {
                   name="email"
                   required
                   value={userCred.email}
-                  class="form-control"
+                  className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
@@ -171,7 +171,7 @@ const Signup = (props) => {
                   name="phoneno"
                   maxlength="10"
                   required
-                  class="form-control"
+                  className="form-control"
                   value={userCred.phoneno}
                   id="exampleInputschoolname"
                   placeholder="PhoneNo"
@@ -187,7 +187,7 @@ const Signup = (props) => {
                   type="password"
                   name="password"
                   required
-                  class="form-control"
+                  className="form-control"
                   value={userCred.password}
                   id="exampleInputPassword1"
                   placeholder="Password"
@@ -206,7 +206,7 @@ const Signup = (props) => {
                   type="password"
                   name="confirmpassword"
                   required
-                  class="form-control"
+                  className="form-control"
                   value={userCred.confirmpassword}
                   id="exampleInputPassword1"
                   placeholder="Confirm Password"
@@ -236,7 +236,7 @@ const Signup = (props) => {
                   }}
                   className="btn   mt-2 mx-2 px-3"
                 >
-                  <i class="fa fa-graduation-cap mx-1" aria-hidden="true"></i>{" "}
+                  <i className="fa fa-graduation-cap mx-1" aria-hidden="true"></i>{" "}
                   Register Now
                 </button>
               </div>

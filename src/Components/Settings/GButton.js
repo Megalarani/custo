@@ -64,7 +64,7 @@ const useStyles = makeStyles({
 });
 
 export const GButton = (props) => {
-  const classes = useStyles();
+  const classNamees = useStyles();
   const {
     label,
     onClick,
@@ -77,46 +77,46 @@ export const GButton = (props) => {
     boxShadow,
     isLong,
   } = props;
-  let rootClass = classes.button;
+  let rootclassName = classNamees.button;
 
   switch (buttonType) {
     case "primary":
-      rootClass = `${rootClass} ${classes.primary}`;
+      rootclassName = `${rootclassName} ${classNamees.primary}`;
       break;
     case "secondary":
-      rootClass = `${rootClass} ${classes.secondary}`;
+      rootclassName = `${rootclassName} ${classNamees.secondary}`;
       break;
     case "warning":
-      rootClass = `${rootClass} ${classes.warning}`;
+      rootclassName = `${rootclassName} ${classNamees.warning}`;
       break;
     case "emphasis":
-      rootClass = `${rootClass} ${classes.emphasis}`;
+      rootclassName = `${rootclassName} ${classNamees.emphasis}`;
       break;
   }
 
   if (outline) {
-    rootClass = `${rootClass} ${classes.outline}`;
+    rootclassName = `${rootclassName} ${classNamees.outline}`;
   }
 
   if (boxShadow) {
-    rootClass = `${rootClass} ${classes.boxShadow}`;
+    rootclassName = `${rootclassName} ${classNamees.boxShadow}`;
   }
 
   if (isLong) {
-    rootClass = `${rootClass} ${classes.paddingLeftRight}`;
+    rootclassName = `${rootclassName} ${classNamees.paddingLeftRight}`;
   }
 
   return (
     <Button
       size={"large"}
-      className={rootClass}
+      className={rootclassName}
       style={inlineStyles}
       onClick={onClick}
       disabled={disabled}
       startIcon={icon ? icon : null}
     >
       {label}
-      {tagName && <span className={classes.buttonTag}>{tagName}</span>}
+      {tagName && <span className={classNamees.buttonTag}>{tagName}</span>}
     </Button>
   );
 };

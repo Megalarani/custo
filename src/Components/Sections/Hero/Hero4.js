@@ -56,10 +56,10 @@ const Hero4 = () => {
       <Loader/>
       </>
     )}
-      <div class={data.container.style}>
-        <div class="row m-0">
-          <div class={`col-md-7 ${styles.boxen}`}>
-            <div class={` ${styles.preschool_text}`}>
+      <div className={data.container.style}>
+        <div className="row m-0">
+          <div className={`col-md-7 ${styles.boxen}`}>
+            <div className={` ${styles.preschool_text}`}>
             {ctx.isEditable ? (
             <>
               <input
@@ -83,9 +83,9 @@ const Hero4 = () => {
           )}
             </div>
           </div>
-          <div class={`col-md-5 ${styles.bot} ${styles.rt_pad}`}>
-            <div class={` ${styles.image}`}>
-              <img class="img-fluid" src="/Images/day_care_img_11.jpg" />
+          <div className={`col-md-5 ${styles.bot} ${styles.rt_pad}`}>
+            <div className={` ${styles.image}`}>
+              <img className="img-fluid" src="/Images/day_care_img_11.jpg" />
             </div>
           </div>
         </div>

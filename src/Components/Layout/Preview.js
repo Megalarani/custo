@@ -44,7 +44,7 @@ const Preview = () => {
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <div className="row px-4  pt-2 pb-4 justify-content-between">
             <button
-              class="btn px-5"
+              className="btn px-5"
               onClick={SaveLayout}
               style={{
                 background: "#fff",
@@ -53,12 +53,12 @@ const Preview = () => {
                 boxShadow: "0 3px 6px #00000036",
               }}
             >
-              Save<i class="fa fa-save mx-2"></i>{" "}
+              Save<i className="fa fa-save mx-2"></i>{" "}
             </button>
            
             <NavLink to="/" target="_blank">
             <button
-              class="btn shadow px-3  "
+              className="btn shadow px-3  "
               style={{
                 background: "#fff",
                 color: "#dc3545",
@@ -66,7 +66,7 @@ const Preview = () => {
                 boxShadow: "0 3px 6px #00000036",
               }}
             >
-              Fullpage View<i class="fa fa-eye mx-2"></i>
+              Fullpage View<i className="fa fa-eye mx-2"></i>
             </button>
                   </NavLink>
           </div>
