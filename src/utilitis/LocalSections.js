@@ -18,7 +18,7 @@ export const LocalSections = [
   {
     group: "Navbar",
     variants: [{ c: Navbar1, id: "Navbar1" }],
-    variants: [{ c: Navbar2, id: "Navbar2" }],
+    //variants: [{ c: Navbar2, id: "Navbar2" }],
   },
   {
     group: "Hero",
