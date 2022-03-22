@@ -8,17 +8,20 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
-import { LocalSections } from "../../utilitis/LocalSections";
+import { LocalSections, commonSections } from "../../utilitis/LocalSections";
 import AuthContext from "../../Context/Context";
 const AllSections = (props) => {
   const ctx = useContext(AuthContext);
+  const [sectionsArray, setSectionsArray] = useState(
+    ctx.user.role === "school" ? LocalSections : commonSections
+  );
   return (
     <div className="all-section-list bg-light col-2 p-0">
       <h6 className="px-2 py-3 text-center text-uppercase">All Sections</h6>
       {/* allowMultipleExpanded */}
       {/* command for multiple expand - doesn't auto close */}
       <Accordion allowZeroExpanded>
-        {LocalSections.map((item, index) => (
+        {sectionsArray.map((item, index) => (
           <AccordionItem key={index}>
             <AccordionItemHeading>
               <AccordionItemButton>{item.group}</AccordionItemButton>
