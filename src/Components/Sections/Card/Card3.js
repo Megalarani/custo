@@ -1,6 +1,6 @@
 import React from "react";
 import { createStyles, makeStyles } from "@mui/styles";
-import { Typography } from "@mui/material/styles/";
+import { Typography } from "@mui/material";
 import Cat1 from "../../../Assests/images/cat1.jpg";
 import Cat2 from "../../../Assests/images/cat2.jpg";
 import Cat3 from "../../../Assests/images/cat3.jpg";

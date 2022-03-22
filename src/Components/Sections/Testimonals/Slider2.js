@@ -1,6 +1,6 @@
 import React from "react";
 import { createStyles, makeStyles } from "@mui/styles";
-import { Typography } from "@mui/material/styles/";
+import { Typography } from "@mui/material";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import Dress1 from "../../../Assests/images/dress1.jpg";

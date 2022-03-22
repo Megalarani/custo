@@ -1,6 +1,6 @@
 import React from "react";
 import { createStyles, makeStyles } from "@mui/styles";
-import { Typography } from "@mui/material/styles/";
+import { Typography } from "@mui/material";
 import BannerImage from "../../../Assests/images/banner1.jpg";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";

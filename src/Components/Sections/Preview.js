@@ -1,7 +1,7 @@
-import React from "react";
-import { useContext, useState } from "react/cjs/react.production.min";
-import AuthContext from "../../Context/Context";
+import { useContext, useState } from "react";
 import { LocalSections, commonSections } from "../../utilitis/LocalSections";
+import AuthContext from "../../Context/Context";
+
 
 const Preview = (props) => {
   const ctx = useContext(AuthContext);
