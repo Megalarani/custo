@@ -27,7 +27,7 @@ export const LocalSections = [
       { c: Hero2, id: "Hero2" },
       { c: Hero3, id: "Hero3" },
       { c: Hero4, id: "Hero4" },
-      { c: Hero5, id: "Hero5" },
+      // { c: Hero5, id: "Hero5" },
     ],
   },
   {
@@ -35,7 +35,7 @@ export const LocalSections = [
     variants: [
       { c: Card1, id: "Card1" },
       { c: Card2, id: "Card2" },
-      { c: Card3, id: "Card3" },
+      // { c: Card3, id: "Card3" },
     ],
   },
   {
@@ -45,7 +45,7 @@ export const LocalSections = [
   {
     group: "Testimonal",
     variants: [{ c: Slider1, id: "Slider1" }],
-    variants: [{ c: Slider2, id: "Slider2" }],
+    // variants: [{ c: Slider2, id: "Slider2" }],
   },
   {
     group: "Contact",

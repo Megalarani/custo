@@ -7,7 +7,7 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
-import { LocalSections } from "../../utilitis/LocalSections";
+import { LocalSections,commonSections } from "../../utilitis/LocalSections";
 import { ItemTypes } from "../../utilitis/Item";
 
 const DraggableList = (props) => {
@@ -38,7 +38,7 @@ const DraggableList = (props) => {
         {/* allowMultipleExpanded */}
         {/* command for multiple expand - doesn't auto close */}
         <Accordion allowZeroExpanded>
-          {LocalSections.map((item, index) => (
+          {commonSections.map((item, index) => (
             <AccordionItem key={index}>
               <AccordionItemHeading>
                 <AccordionItemButton>{item.group}</AccordionItemButton>

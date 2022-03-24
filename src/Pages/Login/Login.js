@@ -40,7 +40,7 @@ const Login = (props) => {
           ctx.setUserId(res.user.uid);
           setTimeout(() => {
             user && navigate(`/${res.user.uid}/home`);
-          }, 3000);
+          }, 1000);
           setloading(false);
         })
         .catch((error) => {

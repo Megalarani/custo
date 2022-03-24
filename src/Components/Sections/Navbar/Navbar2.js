@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
+    rootNav: {
       backgroundColor: "#fff",
       display: "flex",
       flexWrap: "wrap",
@@ -62,16 +62,16 @@ export const Navbar2 = () => {
   ];
   return (
     <>
-      <div className={classes.root}>
+      <div className={classes.rootNav}>
         <div className={classes.logoContainer}>
           <img src="" alt="headerLogo" />
         </div>
         <div className={classes.menuList}>
-          {menuItem.map((item) => {
+          {menuItem.map((item) => (
             <Typography className={classes.menuItems} key={item.id}>
               {item.value}
-            </Typography>;
-          })}
+            </Typography>
+          ))}
         </div>
       </div>
     </>

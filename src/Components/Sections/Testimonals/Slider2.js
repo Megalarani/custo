@@ -16,15 +16,23 @@ const useStyles = makeStyles(() =>
     card: {
       background: "#fff",
       padding: "1rem",
-      borderRadius: "0.5rem",
+      // borderRadius: "0.5rem",
       "& img": {
         maxWidth: "100%",
         height: "auto",
       },
     },
+    introHeader: {
+      fontSize: "1.75rem !important",
+      color: "#000",
+      textTransform: "capitalize",
+      textAlign: "center",
+      paddingBottom: "1.5rem",
+    },
     footer: {
       display: "flex",
       justifyContent: "space-between",
+      alignItems: "center",
     },
     imgText: {
       fontSize: "0.75rem",
@@ -76,22 +84,24 @@ export const Slider2 = () => {
 
   return (
     <>
-      <div className={classes.root}></div>
-      <OwlCarousel className="owl-theme" {...options}>
-        {cardData.map((item) => (
-          <div className={classes.card}>
-            <img src={item.img} alt={item.title} />
-            <div className={classes.footer}>
-              <Typography variant="body2" className={classes.imgText}>
-                {item.title}
-              </Typography>
-              <Typography variant="caption" className={classes.rate}>
-                {item.rate}
-              </Typography>
+      <div className={classes.root}>
+        <Typography className={classes.introHeader}>New Arrivals</Typography>
+        <OwlCarousel className="owl-theme" {...options}>
+          {cardData.map((item) => (
+            <div className={classes.card}>
+              <img src={item.img} alt={item.title} />
+              <div className={classes.footer}>
+                <Typography variant="body2" className={classes.imgText}>
+                  {item.title}
+                </Typography>
+                <Typography variant="caption" className={classes.rate}>
+                  Rs. {item.rate}
+                </Typography>
+              </div>
             </div>
-          </div>
-        ))}
-      </OwlCarousel>
+          ))}
+        </OwlCarousel>
+      </div>
     </>
   );
 };

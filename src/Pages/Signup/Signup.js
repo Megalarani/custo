@@ -17,6 +17,7 @@ const Signup = (props) => {
     confirmpassword: "",
     username: "",
     schoolname: "",
+    // companyname: "",
     phoneno: "",
   });
   const [user, setUser] = useState("");

@@ -25,13 +25,13 @@ const useStyles = makeStyles(() =>
     introHeader: {
       position: "absolute",
       color: "red",
-      fontSize: "1.5rem",
-      paddingBottom: "`1.5rem",
+      fontSize: "1.5rem !important",
+      paddingBottom: "`1.5rem !important",
       textTransform: "capitalize",
       color: "red",
       width: "60%",
       height: "fit-content",
-      margin: "auto",
+      margin: "auto !important",
       left: 0,
       right: 0,
       top: "40%",
@@ -40,12 +40,12 @@ const useStyles = makeStyles(() =>
     introText: {
       position: "absolute",
       color: "#000",
-      fontSize: "1rem",
+      fontSize: "1rem !important",
       textTransform: "uppercase",
       letterSpacing: "0.25rem",
       textAlign: "justify",
       width: "60%",
-      margin: "auto",
+      margin: "auto !important",
       left: 0,
       right: 0,
       top: "50%",
@@ -64,7 +64,7 @@ export const Hero5 = () => {
     autoplay: true,
     autoplayTimeout: 5000,
     autoplaySpeed: 4000,
-    autoplayHoverPause: true,
+    autoplayHoverPause: false,
     items: 1,
   };
   return (
@@ -77,7 +77,7 @@ export const Hero5 = () => {
               <Typography className={classes.introHeader}>
                 Intro Header
               </Typography>
-              <Typography variant="h2" className={classes.introText}>
+              <Typography className={classes.introText}>
                 Intro Text or para
               </Typography>
             </div>
