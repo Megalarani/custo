@@ -1,10 +1,11 @@
 import React from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
+import HeaderLogo from "../../../Assests/images/headerlogo.png";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
+    rootNav: {
       backgroundColor: "#fff",
       display: "flex",
       flexWrap: "wrap",
@@ -62,16 +63,16 @@ export const Navbar2 = () => {
   ];
   return (
     <>
-      <div className={classes.root}>
+      <div className={classes.rootNav}>
         <div className={classes.logoContainer}>
-          <img src="" alt="headerLogo" />
+          <img src={HeaderLogo} alt="headerLogo" />
         </div>
         <div className={classes.menuList}>
-          {menuItem.map((item) => {
+          {menuItem.map((item) => (
             <Typography className={classes.menuItems} key={item.id}>
               {item.value}
-            </Typography>;
-          })}
+            </Typography>
+          ))}
         </div>
       </div>
     </>

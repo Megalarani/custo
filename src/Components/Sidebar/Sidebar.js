@@ -57,7 +57,7 @@ const Sidebar = () => {
         <div className="scroll-view">
           <div className="nav_title">
             <h5 className="text-center text-capitalize m-0 px-1 py-2">
-              {ctx.user.schoolname}
+              {ctx.user.websitename}
             </h5>
           </div>
           <ul className="nav side-menu pt-2">

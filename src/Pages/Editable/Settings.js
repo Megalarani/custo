@@ -63,10 +63,10 @@ const Settings = () => {
   useEffect(() => {
     ctx.updateIsEditable(false);
   }, []);
-  const classNamees = useStyles();
+  const classes = useStyles();
   const [formValues, setFormValues] = useState({
     username: ctx.user.username,
-    schoolname: ctx.user.schoolname,
+    websitename: ctx.user.websitename,
     phoneno: ctx.user.phoneno,
     email: ctx.user.email,
     password: ctx.user.password,
@@ -80,7 +80,7 @@ const Settings = () => {
   const submitHandler = () => {
     if (formValues.username === "") {
       setError("User Name cannot be empty");
-    } else if (formValues.schoolname === "") {
+    } else if (formValues.websitename === "") {
       setError("School Name cannot be empty");
     } else if (formValues.oldPassword === "" && formValues.newPassword === "") {
       console.log("no password change");
@@ -88,7 +88,7 @@ const Settings = () => {
       ctx.updateUser({
         ...formValues,
         username: formValues.username,
-        schoolname: formValues.schoolname,
+        websitename: formValues.websitename,
       });
       setError();
       setEnableSave(false);
@@ -105,7 +105,7 @@ const Settings = () => {
       formValues.oldPassword !== "" &&
       formValues.newPassword !== "" &&
       formValues.username === ctx.user.username &&
-      formValues.schoolname === ctx.user.schoolname
+      formValues.websitename === ctx.user.websitename
     ) {
       
       setloading(true)
@@ -127,7 +127,7 @@ const Settings = () => {
       ctx.updateUser({
         ...formValues,
         username: formValues.username,
-        schoolname: formValues.schoolname,
+        websitename: formValues.websitename,
         password: formValues.newPassword,
       });
       setFormValues({
@@ -159,84 +159,84 @@ const Settings = () => {
           <Loader />
         </>
       )}
-      <div className={classNamees.root}>
-        <div className={classNamees.row}>
-          <div className={classNamees.label}>
+      <div className={classes.root}>
+        <div className={classes.row}>
+          <div className={classes.label}>
             <Typography>Username</Typography>
             <span>:</span>
           </div>
-          <div className={classNamees.input}>
+          <div className={classes.input}>
             <GInput
               id={"username"}
               value={formValues.username}
               onInputChange={handleChange}
               variant="standard"
               disabled={!enableUsername}
-              inputclassName={classNamees.inputField}
+              inputclassName={classes.inputField}
               placeholder="Username"
             />
           </div>
         </div>
-        <div className={classNamees.row}>
-          <div className={classNamees.label}>
+        <div className={classes.row}>
+          <div className={classes.label}>
             <Typography>School Name</Typography>
             <span>:</span>
           </div>
-          <div className={classNamees.input}>
+          <div className={classes.input}>
             <GInput
-              id={"schoolname"}
-              value={formValues.schoolname}
+              id={"websitename"}
+              value={formValues.websitename}
               onInputChange={handleChange}
               variant="standard"
               disabled={!enableUsername}
-              inputclassName={classNamees.inputField}
+              inputclassName={classes.inputField}
               placeholder="Enter School Name"
             />
           </div>
-          <div className={classNamees.actions}></div>
+          <div className={classes.actions}></div>
         </div>
-        <div className={classNamees.row}>
-          <div className={classNamees.label}>
+        <div className={classes.row}>
+          <div className={classes.label}>
             <Typography>Mobile No</Typography>
             <span>:</span>
           </div>
-          <div className={classNamees.input}>
+          <div className={classes.input}>
             <GInput
               id={"phoneno"}
               value={formValues.phoneno}
               onInputChange={handleChange}
               variant="standard"
               disabled
-              inputclassName={classNamees.inputField}
+              inputclassName={classes.inputField}
               placeholder="Mobile No"
             />
           </div>
-          <div className={classNamees.actions}></div>
+          <div className={classes.actions}></div>
         </div>
-        <div className={classNamees.row}>
-          <div className={classNamees.label}>
+        <div className={classes.row}>
+          <div className={classes.label}>
             <Typography>Email</Typography>
             <span>:</span>
           </div>
-          <div className={classNamees.input}>
+          <div className={classes.input}>
             <GInput
               id={"email"}
               value={formValues.email}
               onInputChange={handleChange}
               variant="standard"
               disabled
-              inputclassName={classNamees.inputField}
+              inputclassName={classes.inputField}
               placeholder="Email"
             />
           </div>
-          <div className={classNamees.actions}></div>
+          <div className={classes.actions}></div>
         </div>
-        <div className={classNamees.row} style={{ marginBottom: "2rem" }}>
-          <div className={classNamees.label}>
+        <div className={classes.row} style={{ marginBottom: "2rem" }}>
+          <div className={classes.label}>
             <Typography>Change Password</Typography>
             <span>:</span>
           </div>
-          <div className={classNamees.input}>
+          <div className={classes.input}>
             <GInput
               id={"oldPassword"}
               value={formValues.oldPassword}
@@ -244,7 +244,7 @@ const Settings = () => {
               variant="standard"
               type="password"
               disabled={!enableUsername}
-              inputclassName={classNamees.inputField}
+              inputclassName={classes.inputField}
               placeholder="Old Password"
               maxLength={15}
             />
@@ -255,16 +255,16 @@ const Settings = () => {
               variant="standard"
               type="password"
               disabled={!enableUsername}
-              inputclassName={classNamees.inputField}
+              inputclassName={classes.inputField}
               placeholder="New Password"
               maxLength={15}
             />
           </div>
-          <div className={classNamees.actions}></div>
+          <div className={classes.actions}></div>
         </div>
         <div className="text-center p-2 position-relative">
           {error && (
-            <Typography className={classNamees.errorMsg}>{error}</Typography>
+            <Typography className={classes.errorMsg}>{error}</Typography>
           )}
         </div>
         <div className="row">
@@ -279,7 +279,7 @@ const Settings = () => {
           </div>
           <div className="col-md-3">
             <div
-              className={classNamees.actions}
+              className={classes.actions}
               onClick={() => setEnableUsername(!enableUsername)}
             >
               <span

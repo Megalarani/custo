@@ -14,24 +14,27 @@ const Edit = () => {
     mountedComponent.push(ctx.layoutFlow[0]);
   }
   const onMount = (id) => {
-    // const toEdit = ctx.layoutFlow.filter((x) => x.id === id);
-    // setMountedComponent(toEdit);
-    console.log(ctx.layoutFlow[id]);
-    setMountedComponent((prevState)=>{
+    setMountedComponent((prevState) => {
       prevState = [];
-      return [...prevState,ctx.layoutFlow[id]];
-    })
+      return [...prevState, ctx.layoutFlow[id]];
+    });
   };
   const CreateComponent = ({ component }) => {
     const Component = component;
     return <Component />;
+  };
+  const rename = (name, i) => {
+    let firstName = name.substring(0, name.length - 2);
+    let lastName = name.charAt(name.length - 1);
+    let newName = firstName + " " + lastName;
+    return newName;
   };
   return (
     <>
       <div className="row">
         <div className="all-section-list col-2 p-0">
           {ctx.layoutFlow &&
-            ctx.layoutFlow.map((item,index) => (
+            ctx.layoutFlow.map((item, index) => (
               <div
                 className="row align-items-center  bg-light border-white justify-content-center p-2"
                 key={index}
@@ -46,7 +49,7 @@ const Edit = () => {
                   //   className="text-primary"
                   style={{ marginRight: "5px", width: "45%" }}
                 >
-                  {item.id}
+                  {rename(item.uniqId, index)}
                 </span>
                 <EditIcon style={{ width: "7%" }} />
               </div>
@@ -55,7 +58,10 @@ const Edit = () => {
         {/* <EditableList /> */}
         <div className="col-10 p-3">
           {mountedComponent.map((single) => (
-            <div key={single.id} style={{ zoom: "0.7" }}>
+            <div
+              key={single.uniqId}
+              style={{ zoom: "0.7" }}
+            >
               <CreateComponent component={single.c} />
             </div>
           ))}

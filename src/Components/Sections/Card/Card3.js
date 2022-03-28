@@ -24,6 +24,7 @@ const useStyles = makeStyles(() =>
     overlay: {
       position: "absolute",
       display: "flex",
+      flexWrap: "wrap",
       width: "fit-content",
       height: "fit-content",
       margin: "auto",
@@ -35,12 +36,14 @@ const useStyles = makeStyles(() =>
       "& h6": {
         color: "#000",
         textTransform: "uppercase",
+        textAlign: "center",
         width: "100%",
-        paddingBottom: "1rem",
+        paddingBottom: "0.5rem",
       },
-      "& span": {
-        color: "#efefef",
+      "& p": {
+        color: "#ccc",
         width: "100%",
+        textAlign: "center",
       },
     },
   })
@@ -75,7 +78,7 @@ export const Card3 = () => {
             <img src={item.img} alt={item.title} />
             <div className={classes.overlay}>
               <Typography variant="h6">{item.title}</Typography>
-              <Typography variant="caption">{item.count}&ensp;items</Typography>
+              <Typography variant="body1">{item.count}&ensp;items</Typography>
             </div>
           </div>
         ))}

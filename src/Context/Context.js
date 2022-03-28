@@ -4,7 +4,7 @@ import { auth } from "../services/firebase";
 import { Layout } from "../utilitis/Layout";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
-import {  updatePassword } from "firebase/auth";
+import { updatePassword } from "firebase/auth";
 const AuthContext = React.createContext({
   user: "",
   userId: "",
@@ -33,11 +33,10 @@ export const AuthContextProvider = (props) => {
   const [layoutFlow, setLayoutFlow] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(userId ? true : false);
-  console.log(userId, isLoggedIn);
+
   useEffect(() => {}, []);
   // function to get user website data
   async function getWebsiteData() {
-    console.log("getWebsiteData");
     const docRef = doc(db, "websitedata", userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -61,13 +60,19 @@ export const AuthContextProvider = (props) => {
     const docRef = doc(db, "layout", userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setLayoutData(docSnap.data());
+      let val = docSnap.data();
+      setLayoutData(val);
       var newArr = [];
-      for (var i = 0; i < docSnap.data().layout.length; i++) {
-        let tempArr = Layout.filter((x) => docSnap.data().layout[i] === x.id);
+      for (var i = 0; i < val.layout.length; i++) {
+        let tempArr = Layout.filter(
+          (x) => val.layout[i].id === x.id
+        );
         newArr = newArr.concat(tempArr);
       }
-      setLayoutFlow(newArr);
+      let finalArray = newArr?.map((item, i) =>
+        Object.assign({}, item, val.layout[i])
+      );
+      setLayoutFlow(finalArray);
     } else {
       console.log("No such document!");
     }
@@ -154,37 +159,40 @@ export const AuthContextProvider = (props) => {
   };
   const updateUser = (data) => {
     setUser(data);
-    updateDoc(doc(db, "users", userId), 
-        data
-     )
-    // function to update new passsowrd 
-     if (data.newPassword !==""){
-     updatePassword(auth.currentUser, data.newPassword).then(() => {
-    alert("New password was changed")
-    }).catch((error) => {
-   console.log(error)
-    });}    
- ;}
-  console.log(user);
+    updateDoc(doc(db, "users", userId), data);
+    // function to update new passsowrd
+    if (data.newPassword !== "") {
+      updatePassword(auth.currentUser, data.newPassword)
+        .then(() => {
+          alert("New password was changed");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   // function to update layout array
   const updateLayout = (data) => {
     setLayoutFlow(data);
     var tempArr = [];
     for (var i = 0; i < data.length; i++) {
-      tempArr = tempArr.concat(data[i].id);
+      let newData = {
+        id: data[i].id,
+        uniqId: data[i].uniqId,
+      };
+      tempArr = tempArr.concat(newData);
     }
     setLayoutData({
       layout: tempArr,
     });
   };
-
+  
   const addLayout = (data) => {
-    console.log("Added",data);
-    setLayoutFlow((prevState)=>{
-      return [...prevState,data];
-    })
-  }
-  console.log(layoutFlow)
+    console.log("Added", data);
+    setLayoutFlow((prevState) => {
+      return [...prevState, data];
+    });
+  };
 
   // toggles between editing
   const updateIsEditable = (data) => {
@@ -231,7 +239,7 @@ export const AuthContextProvider = (props) => {
         updateUser: updateUser,
         updateData: updateData,
         updateLayout: updateLayout,
-        addLayout: addLayout
+        addLayout: addLayout,
       }}
     >
       {props.children}
