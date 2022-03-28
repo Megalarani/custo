@@ -17,10 +17,10 @@ const Edit = () => {
     // const toEdit = ctx.layoutFlow.filter((x) => x.id === id);
     // setMountedComponent(toEdit);
     console.log(ctx.layoutFlow[id]);
-    setMountedComponent((prevState)=>{
+    setMountedComponent((prevState) => {
       prevState = [];
-      return [...prevState,ctx.layoutFlow[id]];
-    })
+      return [...prevState, ctx.layoutFlow[id]];
+    });
   };
   const CreateComponent = ({ component }) => {
     const Component = component;
@@ -31,7 +31,7 @@ const Edit = () => {
       <div className="row">
         <div className="all-section-list col-2 p-0">
           {ctx.layoutFlow &&
-            ctx.layoutFlow.map((item,index) => (
+            ctx.layoutFlow.map((item, index) => (
               <div
                 className="row align-items-center  bg-light border-white justify-content-center p-2"
                 key={index}
@@ -55,7 +55,10 @@ const Edit = () => {
         {/* <EditableList /> */}
         <div className="col-10 p-3">
           {mountedComponent.map((single) => (
-            <div key={single.id} style={{ zoom: "0.7" }}>
+            <div
+              key={single.id}
+              style={{ zoom: "0.7", border: "1px solid #efefef" }}
+            >
               <CreateComponent component={single.c} />
             </div>
           ))}

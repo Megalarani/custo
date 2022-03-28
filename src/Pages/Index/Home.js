@@ -7,21 +7,20 @@ const Home = () => {
   useEffect(() => {
     ctx.getLayoutData();
     ctx.getWebsiteData();
-    setMountedData(ctx.layoutFlow ? ctx.layoutFlow : []);
-  }, [mountedData]);
+  }, []);
 
   const CreateComponent = ({ component }) => {
     const Component = component;
     return <Component />;
   };
-
   return (
     <>
-      {mountedData.map((item, index) => (
-        <div>
-          <CreateComponent component={item.c} />
-        </div>
-      ))}
+      {ctx.layoutFlow &&
+        ctx.layoutFlow.map((item) => (
+          <div key={item.id}>
+            <CreateComponent component={item.c} />
+          </div>
+        ))}
     </>
   );
 };

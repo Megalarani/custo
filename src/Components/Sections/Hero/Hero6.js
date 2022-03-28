@@ -10,12 +10,9 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       backgroundColor: "#efefef",
-    },
-    container: {
-      width: "100%",
-      position: "relative",
-      maxHeight: "600px",
-      overflow: "hidden",
+      padding: "1rem",
+      display: "flex",
+      flexWrap: "wrap",
     },
     bannerImg: {
       position: "relative",
@@ -59,7 +56,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export const Hero5 = () => {
+export const Hero6 = () => {
   const data = [
     {
       img: BannerImage1,
@@ -72,40 +69,10 @@ export const Hero5 = () => {
       para: "loerum ipsum is a dummy language for website content writing and adiitonal purposes",
     },
   ];
-  const options = {
-    loop: true,
-    margin: 0,
-    dots: true,
-    nav: true,
-    autoplay: true,
-    autoplayTimeout: 5000,
-    autoplaySpeed: 3000,
-    autoplayHoverPause: false,
-    items: 1,
-  };
   const classes = useStyles();
   return (
     <>
-      <div className={classes.root}>
-        <div className={classes.container}>
-          <OwlCarousel className="owl-theme" {...options} aut>
-            {data.map((item) => (
-              <div
-                className={classes.bannerImg}
-                style={{ backgroundImage: `url(${item.img})` }}
-              >
-                {/* <img src={item.img} alt="bannerImage" /> */}
-                <Typography variant="h2" className={classes.introHeader}>
-                  {item.header}
-                </Typography>
-                <Typography className={classes.introText}>
-                  {item.para}
-                </Typography>
-              </div>
-            ))}
-          </OwlCarousel>
-        </div>
-      </div>
+      <div className={classes.root}></div>
     </>
   );
 };

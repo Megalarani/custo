@@ -38,14 +38,30 @@ const Preview = () => {
     const Component = component;
     return <Component />;
   };
-  const deleteHandler = () => {};
-  function SaveLayout() {
+  const deleteHandler = (id) => {
+    console.log(id,"delete")
+    setMountedData((prevState) => {
+      prevState = prevState.filter((item) => item.uniqId !== id);
+      ctx.updateLayout(prevState);
+      return [...prevState];
+    });
+  };
+  const onSaveHandler = () => {
     setloading(true);
-    updateDoc(doc(db, "layout", ctx.userId), { layout: ctx.layoutData.layout });
+    ctx.updateLayout(mountedData);
+    var tempArr = [];
+    for (var i = 0; i < mountedData.length; i++) {
+      let newData = {
+        id: mountedData[i].id,
+        uniqId: mountedData[i].uniqId,
+      };
+      tempArr = tempArr.concat(newData);
+    }
+    updateDoc(doc(db, "layout", ctx.userId), { layout: tempArr });
     setTimeout(() => {
       setloading(false);
     }, 2000);
-  }
+  };
   return (
     <>
       {loading && (
@@ -61,7 +77,7 @@ const Preview = () => {
           <div className="row px-4  pt-2 pb-4 justify-content-between">
             <button
               className="btn px-5"
-              onClick={SaveLayout}
+              onClick={onSaveHandler}
               style={{
                 background: "#fff",
                 color: "#dc3545",
@@ -95,7 +111,11 @@ const Preview = () => {
               >
                 <div className="border" ref={drop} style={{ zoom: "0.6" }}>
                   {mountedData.map((item, index) => (
-                    <Draggable key={index} draggableId={item.id} index={index}>
+                    <Draggable
+                      key={item.uniqId}
+                      draggableId={item.uniqId}
+                      index={index}
+                    >
                       {(provided) => (
                         <div
                           className="position-relative"
@@ -104,7 +124,7 @@ const Preview = () => {
                           {...provided.dragHandleProps}
                         >
                           <div
-                            onClick={() => deleteHandler(index)}
+                            onClick={() => deleteHandler(item.uniqId)}
                             style={{
                               position: "absolute",
                               top: "0",
@@ -118,7 +138,7 @@ const Preview = () => {
                                 width: "2rem",
                                 height: "2rem",
                                 fill: "#dc3545",
-                                padding: "5px"
+                                padding: "5px",
                               }}
                             />
                           </div>

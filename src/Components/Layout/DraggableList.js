@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useDrag } from "react-dnd";
 import {
   Accordion,
@@ -7,17 +7,19 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
-import { LocalSections,commonSections } from "../../utilitis/LocalSections";
+import { LocalSections, commonSections } from "../../utilitis/LocalSections";
 import { ItemTypes } from "../../utilitis/Item";
+import AuthContext from "../../Context/Context";
 
 const DraggableList = (props) => {
+  const ctx = useContext(AuthContext);
   const CreateComponent = (props) => {
     const [{ isDragging }, drag] = useDrag({
-      item: { id: props.data.id, c: props.data.c },
+      item: { id: props.data.id, c: props.data.c, uniqId: props.data.id + ctx.layoutFlow.length },
       type: "Object",
       collect: (monitor) => ({
-        isDragging: !!monitor.isDragging()
-      })
+        isDragging: !!monitor.isDragging(),
+      }),
     });
     const Component = props.data.c;
     return (

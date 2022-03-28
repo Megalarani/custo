@@ -72,7 +72,7 @@ export const commonSections = [
   },
   {
     group: "Gallery",
-    variants: [{ c: Gallery1, id: "Gallery1" }],
+    variants: [],
   },
   {
     group: "Testimonal",
@@ -80,10 +80,10 @@ export const commonSections = [
   },
   {
     group: "Contact",
-    variants: [{ c: Form1, id: "Form1" }],
+    variants: [],
   },
   {
     group: "Footer",
-    variants: [{ c: Footer1, id: "Footer1" }],
+    variants: [],
   },
 ];

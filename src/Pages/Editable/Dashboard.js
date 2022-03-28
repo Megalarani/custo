@@ -15,7 +15,6 @@ import Loader from "../../loader/Loader";
 const Dashboard = (props) => {
   const [loading, setLoading] = useState(true);
   let params = useParams();
-  console.log(params.id, "params");
   const ctx = useContext(AuthContext);
   useEffect(() => {
     ctx.getWebsiteData();

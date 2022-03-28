@@ -54,14 +54,14 @@ export const Slider2 = () => {
 
   const options = {
     loop: true,
-    margin: 0,
+    margin: 30,
     dots: false,
     nav: false,
     autoplay: true,
-    autoplayTimeout: 5000,
-    autoplaySpeed: 3000,
+    autoplayTimeout: 4000,
+    autoplaySpeed: 2000,
     autoplayHoverPause: true,
-    items: 3,
+    items: 4,
   };
 
   const cardData = [
