@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
+import AuthContext from "../../../Context/Context";
+import Loader from "../../../loader/Loader";
 import Cat1 from "../../../Assests/images/cat1.jpg";
 import Cat2 from "../../../Assests/images/cat2.jpg";
 import Cat3 from "../../../Assests/images/cat3.jpg";
@@ -11,6 +13,18 @@ const useStyles = makeStyles(() =>
       backgroundColor: "#fff",
       display: "flex",
       padding: "1rem",
+    },
+    introTitle:{
+background:"transparent",
+outline:0,
+border:"none",
+textAlign:"center"
+    },
+    introCount:{
+      background:"transparent",
+      outline:0,
+      border:"none",
+      textAlign:"center"
     },
     card: {
       position: "relative",
@@ -51,7 +65,9 @@ const useStyles = makeStyles(() =>
 
 export const Card3 = () => {
   const classes = useStyles();
-
+  const [loading, setloading] = useState(false);
+  const ctx = useContext(AuthContext);
+  const [localData, setLocalData] = useState(null);
   const cardData = [
     {
       img: Cat1,
@@ -69,11 +85,105 @@ export const Card3 = () => {
       count: "1",
     },
   ];
+  let editable = null;
+  if (localData === null) {
+    editable = (
+      <>
+        {cardData?.map((details, index) => (
+  <div className={classes.root}>
+<div className={classes.card}>
+  
+<img src={details.img} alt={details.title} />
+<div className={classes.overlay}>
+
+  <input
+              key={index}
+              // onChange={(e) => onChangeHandler(e, details, index)}
+              className={classes.introTitle}
+              id="title"
+              value={details.title}
+              style={{ width: "75%" }}
+            />
+  <input
+              key={index}
+              // onChange={(e) => onChangeHandler(e, details, index)}
+              className={classes.introCount}
+              id="count"
+              value={details.count}
+              style={{ width: "75%" }}
+            />
+</div>
+</div>
+</div>
+        ))}
+      </>
+    );
+  } else {
+    editable = (
+      <>
+        {localData?.map((details, index) => (
+          
+<div className={classes.root}>
+<div className={classes.card}>
+<img src={details.img} alt={details.title} />
+<div className={classes.overlay}>
+
+  <input
+              key={index}
+              // onChange={(e) => onChangeHandler(e, details, index)}
+              // className={classes.introHeader}
+              id="title"
+              value={details.title}
+              style={{ width: "75%" }}
+            />
+  <input
+              key={index}
+              // onChange={(e) => onChangeHandler(e, details, index)}
+              // className={classes.introHeader}
+              id="count"
+              value={details.count}
+              style={{ width: "75%" }}
+            />
+</div>
+</div>
+</div>
+        ))}
+      </>
+    );
+  }
 
   return (
     <>
-      <div className={classes.root}>
-        {cardData.map((item) => (
+{ctx.isEditable ? (
+        <div className="row py-3 justify-content-end">
+          <div
+            className="saveButton"
+            onClick={() => {
+              setloading(true);
+              ctx.updateData(localData);
+              setTimeout(() => {
+                setloading(false);
+              }, 2000);
+            }}
+          >
+            Save
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      {loading && (
+        <>
+          <Loader />
+        </>
+      )}
+
+       
+        {ctx.isEditable ? (
+            editable
+          ) : (
+            <div className={classes.root}>
+              {cardData.map((item) => (
           <div className={classes.card}>
             <img src={item.img} alt={item.title} />
             <div className={classes.overlay}>
@@ -81,8 +191,10 @@ export const Card3 = () => {
               <Typography variant="body1">{item.count}&ensp;items</Typography>
             </div>
           </div>
-        ))}
-      </div>
+              ))}
+          </div>
+          )}
+     
     </>
   );
 };

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
+import AuthContext from "../../../Context/Context";
+import Loader from "../../../loader/Loader";
 import Dress1 from "../../../Assests/images/dress1.jpg";
 import Dress2 from "../../../Assests/images/dress2.jpg";
 import Dress3 from "../../../Assests/images/dress3.jpg";
@@ -40,8 +42,14 @@ const useStyles = makeStyles(() =>
       fontWeight: "200",
       padding: "0.75rem 0",
       textTransform: "capitalize",
+      background:"transparent",
+      outline:0,
+      border:"none",
     },
     rate: {
+      background:"transparent",
+      outline:0,
+      border:"none",
       fontSize: "0.85rem",
       color: "#000",
       fontWeight: "500",
@@ -51,7 +59,9 @@ const useStyles = makeStyles(() =>
 
 export const Slider2 = () => {
   const classes = useStyles();
-
+  const [loading, setloading] = useState(false);
+  const ctx = useContext(AuthContext);
+  const [localData, setLocalData] = useState(null);
   const options = {
     loop: true,
     margin: 30,
@@ -81,12 +91,106 @@ export const Slider2 = () => {
       rate: "189",
     },
   ];
+  let editable = null;
+  if (localData === null) {
+    editable = (
+      <>
+        {cardData?.map((details, index) => (
+  <div className={classes.card}>
+  <img src={details.img} alt={details.title} />
+  <div className={classes.footer}>
 
+    <input
+  key={index}
+  // onChange={(e) => onChangeHandler(e, details, index)}
+  className={classes.imgText}
+  id="title"
+  value={details.title}
+  style={{ width: "75%" }}
+/>
+
+    <input
+  key={index}
+  // onChange={(e) => onChangeHandler(e, details, index)}
+  className={classes.rate}
+  id="rate"
+  value={details.rate}
+  style={{ width: "75%" }}
+/>
+
+  </div>
+</div>
+        ))}
+      </>
+    );
+  } else {
+    editable = (
+      <>
+        {localData?.map((details, index) => (
+          
+<div className={classes.card}>
+              <img src={details.img} alt={details.title} />
+              <div className={classes.footer}>
+
+                <input
+              key={index}
+              // onChange={(e) => onChangeHandler(e, details, index)}
+              className={classes.imgText}
+              id="title"
+              value={details.title}
+              style={{ width: "75%" }}
+            />
+
+                <input
+              key={index}
+              // onChange={(e) => onChangeHandler(e, details, index)}
+              className={classes.rate}
+              id="rate"
+              value={details.rate}
+              style={{ width: "75%" }}
+            />
+
+              </div>
+            </div>
+  )
+        )}
+      </>
+    );
+  }
+  
   return (
     <>
+{ctx.isEditable ? (
+        <div className="row py-3 justify-content-end">
+          <div
+            className="saveButton"
+            onClick={() => {
+              setloading(true);
+              ctx.updateData(localData);
+              setTimeout(() => {
+                setloading(false);
+              }, 2000);
+            }}
+          >
+            Save
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      {loading && (
+        <>
+          <Loader />
+        </>
+      )}
+
       <div className={classes.root}>
         <Typography className={classes.introHeader}>New Arrivals</Typography>
-        <OwlCarousel className="owl-theme" {...options}>
+      
+ {ctx.isEditable ? (
+            editable
+          ) : (
+            <OwlCarousel className="owl-theme" {...options}>
           {cardData.map((item) => (
             <div className={classes.card}>
               <img src={item.img} alt={item.title} />
@@ -100,7 +204,10 @@ export const Slider2 = () => {
               </div>
             </div>
           ))}
-        </OwlCarousel>
+          </OwlCarousel>
+          )}
+
+        
       </div>
     </>
   );
