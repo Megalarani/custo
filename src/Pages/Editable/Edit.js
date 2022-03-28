@@ -14,9 +14,6 @@ const Edit = () => {
     mountedComponent.push(ctx.layoutFlow[0]);
   }
   const onMount = (id) => {
-    // const toEdit = ctx.layoutFlow.filter((x) => x.id === id);
-    // setMountedComponent(toEdit);
-    console.log(ctx.layoutFlow[id]);
     setMountedComponent((prevState) => {
       prevState = [];
       return [...prevState, ctx.layoutFlow[id]];
@@ -25,6 +22,12 @@ const Edit = () => {
   const CreateComponent = ({ component }) => {
     const Component = component;
     return <Component />;
+  };
+  const rename = (name, i) => {
+    let firstName = name.substring(0, name.length - 2);
+    let lastName = name.charAt(name.length - 1);
+    let newName = firstName + " " + lastName;
+    return newName;
   };
   return (
     <>
@@ -46,7 +49,7 @@ const Edit = () => {
                   //   className="text-primary"
                   style={{ marginRight: "5px", width: "45%" }}
                 >
-                  {item.id}
+                  {rename(item.uniqId, index)}
                 </span>
                 <EditIcon style={{ width: "7%" }} />
               </div>
@@ -56,8 +59,8 @@ const Edit = () => {
         <div className="col-10 p-3">
           {mountedComponent.map((single) => (
             <div
-              key={single.id}
-              style={{ zoom: "0.7", border: "1px solid #efefef" }}
+              key={single.uniqId}
+              style={{ zoom: "0.7" }}
             >
               <CreateComponent component={single.c} />
             </div>

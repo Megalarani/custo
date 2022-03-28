@@ -15,7 +15,7 @@ const DraggableList = (props) => {
   const ctx = useContext(AuthContext);
   const CreateComponent = (props) => {
     const [{ isDragging }, drag] = useDrag({
-      item: { id: props.data.id, c: props.data.c, uniqId: props.data.id + ctx.layoutFlow.length },
+      item: { id: props.data.id, c: props.data.c, uniqId: props.data.id + ctx.layoutFlow?.length },
       type: "Object",
       collect: (monitor) => ({
         isDragging: !!monitor.isDragging(),
