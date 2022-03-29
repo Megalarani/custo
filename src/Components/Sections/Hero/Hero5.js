@@ -70,10 +70,10 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export const Hero5 = () => {
+export const Hero5 = (props) => {
+  console.log(props.id)
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
-  const [localData, setLocalData] = useState(null);
   const data = [
     {
       img: BannerImage1,
@@ -86,6 +86,30 @@ export const Hero5 = () => {
       para: "loerum ipsum is a dummy language for website content writing and adiitonal purposes",
     },
   ];
+  const [localData, setLocalData] = useState(
+    ctx.websiteData[props.id] === undefined
+      ? data
+      : ctx.websiteData[props.id]
+  );
+  const onChangeHandler = (e, details, index) => {
+    setLocalData((prevState) => {
+      let updatedData = null;
+      if (e.target.id === "header") {
+        updatedData = {
+          ...details,
+          header: e.target.value,
+        };
+      }
+      else{
+        updatedData = {
+          ...details,
+          para: e.target.value,
+        };
+      }
+      prevState[index] = updatedData;
+      return [...prevState];
+    });
+  };
   const options = {
     loop: true,
     margin: 0,
@@ -99,11 +123,9 @@ export const Hero5 = () => {
     touchDrag: false,
   };
   const classes = useStyles();
-  let editable = null;
-  if (localData === null) {
-    editable = (
+  let editable = (
       <>
-        {data?.map((details, index) => (
+        {localData?.map((details, index) => (
           <div
             className={classes.bannerImg}
             style={{
@@ -114,17 +136,19 @@ export const Hero5 = () => {
           >
             <input
               key={index}
-              // onChange={(e) => onChangeHandler(e, details, index)}
+              onChange={(e) => onChangeHandler(e, details, index)}
               className={classes.introHeader}
               id="header"
+              placeholder="Header"
               value={details.header}
               style={{ width: "75%" }}
             />
             <textarea
               key={index}
-              // onChange={(e) => onChangeHandler(e, details, index)}
+              onChange={(e) => onChangeHandler(e, details, index)}
               className={classes.introText}
               id="para"
+              placeholder="text"
               value={details.para}
               style={{ width: "75%" }}
             />
@@ -132,35 +156,8 @@ export const Hero5 = () => {
         ))}
       </>
     );
-  } else {
-    editable = (
-      <>
-        {localData?.map((details, index) => (
-          <div
-            className={classes.bannerImg}
-            style={{ backgroundImage: `url(${details.img})`, margin: "1rem" }}
-          >
-            <input
-              key={index}
-              // onChange={(e) => onChangeHandler(e, details, index)}
-              className={classes.introHeader}
-              id="header"
-              value={details.header}
-              style={{ width: "75%" }}
-            />
-            <textarea
-              key={index}
-              // onChange={(e) => onChangeHandler(e, details, index)}
-              className={classes.introText}
-              id="para"
-              value={details.para}
-              style={{ width: "75%" }}
-            />
-          </div>
-        ))}
-      </>
-    );
-  }
+  
+    
 
   return (
     <>
@@ -170,7 +167,7 @@ export const Hero5 = () => {
             className="saveButton"
             onClick={() => {
               setloading(true);
-              ctx.updateData(localData);
+              ctx.updateData(localData,props.id);
               setTimeout(() => {
                 setloading(false);
               }, 2000);
@@ -198,7 +195,7 @@ export const Hero5 = () => {
             editable
           ) : (
             <OwlCarousel className="owl-theme" {...options} aut>
-              {data.map((item) => (
+              {localData.map((item) => (
                 <div
                   className={classes.bannerImg}
                   style={{ backgroundImage: `url(${item.img})` }}

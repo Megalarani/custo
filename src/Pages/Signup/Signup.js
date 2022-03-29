@@ -16,7 +16,7 @@ const Signup = (props) => {
     password: "",
     confirmpassword: "",
     username: "",
-    schoolname: "",
+    websitename: "",
     // companyname: "",
     phoneno: "",
   });
@@ -43,7 +43,7 @@ const Signup = (props) => {
       setloading(false);
     } else if (
       userCred.username === "" ||
-      userCred.schoolname === "" ||
+      userCred.websitename === "" ||
       userCred.phoneno === ""
     ) {
       setError("please enter the remaining fields");
@@ -57,10 +57,15 @@ const Signup = (props) => {
             username: userCred.username,
             email: userCred.email,
             phoneno: userCred.phoneno,
-            schoolname: userCred.schoolname,
+            websitename: userCred.websitename,
             password: userCred.password,
+          })
+          setDoc(doc(db,"layout",user.uid),{
+            layout:[]
           });
-
+          setDoc(doc(db,"websitedata",user.uid),{
+            websiteData:{}
+          });
           setTimeout(() => {
             navigate("/login");
             alert("sucessfully registered");
@@ -134,10 +139,10 @@ const Signup = (props) => {
                 </label>
                 <input
                   type="text"
-                  name="schoolname"
+                  name="websitename"
                   required
                   className="form-control"
-                  value={userCred.schoolname}
+                  value={userCred.websitename}
                   id="exampleInputschoolname"
                   placeholder="SchoolName"
                   onChange={onChangeHandler}

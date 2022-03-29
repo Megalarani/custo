@@ -15,6 +15,11 @@ const useStyles = makeStyles(() =>
       backgroundColor: "#efefef",
       padding: "1rem",
     },
+    row: {
+      display: "flex",
+      flexWrap: "wrap",
+      // justifyContent:"space-between"
+    },
     card: {
       background: "#fff",
       padding: "1rem",
@@ -30,6 +35,9 @@ const useStyles = makeStyles(() =>
       textTransform: "capitalize",
       textAlign: "center",
       paddingBottom: "1.5rem",
+      background: "transparent",
+      outline: 0,
+      border: "none",
     },
     footer: {
       display: "flex",
@@ -42,14 +50,14 @@ const useStyles = makeStyles(() =>
       fontWeight: "200",
       padding: "0.75rem 0",
       textTransform: "capitalize",
-      background:"transparent",
-      outline:0,
-      border:"none",
+      background: "transparent",
+      outline: 0,
+      border: "none",
     },
     rate: {
-      background:"transparent",
-      outline:0,
-      border:"none",
+      background: "transparent",
+      outline: 0,
+      border: "none",
       fontSize: "0.85rem",
       color: "#000",
       fontWeight: "500",
@@ -57,11 +65,12 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export const Slider2 = () => {
+export const Slider2 = (props) => {
+  console.log(props.id);
   const classes = useStyles();
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
-  const [localData, setLocalData] = useState(null);
+
   const options = {
     loop: true,
     margin: 30,
@@ -74,99 +83,108 @@ export const Slider2 = () => {
     items: 4,
   };
 
-  const cardData = [
-    {
-      img: Dress1,
-      title: "Ratione voluptatem sequi...",
-      rate: "199",
-    },
-    {
-      img: Dress2,
-      title: "Ratione voluptatem sequi...",
-      rate: "179",
-    },
-    {
-      img: Dress3,
-      title: "Ratione voluptatem sequi...",
-      rate: "189",
-    },
-  ];
+  const cardData = {
+    header: "New Arrivals",
+    data: [
+      {
+        img: Dress1,
+        title: "Ratione voluptatem sequi...",
+        rate: "199",
+      },
+      {
+        img: Dress2,
+        title: "Ratione voluptatem sequi...",
+        rate: "179",
+      },
+      {
+        img: Dress3,
+        title: "Ratione voluptatem sequi...",
+        rate: "189",
+      },
+    ],
+  };
+  const [localData, setLocalData] = useState(
+    ctx.websiteData[props.id] === undefined
+      ? cardData
+      : ctx.websiteData[props.id]
+  );
+  const onChangeHandler = (e, details, index) => {
+    setLocalData((prevState) => {
+      let updatedData = null;
+      if (e.target.id === "header") {
+        updatedData = {
+          header: e.target.value,
+        };
+      } else if (e.target.id === "title") {
+        updatedData = {
+          ...details,
+          title: e.target.value,
+        };
+      } else {
+        updatedData = {
+          ...details,
+          rate: e.target.value,
+        };
+      }
+      prevState[index] = updatedData;
+      return [...prevState];
+    });
+  };
+
   let editable = null;
   if (localData === null) {
     editable = (
       <>
-        {cardData?.map((details, index) => (
-  <div className={classes.card}>
-  <img src={details.img} alt={details.title} />
-  <div className={classes.footer}>
-
-    <input
-  key={index}
-  // onChange={(e) => onChangeHandler(e, details, index)}
-  className={classes.imgText}
-  id="title"
-  value={details.title}
-  style={{ width: "75%" }}
-/>
-
-    <input
-  key={index}
-  // onChange={(e) => onChangeHandler(e, details, index)}
-  className={classes.rate}
-  id="rate"
-  value={details.rate}
-  style={{ width: "75%" }}
-/>
-
-  </div>
-</div>
-        ))}
-      </>
-    );
-  } else {
-    editable = (
-      <>
-        {localData?.map((details, index) => (
-          
-<div className={classes.card}>
+        <input
+          className={classes.introHeader}
+          placeholder="Header"
+          id="header"
+          value={cardData.header}
+        />
+        <div className={classes.row}>
+          {cardData?.data.map((details, index) => (
+            <div
+              className={classes.card}
+              style={{ width: "24%", marginRight: "1%" }}
+            >
               <img src={details.img} alt={details.title} />
               <div className={classes.footer}>
+                <input
+                  key={index}
+                  onChange={(e) => onChangeHandler(e, details, index)}
+                  className={classes.imgText}
+                  id="title"
+                  style={{ fontSize: "15px" }}
+                  value={details.title}
+                  placeholder="Dress Name"
+                />
 
                 <input
-              key={index}
-              // onChange={(e) => onChangeHandler(e, details, index)}
-              className={classes.imgText}
-              id="title"
-              value={details.title}
-              style={{ width: "75%" }}
-            />
-
-                <input
-              key={index}
-              // onChange={(e) => onChangeHandler(e, details, index)}
-              className={classes.rate}
-              id="rate"
-              value={details.rate}
-              style={{ width: "75%" }}
-            />
-
+                  key={index}
+                  onChange={(e) => onChangeHandler(e, details, index)}
+                  className={classes.rate}
+                  id="rate"
+                  style={{ fontSize: "15px", marginLeft: "10px" }}
+                  value={details.rate}
+                  placeholder="rate"
+                />
               </div>
             </div>
-  )
-        )}
+          ))}
+        </div>
       </>
     );
   }
-  
+
   return (
     <>
-{ctx.isEditable ? (
+      {ctx.isEditable ? (
         <div className="row py-3 justify-content-end">
           <div
             className="saveButton"
             onClick={() => {
               setloading(true);
-              ctx.updateData(localData);
+              ctx.updateData(localData,props.id);
               setTimeout(() => {
                 setloading(false);
               }, 2000);
@@ -185,29 +203,30 @@ export const Slider2 = () => {
       )}
 
       <div className={classes.root}>
-        <Typography className={classes.introHeader}>New Arrivals</Typography>
-      
- {ctx.isEditable ? (
-            editable
-          ) : (
+        {ctx.isEditable ? (
+          editable
+        ) : (
+          <>
+            <Typography className={classes.introHeader}>
+              {cardData.header}
+            </Typography>
             <OwlCarousel className="owl-theme" {...options}>
-          {cardData.map((item) => (
-            <div className={classes.card}>
-              <img src={item.img} alt={item.title} />
-              <div className={classes.footer}>
-                <Typography variant="body2" className={classes.imgText}>
-                  {item.title}
-                </Typography>
-                <Typography variant="caption" className={classes.rate}>
-                  Rs. {item.rate}
-                </Typography>
-              </div>
-            </div>
-          ))}
-          </OwlCarousel>
-          )}
-
-        
+              {localData.data.map((item) => (
+                <div className={classes.card}>
+                  <img src={item.img} alt={item.title} />
+                  <div className={classes.footer}>
+                    <Typography variant="body2" className={classes.imgText}>
+                      {item.title}
+                    </Typography>
+                    <Typography variant="caption" className={classes.rate}>
+                      Rs. {item.rate}
+                    </Typography>
+                  </div>
+                </div>
+              ))}
+            </OwlCarousel>
+          </>
+        )}
       </div>
     </>
   );

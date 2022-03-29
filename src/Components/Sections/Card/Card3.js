@@ -14,18 +14,13 @@ const useStyles = makeStyles(() =>
       display: "flex",
       padding: "1rem",
     },
-    introTitle:{
-background:"transparent",
-outline:0,
-border:"none",
-textAlign:"center"
+    editable: {
+      background: "transparent",
+      outline: 0,
+      border: "none",
+      textAlign: "center",
     },
-    introCount:{
-      background:"transparent",
-      outline:0,
-      border:"none",
-      textAlign:"center"
-    },
+
     card: {
       position: "relative",
       width: "34%",
@@ -63,11 +58,11 @@ textAlign:"center"
   })
 );
 
-export const Card3 = () => {
+export const Card3 = (props) => {
+  console.log(props.id);
   const classes = useStyles();
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
-  const [localData, setLocalData] = useState(null);
   const cardData = [
     {
       img: Cat1,
@@ -85,82 +80,70 @@ export const Card3 = () => {
       count: "1",
     },
   ];
-  let editable = null;
-  if (localData === null) {
-    editable = (
-      <>
-        {cardData?.map((details, index) => (
-  <div className={classes.root}>
-<div className={classes.card}>
-  
-<img src={details.img} alt={details.title} />
-<div className={classes.overlay}>
+  const [localData, setLocalData] = useState(
+    ctx.websiteData[props.id] === undefined
+      ? cardData
+      : ctx.websiteData[props.id]
+  );
+  console.log(localData, "ak");
 
-  <input
-              key={index}
-              // onChange={(e) => onChangeHandler(e, details, index)}
-              className={classes.introTitle}
-              id="title"
-              value={details.title}
-              style={{ width: "75%" }}
-            />
-  <input
-              key={index}
-              // onChange={(e) => onChangeHandler(e, details, index)}
-              className={classes.introCount}
-              id="count"
-              value={details.count}
-              style={{ width: "75%" }}
-            />
-</div>
-</div>
-</div>
-        ))}
-      </>
-    );
-  } else {
-    editable = (
-      <>
-        {localData?.map((details, index) => (
-          
-<div className={classes.root}>
-<div className={classes.card}>
-<img src={details.img} alt={details.title} />
-<div className={classes.overlay}>
+  const onChangeHandler = (e, details, index) => {
+    setLocalData((prevState) => {
+      let updatedData = null;
+      if (e.target.id === "title") {
+        updatedData = {
+          ...details,
+          title: e.target.value,
+        };
+      } else {
+        updatedData = {
+          ...details,
+          count: e.target.value,
+        };
+      }
+      prevState[index] = updatedData;
+      return [...prevState];
+    });
+  };
 
-  <input
+  console.log(localData, "ak");
+  let editable = (
+    <div className={classes.root}>
+      {localData?.map((details, index) => (
+        <div className={classes.card} key={index}>
+          <img src={details.img} alt={details.title} />
+          <div className={classes.overlay}>
+            <input
               key={index}
-              // onChange={(e) => onChangeHandler(e, details, index)}
-              // className={classes.introHeader}
+              onChange={(e) => onChangeHandler(e, details, index)}
+              className={classes.editable}
               id="title"
+              placeholder="title"
               value={details.title}
-              style={{ width: "75%" }}
             />
-  <input
+            <input
               key={index}
-              // onChange={(e) => onChangeHandler(e, details, index)}
-              // className={classes.introHeader}
+              onChange={(e) => onChangeHandler(e, details, index)}
+              className={classes.editable}
               id="count"
+              placeholder="count"
               value={details.count}
-              style={{ width: "75%" }}
             />
-</div>
-</div>
-</div>
-        ))}
-      </>
-    );
-  }
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <>
-{ctx.isEditable ? (
+      {ctx.isEditable ? (
         <div className="row py-3 justify-content-end">
           <div
             className="saveButton"
             onClick={() => {
               setloading(true);
-              ctx.updateData(localData);
+              ctx.updateData(localData, props.id);
               setTimeout(() => {
                 setloading(false);
               }, 2000);
@@ -178,23 +161,21 @@ export const Card3 = () => {
         </>
       )}
 
-       
-        {ctx.isEditable ? (
-            editable
-          ) : (
-            <div className={classes.root}>
-              {cardData.map((item) => (
-          <div className={classes.card}>
-            <img src={item.img} alt={item.title} />
-            <div className={classes.overlay}>
-              <Typography variant="h6">{item.title}</Typography>
-              <Typography variant="body1">{item.count}&ensp;items</Typography>
+      {ctx.isEditable ? (
+        editable
+      ) : (
+        <div className={classes.root}>
+          {localData.map((item) => (
+            <div className={classes.card}>
+              <img src={item.img} alt={item.title} />
+              <div className={classes.overlay}>
+                <Typography variant="h6">{item.title}</Typography>
+                <Typography variant="body1">{item.count}&ensp;items</Typography>
+              </div>
             </div>
-          </div>
-              ))}
-          </div>
-          )}
-     
+          ))}
+        </div>
+      )}
     </>
   );
 };

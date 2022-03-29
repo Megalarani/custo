@@ -6,6 +6,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import Loader from "../../loader/Loader";
 import { NavLink } from "react-router-dom";
 import { useDrop } from "react-dnd";
+import clsx from"clsx"
 import { ReactComponent as DeleteIcon } from "../../Assests/delete.svg";
 
 const Preview = () => {
@@ -34,12 +35,12 @@ const Preview = () => {
     setMountedData(newArr);
     ctx.updateLayout(newArr);
   };
-  const CreateComponent = ({ component }) => {
+  const CreateComponent = ({ component, id }) => {
     const Component = component;
-    return <Component />;
+    return <Component id={id} />;
   };
   const deleteHandler = (id) => {
-    console.log(id,"delete")
+    console.log(id, "delete");
     setMountedData((prevState) => {
       prevState = prevState.filter((item) => item.uniqId !== id);
       ctx.updateLayout(prevState);
@@ -61,6 +62,26 @@ const Preview = () => {
     setTimeout(() => {
       setloading(false);
     }, 2000);
+  };
+  const NoLayout = () => {
+    return (
+      <div
+        className="p-4"
+        style={{ boxShadow: "0px 3px 6px #00000036", borderRadius: "5rem" }}
+      >
+        <h2 className="text-center">Drag and Drop Here</h2>
+        <div className="d-flex justify-content-center">
+          <lottie-player
+            src="https://assets1.lottiefiles.com/packages/lf20_4hlbkvut.json"
+            background="transparent"
+            speed="1"
+            style={{ width: "500px", height: "500px", transform: "scale(1.8)" }}
+            loop
+            autoplay
+          ></lottie-player>
+        </div>
+      </div>
+    );
   };
   return (
     <>
@@ -109,7 +130,12 @@ const Preview = () => {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                <div className="border" ref={drop} style={{ zoom: "0.6" }}>
+                <div
+                  className={clsx(ctx.layoutFlow?.length > 0 ? "border" : "")}
+                  ref={drop}
+                  style={{ zoom: "0.6" }}
+                >
+                  {ctx.layoutFlow?.length === 0 ? <NoLayout /> : <></>}
                   {mountedData.map((item, index) => (
                     <Draggable
                       key={item.uniqId}
@@ -142,7 +168,10 @@ const Preview = () => {
                               }}
                             />
                           </div>
-                          <CreateComponent component={item.c} />
+                          <CreateComponent
+                            component={item.c}
+                            id={item.uniqId}
+                          />
                         </div>
                       )}
                     </Draggable>
