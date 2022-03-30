@@ -13,6 +13,7 @@ import Navbar1 from "../Components/Sections/Navbar/Navbar1";
 import { Navbar2 } from "../Components/Sections/Navbar/Navbar2";
 import Slider1 from "../Components/Sections/Testimonals/Slider1";
 import { Slider2 } from "../Components/Sections/Testimonals/Slider2";
+import { Footer2 } from "../Components/Sections/Footer/Footer2";
 
 export const LocalSections = [
   {
@@ -84,6 +85,6 @@ export const commonSections = [
   },
   {
     group: "Footer",
-    variants: [],
+    variants: [{ c: Footer2, id: "Footer2" }],
   },
 ];
