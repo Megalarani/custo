@@ -135,7 +135,7 @@ const Signup = (props) => {
               </div>
               <div className="form-group col-sm-6">
                 <label for="exampleInputschoolname text-center ">
-                  SchoolName
+                  Website name 
                 </label>
                 <input
                   type="text"
