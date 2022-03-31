@@ -77,11 +77,31 @@ const useStyles = makeStyles(() =>
       right: "1rem",
       boxShadow: "2px 2px 3px 0 #ccc",
     },
+    inputFile: {
+      width: 0,
+      height: 0,
+      opacity: 0,
+      zIndex: "0",
+    },
+    inputLabel: {
+      position: "absolute",
+      background: "#fff",
+      width: "2.5rem",
+      height: "2.5rem",
+      padding: "0.3rem",
+      top: "0",
+      left: "0",
+      zIndex: 20,
+      textAlign: "center",
+      cursor: "pointer",
+      "& i": {
+        fontSize: "1.75rem",
+      },
+    },
   })
 );
 
 export const Slider2 = (props) => {
-  console.log(props.id);
   const classes = useStyles();
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
@@ -127,6 +147,7 @@ export const Slider2 = (props) => {
       : ctx.websiteData[props.id]
   );
   const [card, setCard] = useState(localData.data);
+  const [array, setArray] = useState([]);
   const onChange = (event) => {
     let val = event.target.value;
     setLocalData((prevState) => {
@@ -158,8 +179,39 @@ export const Slider2 = (props) => {
       return [...prevState];
     });
   };
-  const onImageChange = () => {
-    // dbcall
+  const onImageChange = (e, i) => {
+    // setError(null);
+
+    let selected = e.target.files[0];
+
+    if (!selected) {
+      // setError("Please select file");
+      return;
+    }
+
+    if (!selected.type.includes("image")) {
+      // setError("Please select image file");
+      return;
+    }
+    const storage = getStorage();
+    const uploadPath = `images/${card[i].title}`; // upload path
+    const storageRef = ref(storage, uploadPath); // create refernce to store data
+
+    uploadBytes(storageRef, selected).then((snapshot) => {
+      // console.log(snapshot);
+      getDownloadURL(storageRef).then((url) => {
+        setCard((prevState) => {
+          let updatedData = null;
+          updatedData = {
+            ...prevState[i],
+            img: url,
+          };
+          prevState[i] = updatedData;
+          return [...prevState];
+        });
+      });
+    });
+    // setError(null);
   };
   const addCard = () => {
     let updatedData = {
@@ -198,6 +250,7 @@ export const Slider2 = (props) => {
               onClick={() => removeCard(details.id)}
               style={{
                 position: "absolute",
+                background: "#fff",
                 top: "0",
                 right: "0",
                 zIndex: 20,
@@ -215,16 +268,13 @@ export const Slider2 = (props) => {
             </div>
             <input
               type="file"
-              onChange={onImageChange}
-              // className={styles.fileType}
-              id={index}
+              onChange={(e) => onImageChange(e, index)}
+              className={classes.inputFile}
+              id={details.id}
               name={details.title}
             />
-            <label
-              // className={styles.fileLabel}
-              htmlFor={details.title}
-            >
-              <i className="fa fa-upload fa-3x"></i>
+            <label className={classes.inputLabel} htmlFor={details.id}>
+              <i className="fa fa-upload"></i>
             </label>
             <img src={details.img} alt={details.title} />
             <div className={classes.footer}>
@@ -256,63 +306,13 @@ export const Slider2 = (props) => {
   );
 
   const onSaveHandler = () => {
-    const storage = getStorage();
-    for (var i = 0; i < card.length; i++) {
-      const uploadPath = `images/${card[i].title}`; // upload path
-      const storageRef = ref(storage, uploadPath); // create refernce to store data
-
-      uploadBytes(storageRef, card[i].img).then((snapshot) => {
-        // console.log(snapshot);
-        getDownloadURL(storageRef).then((url) => {
-          console.log(url, "url");
-          setCard((prevState) => {
-            let updatedData = null;
-            updatedData = {
-              ...prevState[i],
-              img: url,
-            };
-            prevState[i] = updatedData;
-            return [...prevState];
-          });
-        });
-      });
-    }
-    ctx.updateData(
-      {
-        header: localData.header,
-        data: card,
-      },
-      props.id
-    );
-    // if (card.length === 0) {
-    //   console.log("Add Card");
-    // } else {
-    //   // setloading(true);
-    //   // ctx.updateData(
-    //   //   {
-    //   //     header: localData.header,
-    //   //     data: card,
-    //   //   },
-    //   //   props.id
-    //   // );
-    //   // setTimeout(() => {
-    //   //   setloading(false);
-    //   // }, 2000);
-    //   for (var i = 0; i < card.length; i++) {
-    //     if (card[i].img === "") {
-    //       alert("Image cannot be empty");
-    //       break;
-    //     } else if (card[i].title === "") {
-    //       alert("Title cannot be empty");
-    //       break;
-    //     } else if (card[i].rate === "") {
-    //       alert("Rate cannot be empty");
-    //       break;
-    //     }
-    //   }
-    // }
+    let data = {
+      header: localData.header,
+      data: card,
+    };
+    ctx.updateData(data, props.id);
+    console.log(data);
   };
-
   return (
     <>
       {ctx.isEditable ? (
