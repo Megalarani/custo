@@ -8,11 +8,24 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import AuthContext from "../../../Context/Context";
 import Loader from "../../../loader/Loader";
 import clsx from "clsx";
+import { ReactComponent as DeleteIcon } from "../../../Assests/delete.svg";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
       backgroundColor: "#efefef",
+      position: "relative",
+    },
+    addCard: {
+      borderRadius: "1rem",
+      position: "absolute",
+      background: "#fff",
+      padding: "1rem 2rem",
+      top: "0",
+      cursor: "pointer",
+      right: "1rem",
+      boxShadow: "2px 2px 3px 0 #ccc",
     },
     container: {
       width: "100%",
@@ -49,6 +62,7 @@ const useStyles = makeStyles(() =>
       left: 0,
       right: 0,
       top: "30%",
+      fontSize:"40px",
       textAlign: "center",
     },
     introText: {
@@ -71,7 +85,7 @@ const useStyles = makeStyles(() =>
 );
 
 export const Hero5 = (props) => {
-  console.log(props.id)
+  console.log(props.id);
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
   const data = [
@@ -79,17 +93,17 @@ export const Hero5 = (props) => {
       img: BannerImage1,
       header: "Intro header 1",
       para: "loerum ipsum is a dummy language for website content writing",
+      id: "0",
     },
     {
       img: BannerImage2,
       header: "Intro header 2",
       para: "loerum ipsum is a dummy language for website content writing and adiitonal purposes",
+      id: "1",
     },
   ];
   const [localData, setLocalData] = useState(
-    ctx.websiteData[props.id] === undefined
-      ? data
-      : ctx.websiteData[props.id]
+    ctx.websiteData[props.id] === undefined ? data : ctx.websiteData[props.id]
   );
   const onChangeHandler = (e, details, index) => {
     setLocalData((prevState) => {
@@ -99,8 +113,7 @@ export const Hero5 = (props) => {
           ...details,
           header: e.target.value,
         };
-      }
-      else{
+      } else {
         updatedData = {
           ...details,
           para: e.target.value,
@@ -122,57 +135,146 @@ export const Hero5 = (props) => {
     items: 1,
     touchDrag: false,
   };
+  const onImageChange = () => {
+    // dbcall
+  };
+  const addCard = () => {
+    let updatedData = {
+      img: BannerImage1,
+      header: "",
+      para: "",
+      id: localData.length,
+    };
+    setLocalData((prevState) => {
+      return [...prevState, updatedData];
+    });
+  };
+  const removeCard = (value) => {
+    setLocalData((prevState) => {
+      prevState = prevState.filter((item) => item.id !== value);
+      return [...prevState];
+    });
+  };
   const classes = useStyles();
   let editable = (
-      <>
-        {localData?.map((details, index) => (
+    <>
+      {localData?.map((details, index) => (
+        <div
+          key={index}
+          className={classes.bannerImg}
+          style={{
+            backgroundImage: `url(${details.img})`,
+            margin: "1rem",
+            width: "auto",
+          }}
+        >
           <div
-            className={classes.bannerImg}
+            onClick={() => removeCard(details.id)}
             style={{
-              backgroundImage: `url(${details.img})`,
-              margin: "1rem",
-              width: "auto",
+              position: "absolute",
+              top: "0",
+              left: "0",
+              zIndex: 20,
+              cursor: "pointer",
             }}
           >
-            <input
-              key={index}
-              onChange={(e) => onChangeHandler(e, details, index)}
-              className={classes.introHeader}
-              id="header"
-              placeholder="Header"
-              value={details.header}
-              style={{ width: "75%" }}
-            />
-            <textarea
-              key={index}
-              onChange={(e) => onChangeHandler(e, details, index)}
-              className={classes.introText}
-              id="para"
-              placeholder="text"
-              value={details.para}
-              style={{ width: "75%" }}
+            <DeleteIcon
+              style={{
+                width: "2rem",
+                height: "2rem",
+                fill: "#dc3545",
+                padding: "5px",
+              }}
             />
           </div>
-        ))}
-      </>
-    );
-  
-    
+          {/* <input
+            type="file"
+            onChange={onImageChange}
+            // className={styles.fileType}
+            id={index}
+            name={details.title}
+          />
+          <label
+            // className={styles.fileLabel}
+            htmlFor={details.title}
+          >
+            <i className="fa fa-upload fa-3x"></i>
+          </label> */}
+
+          <input
+            onChange={(e) => onChangeHandler(e, details, index)}
+            className={classes.introHeader}
+            id="header"
+            placeholder="Header"
+            value={details.header}
+            style={{ width: "75%" }}
+          />
+          <textarea
+            onChange={(e) => onChangeHandler(e, details, index)}
+            className={classes.introText}
+            id="para"
+            placeholder="text"
+            value={details.para}
+            style={{ width: "75%" }}
+          />
+        </div>
+      ))}
+      <div className={classes.addCard} onClick={addCard}>
+        Add Card
+      </div>
+    </>
+  );
+  const onSaveHandler = () => {
+    const storage = getStorage();
+    for (var i = 0; i < localData.length; i++) {
+      const uploadPath = `images/${localData[i].header}`; // upload path
+      const storageRef = ref(storage, uploadPath); // create refernce to store data
+
+      uploadBytes(storageRef, localData[i].img).then((snapshot) => {
+        // console.log(snapshot);
+        getDownloadURL(storageRef).then((url) => {
+          console.log(url, "url");
+          setLocalData((prevState) => {
+            let updatedData = null;
+            updatedData = {
+              ...prevState[i],
+              img: url,
+            };
+            prevState[i] = updatedData;
+            return [...prevState];
+          });
+        });
+      });
+    }
+    // ctx.updateData(localData, props.id);
+    // if (card.length === 0) {
+    //   console.log("Add Card");
+    // } else {
+    //     setloading(true);
+    // ctx.updateData(localData, props.id);
+    // setTimeout(() => {
+    //   setloading(false);
+    // }, 2000);
+    //   for (var i = 0; i < card.length; i++) {
+    //     if (card[i].img === "") {
+    //       alert("Image cannot be empty");
+    //       break;
+    //     } else if (card[i].title === "") {
+    //       alert("Title cannot be empty");
+    //       break;
+    //     } else if (card[i].rate === "") {
+    //       alert("Rate cannot be empty");
+    //       break;
+    //     }
+    //   }
+    // }
+  };
 
   return (
     <>
       {ctx.isEditable ? (
         <div className="row py-3 justify-content-end">
-          <div
-            className="saveButton"
-            onClick={() => {
-              setloading(true);
-              ctx.updateData(localData,props.id);
-              setTimeout(() => {
-                setloading(false);
-              }, 2000);
-            }}
-          >
+          <div className="saveButton" onClick={onSaveHandler}>
             Save
           </div>
         </div>
@@ -195,8 +297,9 @@ export const Hero5 = (props) => {
             editable
           ) : (
             <OwlCarousel className="owl-theme" {...options} aut>
-              {localData.map((item) => (
+              {localData.map((item, index) => (
                 <div
+                  key={index}
                   className={classes.bannerImg}
                   style={{ backgroundImage: `url(${item.img})` }}
                 >
