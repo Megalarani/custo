@@ -14,6 +14,7 @@ const useStyles = makeStyles(() =>
       backgroundColor: "#fff",
       display: "flex",
       padding: "1rem",
+      flexWrap:"wrap",
       position: "relative",
     },
     editable: {
@@ -23,18 +24,21 @@ const useStyles = makeStyles(() =>
       textAlign: "center",
     },
     addCard: {
+      fontSize:"25px",
+      display:"flex",
+      alignItems:"center",
+      justifyContent:"center",
       borderRadius: "1rem",
-      position: "absolute",
       background: "#fff",
-      padding: "1rem 2rem",
-      top: "0",
       cursor: "pointer",
-      right: "1rem",
-      boxShadow: "2px 2px 3px 0 #ccc",
+      position: "relative",
+      width: "33.33%",
+      padding: "1rem",
+      boxShadow: "2px 2px 2px 3px #ccc",
     },
     card: {
       position: "relative",
-      width: "34%",
+      width: "33.33%",
       padding: "1rem",
       "& img": {
         maxWidth: "100%",
@@ -194,7 +198,7 @@ export const Card3 = (props) => {
         </div>
       ))}
       <div className={classes.addCard} onClick={addCard}>
-        Add Card
+      <i class="fa fa-plus-circle mx-2" aria-hidden="true"></i> Add Card
       </div>
     </div>
   );
