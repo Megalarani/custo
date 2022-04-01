@@ -111,6 +111,9 @@ const useStyles = makeStyles(() =>
       introHeader: {
         fontSize: "20px !important",
       },
+      carouselContainer: {
+        maxHeight: "250px",
+      },
       bannerImg: {
         height: "250px",
       },
@@ -160,7 +163,7 @@ export const Hero5 = (props) => {
   const options = {
     loop: true,
     margin: 0,
-    dots: true,
+    dots: false,
     nav: false,
     autoplay: true,
     autoplayTimeout: 5000,

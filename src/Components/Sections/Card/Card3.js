@@ -74,6 +74,12 @@ const useStyles = makeStyles(() =>
         textAlign: "center",
       },
     },
+    inputFile: {
+      width: 0,
+      height: 0,
+      opacity: 0,
+      zIndex: "0",
+    },
     inputLabel: {
       position: "absolute",
       background: "#fff",
@@ -89,15 +95,14 @@ const useStyles = makeStyles(() =>
         fontSize: "1.75rem",
       },
     },
+    "@media (max-width: 900px)": {
+      card: {
+        width: "50%",
+      },
+    },
     "@media (max-width: 600px)": {
       card: {
         width: "100%",
-        inputFile: {
-          width: 0,
-          height: 0,
-          opacity: 0,
-          zIndex: "0",
-        },
       },
     },
   })

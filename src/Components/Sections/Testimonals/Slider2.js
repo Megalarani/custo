@@ -120,7 +120,20 @@ export const Slider2 = (props) => {
     autoplayTimeout: 4000,
     autoplaySpeed: 2000,
     autoplayHoverPause: true,
-    items: 4,
+    responsive: {
+      0: {
+        items: 1
+      },
+      450: {
+        items: 2
+      },
+      750: {
+        items: 3
+      },
+      1200: {
+        items: 4
+      }
+    }
   };
 
   const cardData = {
