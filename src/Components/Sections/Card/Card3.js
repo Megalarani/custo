@@ -74,17 +74,6 @@ const useStyles = makeStyles(() =>
         textAlign: "center",
       },
     },
-<<<<<<< HEAD
-    "@media (max-width: 600px)": {
-      card: {
-        width: "100%",
-=======
-    inputFile: {
-      width: 0,
-      height: 0,
-      opacity: 0,
-      zIndex: "0",
-    },
     inputLabel: {
       position: "absolute",
       background: "#fff",
@@ -98,7 +87,17 @@ const useStyles = makeStyles(() =>
       cursor: "pointer",
       "& i": {
         fontSize: "1.75rem",
->>>>>>> 3e318d8327b25527cd0b00e8b3b30b69208b4d36
+      },
+    },
+    "@media (max-width: 600px)": {
+      card: {
+        width: "100%",
+        inputFile: {
+          width: 0,
+          height: 0,
+          opacity: 0,
+          zIndex: "0",
+        },
       },
     },
   })
@@ -263,50 +262,11 @@ export const Card3 = (props) => {
     </div>
   );
   const onSaveHandler = () => {
-    const storage = getStorage();
-    for (var i = 0; i < localData.length; i++) {
-      const uploadPath = `images/${localData[i].title}`; // upload path
-      const storageRef = ref(storage, uploadPath); // create refernce to store data
-
-      uploadBytes(storageRef, localData[i].img).then((snapshot) => {
-        // console.log(snapshot);
-        getDownloadURL(storageRef).then((url) => {
-          console.log(url, "url");
-          setLocalData((prevState) => {
-            let updatedData = null;
-            updatedData = {
-              ...prevState[i],
-              img: url,
-            };
-            prevState[i] = updatedData;
-            return [...prevState];
-          });
-        });
-      });
-    }
-    // ctx.updateData(localData, props.id);
-    // if (card.length === 0) {
-    //   console.log("Add Card");
-    // } else {
-    //     setloading(true);
-    // ctx.updateData(localData, props.id);
-    // setTimeout(() => {
-    //   setloading(false);
-    // }, 2000);
-    //   for (var i = 0; i < card.length; i++) {
-    //     if (card[i].img === "") {
-    //       alert("Image cannot be empty");
-    //       break;
-    //     } else if (card[i].title === "") {
-    //       alert("Title cannot be empty");
-    //       break;
-    //     } else if (card[i].rate === "") {
-    //       alert("Rate cannot be empty");
-    //       break;
-    //     }
-    //   }
-    // }
+    ctx.updateData(localData, props.id);
+   
   };
+    
+
 
   return (
     <>

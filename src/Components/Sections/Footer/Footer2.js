@@ -179,7 +179,7 @@ export const Footer2 = (props) => {
   );
   const onSaveHandler = () => {
     ctx.updateData(localData, props.id);
-    console.log(data);
+ 
   };
 
   return (

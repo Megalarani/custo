@@ -83,17 +83,6 @@ const useStyles = makeStyles(() =>
       right: 0,
       top: "42%",
     },
-<<<<<<< HEAD
-    "@media (max-width: 600px)": {
-      introText: {
-        fontSize: "12px !important",
-      },
-      introHeader: {
-        fontSize: "20px !important",
-      },
-      bannerImg: {
-        height: "250px",
-=======
     inputFile: {
       width: 0,
       height: 0,
@@ -113,7 +102,17 @@ const useStyles = makeStyles(() =>
       cursor: "pointer",
       "& i": {
         fontSize: "1.75rem",
->>>>>>> 3e318d8327b25527cd0b00e8b3b30b69208b4d36
+      },
+    },
+    "@media (max-width: 600px)": {
+      introText: {
+        fontSize: "12px !important",
+      },
+      introHeader: {
+        fontSize: "20px !important",
+      },
+      bannerImg: {
+        height: "250px",
       },
     },
   })

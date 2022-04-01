@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
+import Loader from "../../../loader/Loader";
 import HeaderLogo from "../../../Assests/images/headerlogo.png";
 import { ReactComponent as DeleteIcon } from "../../../Assests/delete.svg";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import AuthContext from "../../../Context/Context";
 const useStyles = makeStyles(() =>
   createStyles({
     rootNav: {
@@ -39,7 +40,9 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export const Navbar2 = () => {
+export const Navbar2 = (props) => {
+  const [loading, setloading] = useState(false);
+  const ctx = useContext(AuthContext);
   const classes = useStyles();
   const menuItem = [
     {
@@ -63,7 +66,14 @@ export const Navbar2 = () => {
       id: "contact",
     },
   ];
-
+  const [localData, setLocalData] = useState(
+    ctx.websiteData[props.id] === undefined
+      ? menuItem
+      : ctx.websiteData[props.id]
+  );
+  const onSaveHandler = () => {
+    ctx.updateData(localData, props.id);
+  };
   return (
     <>
       {ctx.isEditable ? (
@@ -83,6 +93,7 @@ export const Navbar2 = () => {
 
       <div className={classes.rootNav}>
         <div className={classes.logoContainer}>
+          
           <img src={HeaderLogo} alt="headerLogo" />
         </div>
         <div className={classes.menuList}>
