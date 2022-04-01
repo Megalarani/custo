@@ -10,7 +10,7 @@ import { fontSize, margin, textAlign } from "@mui/system";
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-        backgroundColor: "#555"
+      backgroundColor: "#555",
     },
     row: {
       position: "relative",
@@ -18,7 +18,7 @@ const useStyles = makeStyles(() =>
       padding: "10px",
     },
     col: {
-      width: "25%",
+      width: "33.33%",
     },
     divider: {
       height: "5px",
@@ -48,63 +48,181 @@ export const Footer2 = (props) => {
     {
       //   img: BannerImage1,
       header: "Intro header 1",
-      para: "loerum ipsum is a dummy language for website content writing",
+      line1: "loerum",
+      line2: "loerum",
+      line3: "loerum",
+      line4: "loerum",
       id: "0",
     },
     {
       //   img: BannerImage2,
       header: "Intro header 2",
-      para: "loerum ipsum is a dummy language for website content writing and adiitonal purposes",
+      line1: "loerum",
+      line2: "loerum",
+      line3: "loerum",
+      line4: "loerum",
+      id: "1",
+    },
+    {
+      //   img: BannerImage2,
+      header: "Intro header 2",
+      line1: "loerum",
+      line2: "loerum",
+      line3: "loerum",
+      line4: "loerum",
       id: "1",
     },
   ];
   const [localData, setLocalData] = useState(
     ctx.websiteData[props.id] === undefined ? data : ctx.websiteData[props.id]
   );
+  const onChangeHandler = (e, details, index) => {
+    setLocalData((prevState) => {
+      let updatedData = null;
+      if (e.target.id === "header") {
+        updatedData = {
+          ...details,
+          header: e.target.value,
+        };
+      } else if(e.target.id === "line1") {
+        updatedData = {
+          ...details,
+          line1: e.target.value,
+        };
+      }
+      else if(e.target.id === "line2") {
+        updatedData = {
+          ...details,
+          line2: e.target.value,
+        };
+      }
+      else if(e.target.id === "line3") {
+        updatedData = {
+          ...details,
+          line3: e.target.value,
+        };
+      }
+      else if(e.target.id === "line4") {
+        updatedData = {
+          ...details,
+          line4: e.target.value,
+        };
+      };
+      prevState[index] = updatedData;
+      return [...prevState];
+    });
+  };
   const classes = useStyles();
+  let editable = (
+    <>
+      <div>
+        {localData?.map((details, index) => (
+         <div key={index} className={classes.col}>
+            <input
+              onChange={(e) => onChan
+                geHandler(e, details, index)}
+              className={classes.introHeader}
+              id="header"
+              placeholder="header"
+              value={details.header}
+              style={{ width: "75%" }}
+            />
+            <div className={classes.divider}></div>
+            <ul className={classes.list}>
+              <li>
+                <input
+                  onChange={(e) => onChangeHandler(e, details, index)}
+                  className={classes.listText}
+                  id="line1"
+                  placeholder="line1"
+                  value={details.header}
+                  style={{ width: "75%" }}
+                />
+              </li>
+              <li>
+                <input
+                  onChange={(e) => onChangeHandler(e, details, index)}
+                  className={classes.introHeader}
+                  id="line2"
+                  placeholder="line2"
+                  value={details.header}
+                  style={{ width: "75%" }}
+                />
+              </li>
+              <li>
+                <input
+                  onChange={(e) => onChangeHandler(e, details, index)}
+                  className={classes.introHeader}
+                  id="line3"
+                  placeholder="line3"
+                  value={details.header}
+                  style={{ width: "75%" }}
+                />
+              </li>
+              <li>
+                <input
+                  onChange={(e) => onChangeHandler(e, details, index)}
+                  className={classes.introHeader}
+                  id="line4"
+                  placeholder="line4"
+                  value={details.header}
+                  style={{ width: "75%" }}
+                />
+              </li>
+            </ul>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+  const onSaveHandler = () => {
+    ctx.updateData(localData, props.id);
+    console.log(data);
+  };
+  
   return (
     <>
+      {ctx.isEditable ? (
+        <div className="row py-3 justify-content-end">
+          <div className="saveButton" onClick={onSaveHandler}>
+            Save
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      {loading && (
+        <>
+          <Loader />
+        </>
+      )}
       <div className={classes.root}>
         <div className={classes.row}>
-          <div className={classes.col}>
-            <h2 className={classes.introHeader}>Header</h2>
-            <div className={classes.divider}></div>
-            <ul className={classes.list}>
-              <li>Text</li>
-              <li>Text</li>
-              <li>Text</li>
-              <li>Text</li>
-            </ul>
-          </div>
-          <div className={classes.col}>
-            <h2 className={classes.introHeader}>Header</h2>
-            <div className={classes.divider}></div>
-            <ul className={classes.list}>
-              <li>Text</li>
-              <li>Text</li>
-              <li>Text</li>
-              <li>Text</li>
-            </ul>
-          </div>
-          <div className={classes.col}>
-            <h2 className={classes.introHeader}>Header</h2>
-            <div className={classes.divider}></div>
-            <ul className={classes.list}>
-              <li>Text</li>
-              <li>Text</li>
-              <li>Text</li>
-              <li>Text</li>
-            </ul>
-          </div>
-          <div className={classes.col} style={{ width: "25%" }}>
-            <h2 className={classes.introHeader}>Header</h2>
-            <div className={classes.divider}></div>
+        
+            {/* <div>
+              <h2 className={classes.introHeader}>Copyrights@layatex.com</h2>
+            </div> */}
+
+            {ctx.isEditable ? (
+              editable
+            ) : (
+              <div>
+                {localData?.map((details, index) => (
+                   <div key={index} className={classes.col}>
+                    <h2 className={classes.introHeader}>{details.header}</h2>
+                    <div className={classes.divider}></div>
+                    <ul className={classes.list}>
+                      <li>{details.line1}</li>
+                      <li>{details.line2}</li>
+                      <li>{details.line3}</li>
+                      <li>{details.line4}</li>
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-        <div>
-          <h2 className={classes.introHeader}>Copyrights@layatex.com</h2>
-        </div>
-      </div>
     </>
   );
 };
