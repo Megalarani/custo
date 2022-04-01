@@ -165,7 +165,6 @@ export const Slider2 = (props) => {
       : ctx.websiteData[props.id]
   );
   const [card, setCard] = useState(localData.data);
-  const [array, setArray] = useState([]);
   const onChange = (event) => {
     let val = event.target.value;
     setLocalData((prevState) => {
