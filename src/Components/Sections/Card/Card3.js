@@ -267,11 +267,12 @@ export const Card3 = (props) => {
     </div>
   );
   const onSaveHandler = () => {
+    setloading(true);
     ctx.updateData(localData, props.id);
-   
+    setTimeout(() => {
+      setloading(false);
+    }, 2000);
   };
-    
-
 
   return (
     <>

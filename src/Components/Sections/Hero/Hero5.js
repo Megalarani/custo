@@ -291,7 +291,11 @@ export const Hero5 = (props) => {
   );
 
   const onSaveHandler = () => {
+    setloading(true);
     ctx.updateData(localData, props.id);
+    setTimeout(() => {
+      setloading(false);
+    }, 2000);
   };
 
   return (
