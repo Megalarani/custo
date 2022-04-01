@@ -14,9 +14,10 @@ const useStyles = makeStyles(() =>
       backgroundColor: "#fff",
       display: "flex",
       padding: "1rem",
-      flexWrap:"wrap",
+      flexWrap: "wrap",
       position: "relative",
     },
+
     editable: {
       background: "transparent",
       outline: 0,
@@ -24,10 +25,10 @@ const useStyles = makeStyles(() =>
       textAlign: "center",
     },
     addCard: {
-      fontSize:"25px",
-      display:"flex",
-      alignItems:"center",
-      justifyContent:"center",
+      fontSize: "25px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       borderRadius: "1rem",
       background: "#fff",
       cursor: "pointer",
@@ -45,6 +46,7 @@ const useStyles = makeStyles(() =>
         height: "auto",
       },
     },
+
     overlay: {
       position: "absolute",
       display: "flex",
@@ -68,6 +70,11 @@ const useStyles = makeStyles(() =>
         color: "#ccc",
         width: "100%",
         textAlign: "center",
+      },
+    },
+    "@media (max-width: 600px)": {
+      card: {
+        width: "100%",
       },
     },
   })
@@ -198,7 +205,7 @@ export const Card3 = (props) => {
         </div>
       ))}
       <div className={classes.addCard} onClick={addCard}>
-      <i class="fa fa-plus-circle mx-2" aria-hidden="true"></i> Add Card
+        <i class="fa fa-plus-circle mx-2" aria-hidden="true"></i> Add Card
       </div>
     </div>
   );

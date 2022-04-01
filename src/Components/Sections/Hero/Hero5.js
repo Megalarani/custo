@@ -62,7 +62,7 @@ const useStyles = makeStyles(() =>
       left: 0,
       right: 0,
       top: "30%",
-      fontSize:"40px",
+      fontSize: "40px",
       textAlign: "center",
     },
     introText: {
@@ -80,6 +80,17 @@ const useStyles = makeStyles(() =>
       left: 0,
       right: 0,
       top: "42%",
+    },
+    "@media (max-width: 600px)": {
+      introText: {
+        fontSize: "12px !important",
+      },
+      introHeader: {
+        fontSize: "20px !important",
+      },
+      bannerImg: {
+        height: "250px",
+      },
     },
   })
 );

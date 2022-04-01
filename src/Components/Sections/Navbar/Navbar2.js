@@ -2,6 +2,8 @@ import React from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
 import HeaderLogo from "../../../Assests/images/headerlogo.png";
+import { ReactComponent as DeleteIcon } from "../../../Assests/delete.svg";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -61,8 +63,24 @@ export const Navbar2 = () => {
       id: "contact",
     },
   ];
+
   return (
     <>
+      {ctx.isEditable ? (
+        <div className="row py-3 justify-content-end">
+          <div className="saveButton" onClick={onSaveHandler}>
+            Save
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      {loading && (
+        <>
+          <Loader />
+        </>
+      )}
+
       <div className={classes.rootNav}>
         <div className={classes.logoContainer}>
           <img src={HeaderLogo} alt="headerLogo" />
