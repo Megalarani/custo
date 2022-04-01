@@ -84,30 +84,27 @@ export const Footer2 = (props) => {
           ...details,
           header: e.target.value,
         };
-      } else if(e.target.id === "line1") {
+      } else if (e.target.id === "line1") {
         updatedData = {
           ...details,
           line1: e.target.value,
         };
-      }
-      else if(e.target.id === "line2") {
+      } else if (e.target.id === "line2") {
         updatedData = {
           ...details,
           line2: e.target.value,
         };
-      }
-      else if(e.target.id === "line3") {
+      } else if (e.target.id === "line3") {
         updatedData = {
           ...details,
           line3: e.target.value,
         };
-      }
-      else if(e.target.id === "line4") {
+      } else if (e.target.id === "line4") {
         updatedData = {
           ...details,
           line4: e.target.value,
         };
-      };
+      }
       prevState[index] = updatedData;
       return [...prevState];
     });
@@ -115,12 +112,11 @@ export const Footer2 = (props) => {
   const classes = useStyles();
   let editable = (
     <>
-      <div>
+      <div className={classes.row}>
         {localData?.map((details, index) => (
-         <div key={index} className={classes.col}>
+          <div key={index} className={classes.col}>
             <input
-              onChange={(e) => onChan
-                geHandler(e, details, index)}
+              onChange={(e) => onChangeHandler(e, details, index)}
               className={classes.introHeader}
               id="header"
               placeholder="header"
@@ -179,7 +175,7 @@ export const Footer2 = (props) => {
     ctx.updateData(localData, props.id);
     console.log(data);
   };
-  
+
   return (
     <>
       {ctx.isEditable ? (
@@ -197,32 +193,29 @@ export const Footer2 = (props) => {
         </>
       )}
       <div className={classes.root}>
-        <div className={classes.row}>
-        
-            {/* <div>
+        {/* <div>
               <h2 className={classes.introHeader}>Copyrights@layatex.com</h2>
             </div> */}
 
-            {ctx.isEditable ? (
-              editable
-            ) : (
-              <div>
-                {localData?.map((details, index) => (
-                   <div key={index} className={classes.col}>
-                    <h2 className={classes.introHeader}>{details.header}</h2>
-                    <div className={classes.divider}></div>
-                    <ul className={classes.list}>
-                      <li>{details.line1}</li>
-                      <li>{details.line2}</li>
-                      <li>{details.line3}</li>
-                      <li>{details.line4}</li>
-                    </ul>
-                  </div>
-                ))}
+        {ctx.isEditable ? (
+          editable
+        ) : (
+          <div className={classes.row}>
+            {localData?.map((details, index) => (
+              <div key={index} className={classes.col}>
+                <h2 className={classes.introHeader}>{details.header}</h2>
+                <div className={classes.divider}></div>
+                <ul className={classes.list}>
+                  <li>{details.line1}</li>
+                  <li>{details.line2}</li>
+                  <li>{details.line3}</li>
+                  <li>{details.line4}</li>
+                </ul>
               </div>
-            )}
+            ))}
           </div>
-        </div>
+        )}
+      </div>
     </>
   );
 };

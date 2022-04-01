@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
     menuList: {
       display: "flex",
       alignItems: "center",
-      justifyContent: "start",
+      justifyContent: "end",
       width: "65%",
     },
     menuItems: {
