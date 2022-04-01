@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react";
+import { HashLink } from "react-router-hash-link";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
 import Loader from "../../../loader/Loader";
 import HeaderLogo from "../../../Assests/images/headerlogo.png";
 import { ReactComponent as DeleteIcon } from "../../../Assests/delete.svg";
+import Select from "react-select";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import AuthContext from "../../../Context/Context";
+
 const useStyles = makeStyles(() =>
   createStyles({
     rootNav: {
@@ -69,17 +72,18 @@ const useStyles = makeStyles(() =>
     pathSelector: {
       padding: "1rem 0",
     },
-    row:{
+    row: {
       display: "flex",
       alignItems: "center",
       justifyContent: "start",
       padding: "1rem",
       "& p": {
         fontSize: "1.2rem",
+        width: "15%",
         textTransform: "uppercase",
         color: "#000",
-      }
-    }
+      },
+    },
   })
 );
 
@@ -91,24 +95,24 @@ export const Navbar2 = (props) => {
     logo: HeaderLogo,
     menuItem: [
       {
-        value: "Home",
-        path: "home",
+        label: "home",
+        path: "",
       },
       {
-        value: "Womens",
-        path: "womens",
+        label: "womens",
+        path: "",
       },
       {
-        value: "Kids",
-        path: "kids",
+        label: "kids",
+        path: "",
       },
       {
-        value: "About",
-        path: "About",
+        label: "About",
+        path: "",
       },
       {
-        value: "Contact",
-        path: "contact",
+        label: "contact",
+        path: "",
       },
     ],
   };
@@ -118,6 +122,19 @@ export const Navbar2 = (props) => {
       : ctx.websiteData[props.id]
   );
   const [menuItem, setMenuItem] = useState(localData.menuItem);
+  const rename = (name, i) => {
+    let firstName = name.substring(0, name.length - 2);
+    let lastName = name.charAt(name.length - 1);
+    let newName = firstName + " " + lastName;
+    return newName;
+  };
+  var PathArray = ctx.layoutFlow.map(function (mopt) {
+    var info = {
+      value: mopt.uniqId,
+      label: rename(mopt.uniqId),
+    };
+    return info;
+  });
   const onImageChange = (e, i) => {
     // setError(null);
 
@@ -150,20 +167,14 @@ export const Navbar2 = (props) => {
     // setError(null);
   };
   const onChangeHandler = (e, details, index) => {
+    const tempEventInputs = JSON.parse(JSON.stringify(details));
+    if (e.target) {
+      tempEventInputs[e.target.name] = e.target.value;
+    } else {
+      tempEventInputs["path"] = e.value;
+    }
     setMenuItem((prevState) => {
-      let updatedData = null;
-      if (e.target.id === "value") {
-        updatedData = {
-          ...details,
-          value: e.target.value,
-        };
-      } else {
-        updatedData = {
-          ...details,
-          path: e.target.value,
-        };
-      }
-      prevState[index] = updatedData;
+      prevState[index] = tempEventInputs;
       return [...prevState];
     });
   };
@@ -175,32 +186,29 @@ export const Navbar2 = (props) => {
     ctx.updateData(data, props.id);
     console.log(data);
   };
+  console.log(menuItem);
   return (
     <>
       {ctx.isEditable ? (
         <div className="row py-3 justify-content-end">
-           <button
-              className="btn px-5"
-              onClick={onSaveHandler}
-              style={{
-                background: "#fff",
-                fontSize:"20px",
-                color: "#dc3545",
-                borderRadius: "20px",
-                boxShadow: "0 3px 6px #00000036",
-              }}
-            >
-              Save<i className="fa fa-save mx-2"></i>{" "}
-            </button>
+          <button
+            className="btn px-5"
+            onClick={onSaveHandler}
+            style={{
+              background: "#fff",
+              fontSize: "20px",
+              color: "#dc3545",
+              borderRadius: "20px",
+              boxShadow: "0 3px 6px #00000036",
+            }}
+          >
+            Save<i className="fa fa-save mx-2"></i>{" "}
+          </button>
         </div>
       ) : (
         <></>
       )}
-      {loading && (
-        <>
-          <Loader />
-        </>
-      )}
+      {loading && <Loader />}
 
       {ctx.isEditable ? (
         <>
@@ -220,12 +228,13 @@ export const Navbar2 = (props) => {
             </div>
             <div className={classes.menuList}>
               {menuItem.map((item, index) => (
-                <div className={classes.menuItems} key={item.id}>
+                <div className={classes.menuItems} key={index}>
                   <input
                     className={classes.inputHeader}
-                    id="value"
+                    id="label"
+                    name="label"
                     onChange={(e) => onChangeHandler(e, item, index)}
-                    value={item.value}
+                    value={item.label}
                   />
                 </div>
               ))}
@@ -234,8 +243,17 @@ export const Navbar2 = (props) => {
           <div className={classes.pathSelector}>
             {menuItem.map((item, index) => (
               <div className={classes.row} key={index}>
-                <Typography>{item.value}</Typography>
-                {/* <Select options={menuItem}></Select> */}
+                <Typography>{item.label}</Typography>
+                <Select
+                  id="path"
+                  name="path"
+                  options={PathArray}
+                  value={PathArray.filter(function (option) {
+                    return option.value === item.path;
+                  })}
+                  onChange={(e) => onChangeHandler(e, item, index)}
+                  styles={{ width: "20%" }}
+                />
               </div>
             ))}
           </div>
@@ -246,10 +264,12 @@ export const Navbar2 = (props) => {
             <img src={localData.logo} alt="headerLogo" />
           </div>
           <div className={classes.menuList}>
-            {menuItem.map((item) => (
-              <Typography className={classes.menuItems} key={item.path}>
-                {item.value}
-              </Typography>
+            {menuItem.map((item,index) => (
+              <HashLink to={`#${item.path}`} key={index}>
+                <Typography className={classes.menuItems}>
+                  {item.label}
+                </Typography>
+              </HashLink>
             ))}
           </div>
         </div>

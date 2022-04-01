@@ -67,6 +67,7 @@ export const AuthContextProvider = (props) => {
         let tempArr = Layout.filter((x) => val.layout[i].id === x.id);
         newArr = newArr.concat(tempArr);
       }
+      console.log(newArr)
       let finalArray = newArr?.map((item, i) =>
         Object.assign({}, item, val.layout[i])
       );

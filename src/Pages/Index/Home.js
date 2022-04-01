@@ -41,7 +41,7 @@ const Home = () => {
     <div className={classes.scrollbar}>
       {ctx.layoutFlow &&
         ctx.layoutFlow.map((item) => (
-          <div key={item.id} id={item.id}>
+          <div key={item.uniqId} id={item.uniqId}>
             <CreateComponent component={item.c} id={item.uniqId} />
           </div>
         ))}
