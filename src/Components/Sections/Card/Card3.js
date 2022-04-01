@@ -19,6 +19,7 @@ const useStyles = makeStyles(() =>
     },
 
     editable: {
+      width: "100%",
       background: "transparent",
       outline: 0,
       border: "none",
@@ -42,8 +43,9 @@ const useStyles = makeStyles(() =>
       width: "33.33%",
       padding: "1rem",
       "& img": {
-        maxWidth: "100%",
+        width: "100%",
         height: "auto",
+        objectFit: "cover",
       },
     },
 
@@ -51,7 +53,7 @@ const useStyles = makeStyles(() =>
       position: "absolute",
       display: "flex",
       flexWrap: "wrap",
-      width: "fit-content",
+      width: "85%",
       height: "fit-content",
       margin: "auto",
       left: 0,
@@ -72,9 +74,31 @@ const useStyles = makeStyles(() =>
         textAlign: "center",
       },
     },
+<<<<<<< HEAD
     "@media (max-width: 600px)": {
       card: {
         width: "100%",
+=======
+    inputFile: {
+      width: 0,
+      height: 0,
+      opacity: 0,
+      zIndex: "0",
+    },
+    inputLabel: {
+      position: "absolute",
+      background: "#fff",
+      width: "2.5rem",
+      height: "2.5rem",
+      padding: "0.3rem",
+      top: "0",
+      right: "0",
+      zIndex: 20,
+      textAlign: "center",
+      cursor: "pointer",
+      "& i": {
+        fontSize: "1.75rem",
+>>>>>>> 3e318d8327b25527cd0b00e8b3b30b69208b4d36
       },
     },
   })
@@ -129,8 +153,39 @@ export const Card3 = (props) => {
       return [...prevState];
     });
   };
-  const onImageChange = () => {
-    // dbcall
+  const onImageChange = (e, i) => {
+    // setError(null);
+
+    let selected = e.target.files[0];
+
+    if (!selected) {
+      // setError("Please select file");
+      return;
+    }
+
+    if (!selected.type.includes("image")) {
+      // setError("Please select image file");
+      return;
+    }
+    const storage = getStorage();
+    const uploadPath = `images/${localData[i].title + localData[i].id}`; // upload path
+    const storageRef = ref(storage, uploadPath); // create refernce to store data
+
+    uploadBytes(storageRef, selected).then((snapshot) => {
+      // console.log(snapshot);
+      getDownloadURL(storageRef).then((url) => {
+        setLocalData((prevState) => {
+          let updatedData = null;
+          updatedData = {
+            ...prevState[i],
+            img: url,
+          };
+          prevState[i] = updatedData;
+          return [...prevState];
+        });
+      });
+    });
+    // setError(null);
   };
   const addCard = () => {
     let updatedData = {
@@ -172,19 +227,17 @@ export const Card3 = (props) => {
               }}
             />
           </div>
-          {/* <input
+          <input
             type="file"
-            onChange={onImageChange}
-            // className={styles.fileType}
-            id={index}
+            onChange={(e) => onImageChange(e, index)}
+            className={classes.inputFile}
+            id={details.id}
             name={details.title}
           />
-          <label
-            // className={styles.fileLabel}
-            htmlFor={details.title}
-          >
-            <i className="fa fa-upload fa-3x"></i>
-          </label> */}
+          <label className={classes.inputLabel} htmlFor={details.id}>
+            <i className="fa fa-upload"></i>
+          </label>
+
           <img src={details.img} alt={details.title} />
           <div className={classes.overlay}>
             <input

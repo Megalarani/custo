@@ -22,18 +22,20 @@ const useStyles = makeStyles(() =>
       position: "absolute",
       background: "#fff",
       padding: "1rem 2rem",
-      top: "0",
       cursor: "pointer",
+      top: "1rem",
       right: "1rem",
       boxShadow: "2px 2px 3px 0 #ccc",
     },
     container: {
       width: "100%",
       position: "relative",
+      padding: "1rem",
     },
     carouselContainer: {
       maxHeight: "600px",
       overflow: "hidden",
+      padding: "0",
     },
     bannerImg: {
       position: "relative",
@@ -81,6 +83,7 @@ const useStyles = makeStyles(() =>
       right: 0,
       top: "42%",
     },
+<<<<<<< HEAD
     "@media (max-width: 600px)": {
       introText: {
         fontSize: "12px !important",
@@ -90,6 +93,27 @@ const useStyles = makeStyles(() =>
       },
       bannerImg: {
         height: "250px",
+=======
+    inputFile: {
+      width: 0,
+      height: 0,
+      opacity: 0,
+      zIndex: "0",
+    },
+    inputLabel: {
+      position: "absolute",
+      background: "#fff",
+      width: "2.5rem",
+      height: "2.5rem",
+      padding: "0.3rem",
+      bottom: "0",
+      right: "0",
+      zIndex: 20,
+      textAlign: "center",
+      cursor: "pointer",
+      "& i": {
+        fontSize: "1.75rem",
+>>>>>>> 3e318d8327b25527cd0b00e8b3b30b69208b4d36
       },
     },
   })
@@ -146,8 +170,39 @@ export const Hero5 = (props) => {
     items: 1,
     touchDrag: false,
   };
-  const onImageChange = () => {
-    // dbcall
+  const onImageChange = (e, i) => {
+    // setError(null);
+
+    let selected = e.target.files[0];
+
+    if (!selected) {
+      // setError("Please select file");
+      return;
+    }
+
+    if (!selected.type.includes("image")) {
+      // setError("Please select image file");
+      return;
+    }
+    const storage = getStorage();
+    const uploadPath = `images/${localData[i].header + localData[i].id}`; // upload path
+    const storageRef = ref(storage, uploadPath); // create refernce to store data
+
+    uploadBytes(storageRef, selected).then((snapshot) => {
+      // console.log(snapshot);
+      getDownloadURL(storageRef).then((url) => {
+        setLocalData((prevState) => {
+          let updatedData = null;
+          updatedData = {
+            ...prevState[i],
+            img: url,
+          };
+          prevState[i] = updatedData;
+          return [...prevState];
+        });
+      });
+    });
+    // setError(null);
   };
   const addCard = () => {
     let updatedData = {
@@ -175,7 +230,7 @@ export const Hero5 = (props) => {
           className={classes.bannerImg}
           style={{
             backgroundImage: `url(${details.img})`,
-            margin: "1rem",
+            marginBottom: "1rem",
             width: "auto",
           }}
         >
@@ -198,19 +253,16 @@ export const Hero5 = (props) => {
               }}
             />
           </div>
-          {/* <input
+          <input
             type="file"
-            onChange={onImageChange}
-            // className={styles.fileType}
-            id={index}
-            name={details.title}
+            onChange={(e) => onImageChange(e, index)}
+            className={classes.inputFile}
+            id={details.id}
+            name={details.header}
           />
-          <label
-            // className={styles.fileLabel}
-            htmlFor={details.title}
-          >
-            <i className="fa fa-upload fa-3x"></i>
-          </label> */}
+          <label className={classes.inputLabel} htmlFor={details.id}>
+            <i className="fa fa-upload"></i>
+          </label>
 
           <input
             onChange={(e) => onChangeHandler(e, details, index)}
@@ -235,50 +287,9 @@ export const Hero5 = (props) => {
       </div>
     </>
   );
-  const onSaveHandler = () => {
-    const storage = getStorage();
-    for (var i = 0; i < localData.length; i++) {
-      const uploadPath = `images/${localData[i].header}`; // upload path
-      const storageRef = ref(storage, uploadPath); // create refernce to store data
 
-      uploadBytes(storageRef, localData[i].img).then((snapshot) => {
-        // console.log(snapshot);
-        getDownloadURL(storageRef).then((url) => {
-          console.log(url, "url");
-          setLocalData((prevState) => {
-            let updatedData = null;
-            updatedData = {
-              ...prevState[i],
-              img: url,
-            };
-            prevState[i] = updatedData;
-            return [...prevState];
-          });
-        });
-      });
-    }
-    // ctx.updateData(localData, props.id);
-    // if (card.length === 0) {
-    //   console.log("Add Card");
-    // } else {
-    //     setloading(true);
-    // ctx.updateData(localData, props.id);
-    // setTimeout(() => {
-    //   setloading(false);
-    // }, 2000);
-    //   for (var i = 0; i < card.length; i++) {
-    //     if (card[i].img === "") {
-    //       alert("Image cannot be empty");
-    //       break;
-    //     } else if (card[i].title === "") {
-    //       alert("Title cannot be empty");
-    //       break;
-    //     } else if (card[i].rate === "") {
-    //       alert("Rate cannot be empty");
-    //       break;
-    //     }
-    //   }
-    // }
+  const onSaveHandler = () => {
+    ctx.updateData(localData, props.id);
   };
 
   return (

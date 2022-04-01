@@ -118,7 +118,7 @@ export const Footer2 = (props) => {
   const classes = useStyles();
   let editable = (
     <>
-      <div>
+      <div className={classes.row}>
         {localData?.map((details, index) => (
           <div key={index} className={classes.col}>
             <input
