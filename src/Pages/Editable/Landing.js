@@ -14,11 +14,7 @@ const Landing = (props) => {
   const checkdata = {
     h2: "tamil",
   };
-  function upload() {
-    updateDoc(doc(db, "websitedata", "yprpJe1AkDdPMOqwtgRppoFgX8D3"), {
-      websitedata: checkdata,
-    });
-  }
+
   return (
     <div className="p-2">
       <div className="container-fluid p-0">
@@ -55,7 +51,6 @@ const Landing = (props) => {
         </div>
         <div className="col-md-7 p-1">
           <img className="img-fluid" src="/Images/landing.jpg" alt="landing" />
-          <button onClick={upload}> upload</button>
         </div>
       </div>
     </div>

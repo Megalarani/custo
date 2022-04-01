@@ -78,9 +78,19 @@ export const Navbar2 = (props) => {
     <>
       {ctx.isEditable ? (
         <div className="row py-3 justify-content-end">
-          <div className="saveButton" onClick={onSaveHandler}>
-            Save
-          </div>
+           <button
+              className="btn px-5"
+              onClick={onSaveHandler}
+              style={{
+                background: "#fff",
+                fontSize:"20px",
+                color: "#dc3545",
+                borderRadius: "20px",
+                boxShadow: "0 3px 6px #00000036",
+              }}
+            >
+              Save<i className="fa fa-save mx-2"></i>{" "}
+            </button>
         </div>
       ) : (
         <></>
