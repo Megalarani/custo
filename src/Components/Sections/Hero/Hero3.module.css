@@ -33,9 +33,9 @@
   outline: 0;
   line-height: 1.2em;
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 .boxen_visitus_p,
 .inputPara {
   font-family: "Muli", sans-serif;

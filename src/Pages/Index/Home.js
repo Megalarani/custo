@@ -1,7 +1,31 @@
 import React from "react";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../Context/Context";
+import { createStyles, makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    scrollbar: {
+      maxHeight: "100vh",
+      overflow: "auto",
+      "&::-webkit-scrollbar": {
+        width: "5px",
+      },
+      "&::-webkit-scrollbar-thumb": {
+        width: "5px",
+        background: "#000",
+      },
+      "&::-webkit-scrollbar-track": {
+        width: "5px",
+        background: "#efefef",
+        boxShadow: "inset 0px 3px 6px #00000036"
+      },
+    },
+  })
+);
+
 const Home = () => {
+  const classes = useStyles();
   const ctx = useContext(AuthContext);
   const [mountedData, setMountedData] = useState([]);
   useEffect(() => {
@@ -9,19 +33,19 @@ const Home = () => {
     ctx.getWebsiteData();
   }, []);
 
-  const CreateComponent = ({ component,id }) => {
+  const CreateComponent = ({ component, id }) => {
     const Component = component;
     return <Component id={id} />;
   };
   return (
-    <>
+    <div className={classes.scrollbar}>
       {ctx.layoutFlow &&
         ctx.layoutFlow.map((item) => (
-          <div key={item.id}>
-            <CreateComponent component={item.c} id={item.uniqId}/>
+          <div key={item.id} id={item.id}>
+            <CreateComponent component={item.c} id={item.uniqId} />
           </div>
         ))}
-    </>
+    </div>
   );
 };
 

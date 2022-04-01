@@ -150,7 +150,7 @@ export const Hero5 = (props) => {
     loop: true,
     margin: 0,
     dots: true,
-    nav: true,
+    nav: false,
     autoplay: true,
     autoplayTimeout: 5000,
     autoplaySpeed: 3000,
