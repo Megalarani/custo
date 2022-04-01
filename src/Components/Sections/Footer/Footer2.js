@@ -178,7 +178,11 @@ export const Footer2 = (props) => {
     </>
   );
   const onSaveHandler = () => {
+    setloading(true);
     ctx.updateData(localData, props.id);
+    setTimeout(() => {
+      setloading(false);
+    }, 2000);
  
   };
 

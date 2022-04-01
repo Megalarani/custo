@@ -122,18 +122,18 @@ export const Slider2 = (props) => {
     autoplayHoverPause: true,
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
       450: {
-        items: 2
+        items: 2,
       },
       750: {
-        items: 3
+        items: 3,
       },
       1200: {
-        items: 4
-      }
-    }
+        items: 4,
+      },
+    },
   };
 
   const cardData = {
@@ -324,12 +324,16 @@ export const Slider2 = (props) => {
   );
 
   const onSaveHandler = () => {
+    setloading(true);
     let data = {
       header: localData.header,
       data: card,
     };
+
     ctx.updateData(data, props.id);
-    console.log(data);
+    setTimeout(() => {
+      setloading(false);
+    }, 2000);
   };
   return (
     <>
