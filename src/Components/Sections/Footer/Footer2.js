@@ -16,6 +16,7 @@ const useStyles = makeStyles(() =>
       position: "relative",
       display: "flex",
       padding: "10px",
+      flexWrap: "wrap",
     },
     col: {
       width: "33.33%",
@@ -37,6 +38,11 @@ const useStyles = makeStyles(() =>
       fontSize: "25px",
       color: "white",
       textAlign: "center",
+    },
+    '@media (max-width: 600px)': {
+      col: {
+        width: "100%",
+      },
     },
   })
 );
@@ -173,7 +179,7 @@ export const Footer2 = (props) => {
   );
   const onSaveHandler = () => {
     ctx.updateData(localData, props.id);
-    console.log(data);
+ 
   };
 
   return (

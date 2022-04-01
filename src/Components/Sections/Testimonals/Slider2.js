@@ -97,6 +97,11 @@ const useStyles = makeStyles(() =>
       "& i": {
         fontSize: "1.75rem",
       },
+      // "@media (max-width: 600px)": {
+      //   card: {
+      //     width: "100%",
+      //   },
+      // },
     },
   })
 );

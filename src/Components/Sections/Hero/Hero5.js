@@ -104,6 +104,17 @@ const useStyles = makeStyles(() =>
         fontSize: "1.75rem",
       },
     },
+    "@media (max-width: 600px)": {
+      introText: {
+        fontSize: "12px !important",
+      },
+      introHeader: {
+        fontSize: "20px !important",
+      },
+      bannerImg: {
+        height: "250px",
+      },
+    },
   })
 );
 
