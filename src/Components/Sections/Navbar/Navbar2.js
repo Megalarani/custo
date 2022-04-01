@@ -18,9 +18,10 @@ const useStyles = makeStyles(() =>
     },
     logoContainer: {
       width: "10%",
+      position: "relative",
       "& img": {
         width: "100%",
-        height: "auto",
+        height: "3rem",
         objectFit: "contain",
       },
     },
@@ -37,6 +38,48 @@ const useStyles = makeStyles(() =>
       padding: "0.5rem 0.75rem",
       marginRight: "0.5rem",
     },
+    inputHeader: {
+      width: "100%",
+      background: "none",
+      border: 0,
+      outline: 0,
+      fontItems: "0.9rem",
+    },
+    inputFile: {
+      width: 0,
+      height: 0,
+      opacity: 0,
+      zIndex: "0",
+    },
+    inputLabel: {
+      position: "absolute",
+      background: "#fff",
+      width: "2.5rem",
+      height: "2.5rem",
+      padding: "0.3rem",
+      bottom: "0",
+      right: "0",
+      zIndex: 20,
+      textAlign: "center",
+      cursor: "pointer",
+      "& i": {
+        fontSize: "1.75rem",
+      },
+    },
+    pathSelector: {
+      padding: "1rem 0",
+    },
+    row:{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "start",
+      padding: "1rem",
+      "& p": {
+        fontSize: "1.2rem",
+        textTransform: "uppercase",
+        color: "#000",
+      }
+    }
   })
 );
 
@@ -44,35 +87,93 @@ export const Navbar2 = (props) => {
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
   const classes = useStyles();
-  const menuItem = [
-    {
-      value: "Home",
-      id: "home",
-    },
-    {
-      value: "Womens",
-      id: "womens",
-    },
-    {
-      value: "Kids",
-      id: "kids",
-    },
-    {
-      value: "About",
-      id: "About",
-    },
-    {
-      value: "Contact",
-      id: "contact",
-    },
-  ];
+  const headerData = {
+    logo: HeaderLogo,
+    menuItem: [
+      {
+        value: "Home",
+        path: "home",
+      },
+      {
+        value: "Womens",
+        path: "womens",
+      },
+      {
+        value: "Kids",
+        path: "kids",
+      },
+      {
+        value: "About",
+        path: "About",
+      },
+      {
+        value: "Contact",
+        path: "contact",
+      },
+    ],
+  };
   const [localData, setLocalData] = useState(
     ctx.websiteData[props.id] === undefined
-      ? menuItem
+      ? headerData
       : ctx.websiteData[props.id]
   );
+  const [menuItem, setMenuItem] = useState(localData.menuItem);
+  const onImageChange = (e, i) => {
+    // setError(null);
+
+    let selected = e.target.files[0];
+
+    if (!selected) {
+      // setError("Please select file");
+      return;
+    }
+
+    if (!selected.type.includes("image")) {
+      // setError("Please select image file");
+      return;
+    }
+    const storage = getStorage();
+    const uploadPath = `images/headerLogo`; // upload path
+    const storageRef = ref(storage, uploadPath); // create refernce to store data
+
+    uploadBytes(storageRef, selected).then((snapshot) => {
+      // console.log(snapshot);
+      getDownloadURL(storageRef).then((url) => {
+        setLocalData((prevState) => {
+          return {
+            ...prevState,
+            logo: url,
+          };
+        });
+      });
+    });
+    // setError(null);
+  };
+  const onChangeHandler = (e, details, index) => {
+    setMenuItem((prevState) => {
+      let updatedData = null;
+      if (e.target.id === "value") {
+        updatedData = {
+          ...details,
+          value: e.target.value,
+        };
+      } else {
+        updatedData = {
+          ...details,
+          path: e.target.value,
+        };
+      }
+      prevState[index] = updatedData;
+      return [...prevState];
+    });
+  };
   const onSaveHandler = () => {
-    ctx.updateData(localData, props.id);
+    let data = {
+      logo: localData.logo,
+      menuItem: menuItem,
+    };
+    ctx.updateData(data, props.id);
+    console.log(data);
   };
   return (
     <>
@@ -91,19 +192,58 @@ export const Navbar2 = (props) => {
         </>
       )}
 
-      <div className={classes.rootNav}>
-        <div className={classes.logoContainer}>
-          
-          <img src={HeaderLogo} alt="headerLogo" />
+      {ctx.isEditable ? (
+        <>
+          <div className={classes.rootNav}>
+            <div className={classes.logoContainer}>
+              <input
+                type="file"
+                onChange={(e) => onImageChange(e)}
+                className={classes.inputFile}
+                id="logo"
+                name="logo"
+              />
+              <label className={classes.inputLabel} htmlFor="logo">
+                <i className="fa fa-upload"></i>
+              </label>
+              <img src={localData.logo} alt="headerLogo" />
+            </div>
+            <div className={classes.menuList}>
+              {menuItem.map((item, index) => (
+                <div className={classes.menuItems} key={item.id}>
+                  <input
+                    className={classes.inputHeader}
+                    id="value"
+                    onChange={(e) => onChangeHandler(e, item, index)}
+                    value={item.value}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={classes.pathSelector}>
+            {menuItem.map((item, index) => (
+              <div className={classes.row} key={index}>
+                <Typography>{item.value}</Typography>
+                {/* <Select options={menuItem}></Select> */}
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className={classes.rootNav}>
+          <div className={classes.logoContainer}>
+            <img src={localData.logo} alt="headerLogo" />
+          </div>
+          <div className={classes.menuList}>
+            {menuItem.map((item) => (
+              <Typography className={classes.menuItems} key={item.path}>
+                {item.value}
+              </Typography>
+            ))}
+          </div>
         </div>
-        <div className={classes.menuList}>
-          {menuItem.map((item) => (
-            <Typography className={classes.menuItems} key={item.id}>
-              {item.value}
-            </Typography>
-          ))}
-        </div>
-      </div>
+      )}
     </>
   );
 };
