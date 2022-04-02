@@ -179,12 +179,15 @@ export const Navbar2 = (props) => {
     });
   };
   const onSaveHandler = () => {
+    setloading(true);
     let data = {
       logo: localData.logo,
       menuItem: menuItem,
     };
     ctx.updateData(data, props.id);
-    console.log(data);
+    setTimeout(() => {
+      setloading(false);
+    }, 2000);
   };
   console.log(menuItem);
   return (

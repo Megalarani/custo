@@ -14,6 +14,7 @@ import { Navbar2 } from "../Components/Sections/Navbar/Navbar2";
 import Slider1 from "../Components/Sections/Testimonals/Slider1";
 import { Slider2 } from "../Components/Sections/Testimonals/Slider2";
 import { Footer2 } from "../Components/Sections/Footer/Footer2";
+import Form2 from "../Components/Sections/Contact/Form2";
 
 export const LocalSections = [
   {
@@ -81,7 +82,7 @@ export const commonSections = [
   },
   {
     group: "Contact",
-    variants: [],
+    variants: [{ c: Form2, id: "Form2" }]
   },
   {
     group: "Footer",

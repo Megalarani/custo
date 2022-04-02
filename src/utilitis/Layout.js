@@ -14,7 +14,7 @@ import { Navbar2 } from "../Components/Sections/Navbar/Navbar2";
 import Slider1 from "../Components/Sections/Testimonals/Slider1";
 import { Slider2 } from "../Components/Sections/Testimonals/Slider2";
 import { Footer2 } from "../Components/Sections/Footer/Footer2";
-
+import Form2 from "../Components/Sections/Contact/Form2";
 export const Layout = [
   { c: Navbar1, id: "Navbar1" },
   { c: Navbar2, id: "Navbar2" },
@@ -31,5 +31,6 @@ export const Layout = [
   { c: Slider2, id: "Slider2" },
   { c: Form1, id: "Form1" },
   { c: Footer1, id: "Footer1" },
+  { c: Form2, id: "Form2" },
   { c: Footer2, id: "Footer2" },
 ];
