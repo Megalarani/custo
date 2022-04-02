@@ -59,7 +59,7 @@ const useStyles = makeStyles(() =>
 export const Form2 = (props) => {
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
-  const data = 
+  const data =[ 
     {
       header:"layatex",
       para:"Fixyman is proud to be the name that nearly 1 million homeowners have trusted since 1996 for home improvement and repair,providing virtually any home rep.",
@@ -70,7 +70,7 @@ export const Form2 = (props) => {
       email: "loerum@gmail.com",
       img1:"Cat3",
       img2:"Cat3"
-    }
+    }]
    
   
   const [localData, setLocalData] = useState(
