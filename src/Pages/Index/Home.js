@@ -8,6 +8,7 @@ const useStyles = makeStyles(() =>
     scrollbar: {
       maxHeight: "100vh",
       overflow: "auto",
+      scrollBehavior: "smooth",
       "&::-webkit-scrollbar": {
         width: "5px",
       },
@@ -18,7 +19,7 @@ const useStyles = makeStyles(() =>
       "&::-webkit-scrollbar-track": {
         width: "5px",
         background: "#efefef",
-        boxShadow: "inset 0px 3px 6px #00000036"
+        boxShadow: "inset 0px 3px 6px #00000036",
       },
     },
   })
@@ -27,10 +28,9 @@ const useStyles = makeStyles(() =>
 const Home = () => {
   const classes = useStyles();
   const ctx = useContext(AuthContext);
-  const [mountedData, setMountedData] = useState([]);
   useEffect(() => {
-    ctx.getLayoutData();
-    ctx.getWebsiteData();
+    ctx.userLayoutData();
+    ctx.userWebsiteData();
   }, []);
 
   const CreateComponent = ({ component, id }) => {

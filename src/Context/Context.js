@@ -2,7 +2,13 @@ import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../services/firebase";
 import { Layout } from "../utilitis/Layout";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../services/firebase";
 import { updatePassword } from "firebase/auth";
 const AuthContext = React.createContext({
@@ -12,6 +18,8 @@ const AuthContext = React.createContext({
   isLoggedIn: false,
   isEditable: Boolean,
   websiteData: {},
+  userWebsiteData: () => {},
+  userLayoutData: () => {},
   getWebsiteData: () => {},
   getUserData: () => {},
   getLayoutData: () => {},
@@ -35,7 +43,33 @@ export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(userId ? true : false);
 
   useEffect(() => {}, []);
-  // function to get user website data
+  // get website data for end user
+  async function userWebsiteData() {
+    const querySnapshot = await getDocs(collection(db, "websitedata"));
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      setWebsiteData(doc.data().websiteData);
+    });
+  }
+  // get website layout information for end user
+  async function userLayoutData() {
+    const querySnapshot = await getDocs(collection(db, "layout"));
+    querySnapshot.forEach((doc) => {
+      let val = doc.data();
+      setLayoutData(val);
+      var newArr = [];
+      for (var i = 0; i < val.layout.length; i++) {
+        let tempArr = Layout.filter((x) => val.layout[i].id === x.id);
+        newArr = newArr.concat(tempArr);
+      }
+      console.log(newArr);
+      let finalArray = newArr?.map((item, i) =>
+        Object.assign({}, item, val.layout[i])
+      );
+      setLayoutFlow(finalArray);
+    });
+  }
+  // function to get website data by admin
   async function getWebsiteData() {
     const docRef = doc(db, "websitedata", userId);
     const docSnap = await getDoc(docRef);
@@ -45,7 +79,7 @@ export const AuthContextProvider = (props) => {
       console.log("No such document!");
     }
   }
-  // function to get user data
+  // function to get user data of admin
   async function getUserData() {
     const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
@@ -55,7 +89,7 @@ export const AuthContextProvider = (props) => {
       console.log("No such document!");
     }
   }
-  // function to get user website layout information
+  // function to get website layout information for admin
   async function getLayoutData() {
     const docRef = doc(db, "layout", userId);
     const docSnap = await getDoc(docRef);
@@ -67,7 +101,7 @@ export const AuthContextProvider = (props) => {
         let tempArr = Layout.filter((x) => val.layout[i].id === x.id);
         newArr = newArr.concat(tempArr);
       }
-      console.log(newArr)
+      console.log(newArr);
       let finalArray = newArr?.map((item, i) =>
         Object.assign({}, item, val.layout[i])
       );
@@ -76,10 +110,10 @@ export const AuthContextProvider = (props) => {
       console.log("No such document!");
     }
   }
-  console.log("layout",layoutFlow)
+  console.log("layout", layoutFlow);
 
   const updateData = (data, Identifier) => {
-    console.log(Identifier,data)
+    console.log(Identifier, data);
     // if (Array.isArray(data) === true) {
     //   console.log("Array", Identifier, data);
     websiteData[Identifier] = data;
@@ -89,7 +123,7 @@ export const AuthContextProvider = (props) => {
     });
   };
   console.log(websiteData, "success");
-  
+
   const updateUser = (data) => {
     setUser(data);
     updateDoc(doc(db, "users", userId), data);
@@ -166,6 +200,8 @@ export const AuthContextProvider = (props) => {
         isLoggedIn: isLoggedIn,
         isEditable: isEditable,
         updateIsEditable: updateIsEditable,
+        userWebsiteData: userWebsiteData,
+        userLayoutData: userLayoutData,
         getWebsiteData: getWebsiteData,
         getUserData: getUserData,
         getLayoutData: getLayoutData,
