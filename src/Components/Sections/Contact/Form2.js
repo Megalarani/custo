@@ -11,43 +11,26 @@ import { fontSize, margin, textAlign } from "@mui/system";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-      backgroundColor: "#555",
+    
+    editableHeader:{
+      width:"100%",
+      fontSize:"25px",
+      textAlign: "center",
+      color: "red",
+      background: "transparent",
+      outline: "0",
+      border: "none",
+      marginBottom:"10px"
     },
     editable: {
+      width:"100%",
       textAlign: "center",
-      color: "white",
+      color: "black",
       background: "transparent",
       outline: "0",
       border: "none",
     },
-    row: {
-      position: "relative",
-      display: "flex",
-      padding: "10px",
-      flexWrap: "wrap",
-    },
-    col: {
-      width: "33.33%",
-    },
-    divider: {
-      height: "5px",
-      width: "40%",
-      backgroundColor: "white",
-      margin: "auto",
-    },
-    introHeader: {
-      textAlign: "center",
-      color: "white",
-      fontSize: "30px",
-    },
-    list: {
-      margin: "10px",
-      listStyle: "none",
-      fontSize: "25px",
-      color: "white",
-      textAlign: "center",
-    },
+   
     "@media (max-width: 600px)": {
       col: {
         width: "100%",
@@ -59,23 +42,22 @@ const useStyles = makeStyles(() =>
 export const Form2 = (props) => {
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
-  const data =[ 
+  const data = [
     {
-      header:"layatex",
-      para:"Fixyman is proud to be the name that nearly 1 million homeowners have trusted since 1996 for home improvement and repair,providing virtually any home rep.",
-      address1: "Intro header 1",
-      address2:"Vel Nagar, Aavadi",
-      contact1: "l472487229",
-      contact2:"2142425252",
+      header: "layatex",
+      para: "Fixyman is proud to be the name that nearly 1 million homeowners have trusted since 1996 for home improvement and repair,providing virtually any home rep.",
+      address: "Intro header 1 Vel Nagar, Aavadi",
+      contact: "l472487229",
       email: "loerum@gmail.com",
-      img1:"Cat3",
-      img2:"Cat3"
-    }]
-   
-  
+      img1: "Cat3",
+      img2: "Cat3",
+    },
+  ];
+
   const [localData, setLocalData] = useState(
     ctx.websiteData[props.id] === undefined ? data : ctx.websiteData[props.id]
   );
+  console.log("beast", localData);
   const onChangeHandler = (e, details, index) => {
     setLocalData((prevState) => {
       let updatedData = null;
@@ -84,25 +66,25 @@ export const Form2 = (props) => {
           ...details,
           header: e.target.value,
         };
-      } else if (e.target.id === "line1") {
+      } else if (e.target.id === "para") {
         updatedData = {
           ...details,
-          line1: e.target.value,
+          para: e.target.value,
         };
-      } else if (e.target.id === "line2") {
+      } else if (e.target.id === "address") {
         updatedData = {
           ...details,
-          line2: e.target.value,
+          address: e.target.value,
         };
-      } else if (e.target.id === "line3") {
+      } else if (e.target.id === "contact") {
         updatedData = {
           ...details,
-          line3: e.target.value,
+          contact: e.target.value,
         };
-      } else if (e.target.id === "line4") {
+      } else if (e.target.id === "email") {
         updatedData = {
           ...details,
-          line4: e.target.value,
+          email: e.target.value,
         };
       }
       prevState[index] = updatedData;
@@ -110,7 +92,114 @@ export const Form2 = (props) => {
     });
   };
   const classes = useStyles();
-  let editable = <></>;
+  let editable = (
+    <div class="contact-address-area">
+      {localData?.map((details, index) => (
+        <div key={index} class="container">
+          <div class="sec-title-style1 text-center max-width">
+            <div class="title">Contact Us</div>
+            <div class="text">
+              <div class="decor-left">
+                <span></span>
+              </div>
+              <p>Quick Contact</p>
+              <div class="decor-right">
+                <span></span>
+              </div>
+            </div>
+            <div class="bottom-text">
+              {/* <p>{details.para}</p> */}
+              <input
+                onChange={(e) => onChangeHandler(e, details, index)}
+                className={classes.editable}
+                id="para"
+                placeholder="para"
+                value={details.para}
+              />
+            </div>
+          </div>
+          <div class="contact-address-box row">
+            {/* <!--Start Single Contact Address Box--> */}
+            <div class="col-sm-4 single-contact-address-box text-center">
+              <img src={details.img1} />
+            </div>
+            {/* <!--End Single Contact Address Box-->
+              <!--Start Single Contact Address Box--> */}
+            <div class="col-sm-4 single-contact-address-box main-branch rounded">
+              {/* <h3>{item.header}</h3> */}
+              <input
+                onChange={(e) => onChangeHandler(e, details, index)}
+                className={classes.editableHeader}
+                id="header"
+                placeholder="header"
+                value={details.header}
+              />
+              <div class="inner">
+                <ul>
+                  <li>
+                    <div class="text">
+                      <h5>
+                        <i className="fa fa-facebook mx-2"></i>Address:
+                      </h5>
+                      <p className="mx-5">
+                        {" "}
+                        <input
+                          onChange={(e) => onChangeHandler(e, details, index)}
+                          className={classes.editable}
+                          id="address"
+                          placeholder="address"
+                          value={details.address}
+                        />
+                        {/* {item.address} */}
+                        <br />
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="text">
+                      <h5>
+                        {" "}
+                        <i className="fa fa-facebook mx-2"></i>Contact No:
+                      </h5>
+                      {/* <p className="mx-5">{item.contact}</p> */}
+                      <input
+                        onChange={(e) => onChangeHandler(e, details, index)}
+                        className={classes.editable}
+                        id="contact"
+                        placeholder="contact"
+                        value={details.contact}
+                      />
+                    </div>
+                  </li>
+                  <li>
+                    <div class="text">
+                      <h5>
+                        {" "}
+                        <i className="fa fa-facebook mx-2"></i>Email:
+                      </h5>
+                      {/* <p className="mx-5">{item.email}</p> */}
+                      <input
+                        onChange={(e) => onChangeHandler(e, details, index)}
+                        className={classes.editable}
+                        id="email"
+                        placeholder="email"
+                        value={details.email}
+                      />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {/* <!--End Single Contact Address Box-->
+              <!--Start Single Contact Address Box--> */}
+            <div class="col-sm-4 single-contact-address-box text-center">
+              <img src={details.img2} />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
   const onSaveHandler = () => {
     setloading(true);
     ctx.updateData(localData, props.id);
@@ -147,78 +236,82 @@ export const Form2 = (props) => {
           <Loader />
         </>
       )}
-      <section class="contact-address-area">
-        <div class="container">
-          <div class="sec-title-style1 text-center max-width">
-            <div class="title">Contact Us</div>
-            <div class="text">
-              <div class="decor-left">
-                <span></span>
+
+      {ctx.isEditable ? (
+        editable
+      ) : (
+        <div class="contact-address-area">
+          {localData?.map((item, index) => (
+            <div key={index} class="container">
+              <div class="sec-title-style1 text-center max-width">
+                <div class="title">Contact Us</div>
+                <div class="text">
+                  <div class="decor-left">
+                    <span></span>
+                  </div>
+                  <p>Quick Contact</p>
+                  <div class="decor-right">
+                    <span></span>
+                  </div>
+                </div>
+                <div class="bottom-text">
+                  <p>{item.para}</p>
+                </div>
               </div>
-              <p>Quick Contact</p>
-              <div class="decor-right">
-                <span></span>
+              <div class="contact-address-box row">
+                {/* <!--Start Single Contact Address Box--> */}
+                <div class="col-sm-4 single-contact-address-box text-center">
+                  <img src={item.img1} />
+                </div>
+                {/* <!--End Single Contact Address Box-->
+              <!--Start Single Contact Address Box--> */}
+                <div class="col-sm-4 single-contact-address-box main-branch rounded">
+                  <h3>{item.header}</h3>
+                  <div class="inner">
+                    <ul>
+                      <li>
+                        <div class="text">
+                          <h5>
+                            <i className="fa fa-facebook mx-2"></i>Address:
+                          </h5>
+                          <p className="mx-5">
+                            {" "}
+                            {item.address}
+                            <br />
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="text">
+                          <h5>
+                            {" "}
+                            <i className="fa fa-facebook mx-2"></i>Contact No:
+                          </h5>
+                          <p className="mx-5">{item.contact}</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="text">
+                          <h5>
+                            {" "}
+                            <i className="fa fa-facebook mx-2"></i>Email:
+                          </h5>
+                          <p className="mx-5">{item.email}</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                {/* <!--End Single Contact Address Box-->
+              <!--Start Single Contact Address Box--> */}
+                <div class="col-sm-4 single-contact-address-box text-center">
+                  <img src={item.img2} />
+                </div>
               </div>
             </div>
-            <div class="bottom-text">
-              <p>
-                {localData.para}
-              </p>
-            </div>
-          </div>
-          <div class="contact-address-box row">
-            {/* <!--Start Single Contact Address Box--> */}
-            <div class="col-sm-4 single-contact-address-box text-center">
-              <img src={localData.img1} />
-            </div>
-            {/* <!--End Single Contact Address Box-->
-                    <!--Start Single Contact Address Box--> */}
-            <div class="col-sm-4 single-contact-address-box main-branch rounded">
-              <h3>{localData.header}</h3>
-              <div class="inner">
-                <ul>
-                  <li>
-                    <div class="title">
-                      <h4><i className="fa fa-facebook"></i>Address:</h4>
-                    </div>
-                    <div class="text">
-                      <p>
-                      <i className="fa fa-facebook"></i> {localData.address1}
-                        <br /> {localData.address2}
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="title">
-                      <h4> <i className="fa fa-facebook"></i>Contact No:</h4>
-                    </div>
-                    <div class="text">
-                      <p>
-                      {localData.contact1} <br /> {localData.contact2}
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="title">
-                      <h4> <i className="fa fa-facebook"></i>Email:</h4>
-                    </div>
-                    <div class="text">
-                      <p>
-                        support@campuzone.com <br />
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            {/* <!--End Single Contact Address Box-->
-                    <!--Start Single Contact Address Box--> */}
-            <div class="col-sm-4 single-contact-address-box text-center">
-              <img src={localData.img2} />
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      )}
     </>
   );
 };
