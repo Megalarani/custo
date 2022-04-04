@@ -106,7 +106,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export const Slider2 = (props) => {
+const Gallery2 = (props) => {
   const classes = useStyles();
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
@@ -392,3 +392,4 @@ export const Slider2 = (props) => {
     </>
   );
 };
+ export default Gallery2;
