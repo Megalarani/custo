@@ -139,7 +139,7 @@ export const Form2 = (props) => {
                   <li>
                     <div class="text">
                       <h5>
-                        <i className="fa fa-facebook mx-2"></i>Address:
+                        <i className="fa fa-map-marker mx-2"></i>Address:
                       </h5>
                       <p className="mx-5">
                         {" "}
@@ -159,7 +159,7 @@ export const Form2 = (props) => {
                     <div class="text">
                       <h5>
                         {" "}
-                        <i className="fa fa-facebook mx-2"></i>Contact No:
+                        <i className="fa fa-phone mx-2"></i>Contact No:
                       </h5>
                       {/* <p className="mx-5">{item.contact}</p> */}
                       <input
@@ -175,7 +175,7 @@ export const Form2 = (props) => {
                     <div class="text">
                       <h5>
                         {" "}
-                        <i className="fa fa-facebook mx-2"></i>Email:
+                        <i className="fa fa-envelope mx-2"></i>Email:
                       </h5>
                       {/* <p className="mx-5">{item.email}</p> */}
                       <input
