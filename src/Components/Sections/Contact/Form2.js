@@ -6,12 +6,20 @@ import AuthContext from "../../../Context/Context";
 import Loader from "../../../loader/Loader";
 import clsx from "clsx";
 import "./Form2.css";
-import Cat3 from "../../../Assests/images/cat3.jpg";
+import Cat2 from "../../../Assests/images/cat2.jpg";
 import { fontSize, margin, textAlign } from "@mui/system";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    
+    contactTitle:{
+      position: "relative",
+      display: "block",
+      color: "#131313",
+      fontSize: "36px",
+      lineHeight: "46px",
+      fontWeight: "700",
+      textTransform: "uppercase"
+    },
     editableHeader:{
       width:"100%",
       fontSize:"25px",
@@ -49,8 +57,9 @@ export const Form2 = (props) => {
       address: "Intro header 1 Vel Nagar, Aavadi",
       contact: "l472487229",
       email: "loerum@gmail.com",
-      img1: "Cat3",
-      img2: "Cat3",
+      img1: Cat2,
+      img2: Cat2,
+     
     },
   ];
 
@@ -97,7 +106,7 @@ export const Form2 = (props) => {
       {localData?.map((details, index) => (
         <div key={index} class="container">
           <div class="sec-title-style1 text-center max-width">
-            <div class="title">Contact Us</div>
+            <div class={classes.contactTitle}>Contact Us</div>
             <div class="text">
               <div class="decor-left">
                 <span></span>
@@ -261,7 +270,7 @@ export const Form2 = (props) => {
               <div class="contact-address-box row">
                 {/* <!--Start Single Contact Address Box--> */}
                 <div class="col-sm-4 single-contact-address-box text-center">
-                  <img src={item.img1} />
+                  <img src={item.img1}  alt={item.header}/>
                 </div>
                 {/* <!--End Single Contact Address Box-->
               <!--Start Single Contact Address Box--> */}
@@ -305,7 +314,7 @@ export const Form2 = (props) => {
                 {/* <!--End Single Contact Address Box-->
               <!--Start Single Contact Address Box--> */}
                 <div class="col-sm-4 single-contact-address-box text-center">
-                  <img src={item.img2} />
+                  <img src={item.img2} alt={item.header}/>
                 </div>
               </div>
             </div>
