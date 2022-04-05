@@ -1,17 +1,16 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
 import OwlCarousel from "react-owl-carousel";
 import AuthContext from "../../../Context/Context";
 import Loader from "../../../loader/Loader";
 import clsx from "clsx";
-import WebFont from 'webfontloader';
+import WebFont from "webfontloader";
 import { fontSize, margin, textAlign } from "@mui/system";
 import { ReactComponent as DeleteIcon } from "../../../Assests/delete.svg";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const useStyles = makeStyles(() =>
-
   createStyles({
     root: {
       position: "relative",
@@ -40,18 +39,18 @@ const useStyles = makeStyles(() =>
       paddingBottom: "1.5rem",
       background: "transparent",
       outline: 0,
-      margin:"20px",
+      margin: "20px",
       border: "none",
       width: "100%",
-      fontFamily: 'Raleway',
-      fontWeight:"700"
+      fontFamily: "Raleway",
+      fontWeight: "700",
     },
     testName: {
       color: "#555",
-      fontFamily: 'Raleway',
+      fontFamily: "Raleway",
       marginTop: "5px",
       fontSize: "30px",
-      fontWeight:"600",
+      fontWeight: "600",
       textAlign: "center",
     },
     para: {
@@ -108,10 +107,10 @@ const Slider2 = (props) => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Raleway']
-      }
+        families: ["Raleway"],
+      },
     });
-   }, []);
+  }, []);
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
   const cardData = {
@@ -361,7 +360,7 @@ const Slider2 = (props) => {
               <h2 className={classes.introHeader}>Copyrights@layatex.com</h2>
             </div> */}
       <div className={classes.root}>
-        <h2 className={classes.introHeader} >{localData.header}</h2>
+        <h2 className={classes.introHeader}>{localData.header}</h2>
         {ctx.isEditable ? (
           editable
         ) : (

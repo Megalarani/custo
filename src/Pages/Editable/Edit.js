@@ -2,9 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import EditableList from "../../Components/Edit/EditableList";
 // import { Layout } from "../../utilitis/Layout";
 import AuthContext from "../../Context/Context";
+import WebFont from "webfontloader";
 import { ReactComponent as EditIcon } from "../../Assests/pencil.svg";
 
 const Edit = () => {
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Raleway"],
+      },
+    });
+  }, []);
   const ctx = useContext(AuthContext);
   const [mountedComponent, setMountedComponent] = useState([]);
   useEffect(() => {
@@ -37,8 +45,8 @@ const Edit = () => {
   const Nosections= ()=>{
     return (
       <div
-      className="p-2 m-3"
-      style={{ boxShadow: "0px 3px 6px #00000036", borderRadius: "5rem" }}
+      className="p-2 mx-3 w-50 m-auto"
+      style={{ boxShadow: "0px 3px 6px #00000036", borderRadius: "5rem", fontFamily:"raleway" }}
     >
       <h2 className="text-center">Add Sections to edit</h2>
       <div className="d-flex justify-content-center">
@@ -46,7 +54,7 @@ const Edit = () => {
           src="https://assets1.lottiefiles.com/packages/lf20_4hlbkvut.json"
           background="transparent"
           speed="1"
-          style={{ width: "500px", height: "500px", transform: "scale(1.5 )" }}
+          style={{ width: "500px", height: "500px", transform: "scale(1.0 )" }}
           loop
           autoplay
         ></lottie-player>

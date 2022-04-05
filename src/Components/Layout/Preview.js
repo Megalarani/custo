@@ -7,6 +7,7 @@ import Loader from "../../loader/Loader";
 import { NavLink } from "react-router-dom";
 import { useDrop } from "react-dnd";
 import clsx from"clsx"
+import WebFont from "webfontloader";
 import { ReactComponent as DeleteIcon } from "../../Assests/delete.svg";
 
 const Preview = () => {
@@ -63,6 +64,13 @@ const Preview = () => {
       setloading(false);
     }, 2000);
   };
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Raleway"],
+      },
+    });
+  }, []);
   const NoLayout = () => {
     return (
       <div
@@ -75,7 +83,7 @@ const Preview = () => {
             src="https://assets1.lottiefiles.com/packages/lf20_4hlbkvut.json"
             background="transparent"
             speed="1"
-            style={{ width: "500px", height: "500px", transform: "scale(1.8)" }}
+            style={{ width: "500px", height: "500px", transform: "scale(1.8)", fontfamily:"raleway" }}
             loop
             autoplay
           ></lottie-player>
