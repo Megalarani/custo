@@ -5,67 +5,92 @@ import OwlCarousel from "react-owl-carousel";
 import AuthContext from "../../../Context/Context";
 import Loader from "../../../loader/Loader";
 import clsx from "clsx";
-import Cat3 from "../../../Assests/images/cat3.jpg";
 import { fontSize, margin, textAlign } from "@mui/system";
-import "./Slider2.css";
-
+import { ReactComponent as DeleteIcon } from "../../../Assests/delete.svg";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      minHeight: "100vh",
-      display: "flex",
-      alignItems: "center",
-      backgroundColor: "rgb(233, 150, 150)",
+      position: "relative",
+      background: "#efefef",
       fontFamily: "Open Sans",
+      padding: "70px 0px",
     },
-    carouselCaption: {
-      position: "initial",
-      zIndex: "10",
-      padding: "5rem 8rem",
-      color: "rgba(78, 77, 77, 0.856)",
+    container: {
+      position: "relative",
+      width: "60%",
+      margin: "auto",
+      padding: "40px 20px",
+      boxShadow:
+        " rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;",
+      borderRadius: "15px",
+      background: "white",
+    },
+    inside: {
+      position: "relative",
+    },
+    introHeader: {
+      fontSize: "40px",
+      color: "#000",
+      textTransform: "capitalize",
       textAlign: "center",
-      fontSize: "1.2rem",
-      fontStyle: "italic",
-      fontWeight: "bold",
-      lineHeight: "2rem",
+      paddingBottom: "1.5rem",
+      background: "transparent",
+      outline: 0,
+      margin:"20px",
+      border: "none",
+      width: "100%",
+    },
+    testName: {
+      marginTop: "5px",
+      fontSize: "30px",
+      textAlign: "center",
+    },
+    para: {
+      textAlign: "center",
+      fontSize: "20px",
     },
     editable: {
+      color: "black",
       textAlign: "center",
-      color: "white",
       background: "transparent",
       outline: "0",
       border: "none",
     },
-    row: {
-      position: "relative",
-      display: "flex",
-      padding: "10px",
-      flexWrap: "wrap",
+    inputFile: {
+      width: 0,
+      height: 0,
+      opacity: 0,
+      zIndex: "0",
     },
-    col: {
-      width: "33.33%",
-    },
-    divider: {
-      height: "5px",
-      width: "40%",
-      backgroundColor: "white",
-      margin: "auto",
-    },
-    introHeader: {
+    inputLabel: {
+      position: "absolute",
+      background: "#fff",
+      width: "2.5rem",
+      height: "2.5rem",
+      padding: "0.3rem",
+      top: "0",
+      right: "0",
+      zIndex: 20,
       textAlign: "center",
-      color: "white",
-      fontSize: "30px",
+      cursor: "pointer",
+      "& i": {
+        fontSize: "1.75rem",
+      },
     },
-    list: {
-      margin: "10px",
-      listStyle: "none",
-      fontSize: "25px",
-      color: "white",
-      textAlign: "center",
+    addCard: {
+      borderRadius: "1rem",
+      position: "absolute",
+      background: "#fff",
+      padding: "1rem 2rem",
+      top: "1rem",
+      cursor: "pointer",
+      right: "1rem",
+      boxShadow: "2px 2px 3px 0 #ccc",
     },
     "@media (max-width: 600px)": {
-      col: {
-        width: "100%",
+      container: {
+        width: "90%",
       },
     },
   })
@@ -74,56 +99,67 @@ const useStyles = makeStyles(() =>
 const Slider2 = (props) => {
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
-  const data = [
-    {
-      name: "Intro header 1",
-      para: "If Shai Reznik's TDD videos don't convince you to add automated testing your code, I don't know what will.This was the very best explanation of frameworks for brginners that I've ever seen",
-      img: "Cat3",
-      id: "0",
-    },
-    {
-      name: "Intro header 1",
-      para: "If Shai Reznik's TDD videos don't convince you to add automated testing your code, I don't know what will.This was the very best explanation of frameworks for brginners that I've ever seen",
-      img: "Cat3",
-      id: "1",
-    },
-    {
-      name: "Intro header 1",
-      para: "If Shai Reznik's TDD videos don't convince you to add automated testing your code, I don't know what will.This was the very best explanation of frameworks for brginners that I've ever seen",
-      img: "Cat3",
-      id: "2",
-    },
-  ];
+  const cardData = {
+    header: "what people Think About US",
+    data: [
+      {
+        name: "Intro header 1",
+        para: "If Shai Reznik's TDD videos don't convince you to add automated testing your code, I don't know what will.This was the very best explanation of frameworks for brginners that I've ever seen",
+        img: "https://www.w3schools.com/howto/img_avatar.png",
+        id: "0",
+      },
+      {
+        name: "Intro header 1",
+        para: "If Shai Reznik's TDD videos don't convince you to add automated testing your code, I don't know what will.This was the very best explanation of frameworks for brginners that I've ever seen",
+        img: "https://www.w3schools.com/howto/img_avatar.png",
+        id: "1",
+      },
+      {
+        name: "Intro header 1",
+        para: "If Shai Reznik's TDD videos don't convince you to add automated testing your code, I don't know what will.This was the very best explanation of frameworks for brginners that I've ever seen",
+        img: "https://www.w3schools.com/howto/img_avatar.png",
+        id: "2",
+      },
+    ],
+  };
   const [localData, setLocalData] = useState(
-    ctx.websiteData[props.id] === undefined ? data : ctx.websiteData[props.id]
+    ctx.websiteData[props.id] === undefined
+      ? cardData
+      : ctx.websiteData[props.id]
   );
-  const onChangeHandler = (e, details, index) => {
+  const [card, setCard] = useState(localData.data);
+  const onChange = (event) => {
+    let val = event.target.value;
     setLocalData((prevState) => {
+      return {
+        ...prevState,
+        [event.target.id]: val,
+      };
+    });
+  };
+  const options = {
+    loop: true,
+    margin: 50,
+    dots: true,
+    nav: true,
+    autoplay: true,
+    autoplayTimeout: 4000,
+    autoplaySpeed: 2000,
+    autoplayHoverPause: true,
+    items: 1,
+  };
+  const onChangeHandler = (e, details, index) => {
+    setCard((prevState) => {
       let updatedData = null;
-      if (e.target.id === "header") {
+      if (e.target.id === "name") {
         updatedData = {
           ...details,
-          header: e.target.value,
+          name: e.target.value,
         };
-      } else if (e.target.id === "line1") {
+      } else if (e.target.id === "para") {
         updatedData = {
           ...details,
-          line1: e.target.value,
-        };
-      } else if (e.target.id === "line2") {
-        updatedData = {
-          ...details,
-          line2: e.target.value,
-        };
-      } else if (e.target.id === "line3") {
-        updatedData = {
-          ...details,
-          line3: e.target.value,
-        };
-      } else if (e.target.id === "line4") {
-        updatedData = {
-          ...details,
-          line4: e.target.value,
+          para: e.target.value,
         };
       }
       prevState[index] = updatedData;
@@ -131,10 +167,147 @@ const Slider2 = (props) => {
     });
   };
   const classes = useStyles();
-  let editable = <></>;
+  const onImageChange = (e, i) => {
+    // setError(null);
+
+    let selected = e.target.files[0];
+
+    if (!selected) {
+      // setError("Please select file");
+      return;
+    }
+
+    if (!selected.type.includes("image")) {
+      // setError("Please select image file");
+      return;
+    }
+    const storage = getStorage();
+    const uploadPath = `images/${localData[i].title + localData[i].id}`; // upload path
+    const storageRef = ref(storage, uploadPath); // create refernce to store data
+
+    uploadBytes(storageRef, selected).then((snapshot) => {
+      // console.log(snapshot);
+      getDownloadURL(storageRef).then((url) => {
+        setCard((prevState) => {
+          let updatedData = null;
+          updatedData = {
+            ...prevState[i],
+            img: url,
+          };
+          prevState[i] = updatedData;
+          return [...prevState];
+        });
+      });
+    });
+    // setError(null);
+  };
+  const addCard = () => {
+    let updatedData = {
+      img: "https://www.w3schools.com/howto/img_avatar.png",
+      name: "",
+      para: "",
+      id: card.length,
+    };
+    setCard((prevState) => {
+      return [...prevState, updatedData];
+    });
+  };
+  const removeCard = (value) => {
+    setCard((prevState) => {
+      prevState = prevState.filter((item) => item.id !== value);
+      return [...prevState];
+    });
+  };
+  let editable = (
+    <div>
+      <div className={classes.addCard} onClick={addCard}>
+        <i class="fa fa-plus-circle mx-2" aria-hidden="true"></i> Add Card
+      </div>
+      <div className={classes.container}>
+        <input
+          className={classes.introHeader}
+          placeholder="Header"
+          id="header"
+          onChange={onChange}
+          value={localData.header}
+        />
+        {card.map((details, index) => (
+          <div key={index} className={classes.inside}>
+            <div
+              onClick={() => removeCard(details.id)}
+              style={{
+                position: "absolute",
+                top: "0",
+                left: "0",
+                zIndex: 20,
+                cursor: "pointer",
+              }}
+            >
+              <DeleteIcon
+                style={{
+                  width: "2rem",
+                  height: "2rem",
+                  fill: "#dc3545",
+                  padding: "5px",
+                }}
+              />
+            </div>
+            <textarea
+              onChange={(e) => onChangeHandler(e, details, index)}
+              className={classes.editable}
+              style={{ width: "100%" }}
+              id="para"
+              placeholder="Text"
+              value={details.para}
+            />
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "10px",
+              }}
+            >
+              <input
+                type="file"
+                onChange={(e) => onImageChange(e, index)}
+                className={classes.inputFile}
+                id={details.id}
+                name={details.name}
+              />
+              <label className={classes.inputLabel} htmlFor={details.id}>
+                <i className="fa fa-upload"></i>
+              </label>
+              <img
+                src={details.img}
+                alt={details.name}
+                style={{ width: "50px", borderRadius: "50%" }}
+              ></img>
+            </div>
+
+            <div id="image-caption" className={classes.testName}>
+              <input
+                onChange={(e) => onChangeHandler(e, details, index)}
+                className={classes.editable}
+                id="name"
+                placeholder="name"
+                value={details.name}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   const onSaveHandler = () => {
     setloading(true);
-    ctx.updateData(localData, props.id);
+    let data = {
+      header: localData.header,
+      data: card,
+    };
+
+    ctx.updateData(data, props.id);
     setTimeout(() => {
       setloading(false);
     }, 2000);
@@ -173,38 +346,35 @@ const Slider2 = (props) => {
               <h2 className={classes.introHeader}>Copyrights@layatex.com</h2>
             </div> */}
       <div className={classes.root}>
+        <h2 className={classes.introHeader} >{localData.header}</h2>
         {ctx.isEditable ? (
           editable
         ) : (
-          <div class="container">
-            <div id="demo" class="carousel slide" data-ride="carousel">
-              <div class="carousel-inner">
-                {localData?.map((item, index) => (
-                  <div class="carousel-item  active">
-                    <div class="carousel-caption">
-                      <p>{item.para} </p> <img src={item.img} alt={item.name} />
-                      <div id="image-caption">{item.name}</div>
-                    </div>
+          <div className={classes.container}>
+            <OwlCarousel className="owl-theme" {...options}>
+              {card.map((item, index) => (
+                <div key={index}>
+                  <p className={classes.para}>{item.para} </p>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      margin: "10px",
+                    }}
+                  >
+                    <img
+                      src={item.img}
+                      alt={item.name}
+                      style={{ width: "50px", borderRadius: "50%" }}
+                    ></img>
                   </div>
-                ))}
-              </div>
-              <a
-                class="carousel-control-prev slider2 "
-                href="#demo"
-                data-slide="prev"
-              >
-                {" "}
-                <i class="fas fa-arrow-left"></i>{" "}
-              </a>{" "}
-              <a
-                class="carousel-control-next slider2"
-                href="#demo"
-                data-slide="next"
-              >
-                {" "}
-                <i class="fas fa-arrow-right"></i>{" "}
-              </a>
-            </div>
+                  <div id="image-caption" className={classes.testName}>
+                    {item.name}
+                  </div>
+                </div>
+              ))}
+            </OwlCarousel>
           </div>
         )}
       </div>

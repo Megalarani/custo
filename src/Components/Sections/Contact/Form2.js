@@ -7,6 +7,7 @@ import Loader from "../../../loader/Loader";
 import clsx from "clsx";
 import "./Form2.css";
 import Cat2 from "../../../Assests/images/cat2.jpg";
+import Cat1 from "../../../Assests/images/cat1.jpg";
 import { fontSize, margin, textAlign } from "@mui/system";
 
 const useStyles = makeStyles(() =>
@@ -66,7 +67,6 @@ export const Form2 = (props) => {
   const [localData, setLocalData] = useState(
     ctx.websiteData[props.id] === undefined ? data : ctx.websiteData[props.id]
   );
-  console.log("beast", localData);
   const onChangeHandler = (e, details, index) => {
     setLocalData((prevState) => {
       let updatedData = null;
@@ -270,7 +270,7 @@ export const Form2 = (props) => {
               <div class="contact-address-box row">
                 {/* <!--Start Single Contact Address Box--> */}
                 <div class="col-sm-4 single-contact-address-box text-center">
-                  <img src={item.img1}  alt={item.header}/>
+                  <img src={Cat2}  alt={item.header}/>
                 </div>
                 {/* <!--End Single Contact Address Box-->
               <!--Start Single Contact Address Box--> */}
@@ -281,7 +281,7 @@ export const Form2 = (props) => {
                       <li>
                         <div class="text">
                           <h5>
-                            <i className="fa fa-facebook mx-2"></i>Address:
+                            <i className="fa fa-map-marker mx-2"></i>Address:
                           </h5>
                           <p className="mx-5">
                             {" "}
@@ -294,7 +294,7 @@ export const Form2 = (props) => {
                         <div class="text">
                           <h5>
                             {" "}
-                            <i className="fa fa-facebook mx-2"></i>Contact No:
+                            <i className="fa  fa-phone  mx-2"></i>Contact No:
                           </h5>
                           <p className="mx-5">{item.contact}</p>
                         </div>
@@ -303,7 +303,7 @@ export const Form2 = (props) => {
                         <div class="text">
                           <h5>
                             {" "}
-                            <i className="fa fa-facebook mx-2"></i>Email:
+                            <i className="fa fa-envelope mx-2"></i>Email:
                           </h5>
                           <p className="mx-5">{item.email}</p>
                         </div>
@@ -314,7 +314,7 @@ export const Form2 = (props) => {
                 {/* <!--End Single Contact Address Box-->
               <!--Start Single Contact Address Box--> */}
                 <div class="col-sm-4 single-contact-address-box text-center">
-                  <img src={item.img2} alt={item.header}/>
+                  <img src={Cat1}  alt={item.header}/>
                 </div>
               </div>
             </div>
