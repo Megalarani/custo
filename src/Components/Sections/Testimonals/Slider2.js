@@ -1,14 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
 import OwlCarousel from "react-owl-carousel";
 import AuthContext from "../../../Context/Context";
 import Loader from "../../../loader/Loader";
 import clsx from "clsx";
+import WebFont from 'webfontloader';
 import { fontSize, margin, textAlign } from "@mui/system";
 import { ReactComponent as DeleteIcon } from "../../../Assests/delete.svg";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 const useStyles = makeStyles(() =>
+
   createStyles({
     root: {
       position: "relative",
@@ -31,7 +34,7 @@ const useStyles = makeStyles(() =>
     },
     introHeader: {
       fontSize: "40px",
-      color: "#000",
+      color: "#555",
       textTransform: "capitalize",
       textAlign: "center",
       paddingBottom: "1.5rem",
@@ -40,10 +43,15 @@ const useStyles = makeStyles(() =>
       margin:"20px",
       border: "none",
       width: "100%",
+      fontFamily: 'Raleway',
+      fontWeight:"700"
     },
     testName: {
+      color: "#555",
+      fontFamily: 'Raleway',
       marginTop: "5px",
       fontSize: "30px",
+      fontWeight:"600",
       textAlign: "center",
     },
     para: {
@@ -97,6 +105,13 @@ const useStyles = makeStyles(() =>
 );
 
 const Slider2 = (props) => {
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Raleway']
+      }
+    });
+   }, []);
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
   const cardData = {
