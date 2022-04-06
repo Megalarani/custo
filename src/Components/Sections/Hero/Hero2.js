@@ -51,11 +51,6 @@ const Hero2 = () => {
       ) : (
         <></>
       )}
-       {loading && (
-      <>
-      <Loader/>
-      </>
-    )}
       <section id="#About">
         <div className={data.container.style}>
         {ctx.isEditable ? (
