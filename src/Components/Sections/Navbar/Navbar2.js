@@ -37,6 +37,7 @@ const useStyles = makeStyles(() =>
     menuItems: {
       fontItems: "0.9rem",
       color: "#000",
+
       textTransform: "uppercase",
       padding: "0.5rem 0.75rem",
       marginRight: "0.5rem",
@@ -83,6 +84,16 @@ const useStyles = makeStyles(() =>
         textTransform: "uppercase",
         color: "#000",
       },
+    },
+
+    "@media (max-width: 600px)": {
+      rootNav: {
+        padding: "0",
+        paddingLeft: "2px",
+      },
+      menuItem:{
+        fontSize:"8px"
+      }
     },
   })
 );
@@ -267,11 +278,11 @@ export const Navbar2 = (props) => {
             <img src={localData.logo} alt="headerLogo" />
           </div>
           <div className={classes.menuList}>
-            {menuItem.map((item,index) => (
+            {menuItem.map((item, index) => (
               <HashLink to={`#${item.path}`} key={index}>
-                <Typography className={classes.menuItems}>
+                <p className={classes.menuItems}>
                   {item.label}
-                </Typography>
+                </p>
               </HashLink>
             ))}
           </div>
