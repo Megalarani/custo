@@ -20,73 +20,55 @@ import Form2 from "../Components/Sections/Contact/Form2";
 export const LocalSections = [
   {
     group: "Navbar",
-    variants: [{ c: Navbar1, id: "Navbar1" }],
-    //variants: [{ c: Navbar2, id: "Navbar2" }],
+    variants: [
+      // { c: Navbar1, id: "Navbar1" },
+      { c: Navbar2, id: "Navbar2" },
+    ],
   },
   {
     group: "Hero",
     variants: [
-      { c: Hero1, id: "Hero1" },
-      { c: Hero2, id: "Hero2" },
-      { c: Hero3, id: "Hero3" },
-      { c: Hero4, id: "Hero4" },
-      // { c: Hero5, id: "Hero5" },
+      // { c: Hero1, id: "Hero1" },
+      // { c: Hero2, id: "Hero2" },
+      // { c: Hero3, id: "Hero3" },
+      // { c: Hero4, id: "Hero4" },
+      { c: Hero5, id: "Hero5" },
     ],
   },
   {
     group: "Card",
     variants: [
-      { c: Card1, id: "Card1" },
-      { c: Card2, id: "Card2" },
-      // { c: Card3, id: "Card3" },
+      // { c: Card1, id: "Card1" },
+      // { c: Card2, id: "Card2" },
+      { c: Card3, id: "Card3" },
     ],
   },
   {
     group: "Gallery",
-    variants: [{ c: Gallery1, id: "Gallery1" }],
+    variants: [
+      // { c: Gallery1, id: "Gallery1" },
+      { c: Gallery2, id: "Gallery2" },
+    ],
   },
   {
     group: "Testimonal",
-    variants: [{ c: Slider1, id: "Slider1" }],
-    // variants: [{ c: Slider2, id: "Slider2" }],
+    variants: [
+      { c: Slider1, id: "Slider1" },
+      { c: Slider2, id: "Slider2" },
+    ],
   },
   {
     group: "Contact",
-    variants: [{ c: Form1, id: "Form1" }],
+    variants: [
+      // { c: Form1, id: "Form1" },
+      { c: Form2, id: "Form2" },
+    ],
   },
   {
     group: "Footer",
-    variants: [{ c: Footer1, id: "Footer1" }],
-  },
-];
-
-export const commonSections = [
-  {
-    group: "Navbar",
-    variants: [{ c: Navbar2, id: "Navbar2" }],
-  },
-  {
-    group: "Hero",
-    variants: [{ c: Hero5, id: "Hero5" }],
-  },
-  {
-    group: "Card",
-    variants: [{ c: Card3, id: "Card3" }],
-  },
-  {
-    group: "Gallery",
-    variants: [{ c: Gallery2, id: "Gallery2" }],
-  },
-  {
-    group: "Testimonal",
-    variants: [{ c: Slider2, id: "Slider2" }],
-  },
-  {
-    group: "Contact",
-    variants: [{ c: Form2, id: "Form2" }]
-  },
-  {
-    group: "Footer",
-    variants: [{ c: Footer2, id: "Footer2" }],
+    variants: [
+      // { c: Footer1, id: "Footer1" },
+      { c: Footer2, id: "Footer2" },
+    ],
   },
 ];

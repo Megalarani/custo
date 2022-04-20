@@ -36,12 +36,12 @@ const Login = (props) => {
     } else {
       signInWithEmailAndPassword(auth, userCred.email, userCred.password)
         .then((res) => {
+          setloading(false);
           console.log("success");
           ctx.setUserId(res.user.uid);
           setTimeout(() => {
             user && navigate(`/${res.user.uid}/home`);
           }, 1000);
-          setloading(false);
         })
         .catch((error) => {
           console.log("error",error);

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import EditableList from "../../Components/Edit/EditableList";
-// import { Layout } from "../../utilitis/Layout";
 import AuthContext from "../../Context/Context";
 import WebFont from "webfontloader";
 import { ReactComponent as EditIcon } from "../../Assests/pencil.svg";

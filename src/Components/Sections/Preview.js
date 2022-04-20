@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { LocalSections, commonSections } from "../../utilitis/LocalSections";
+import { LocalSections } from "../../utilitis/LocalSections";
 import AuthContext from "../../Context/Context";
 
 
@@ -9,9 +9,6 @@ const Preview = (props) => {
     const Component = component;
     return <Component />;
   };
-  const [sectionsArray, setSectionsArray] = useState(
-    ctx.user.role === "school" ? LocalSections : commonSections
-  );
   return (
     <div
       className="col-10 p-2 special-scroll"
@@ -20,7 +17,7 @@ const Preview = (props) => {
       <h3 className="text-center p-2" style={{ color: "var(--primary)" }}>
         Campuzone provides you with various options
       </h3>
-      {sectionsArray.map((single, index) => (
+      {LocalSections.map((single, index) => (
         <div key={index * 11}>
           <h6 className="text-primary text-capitalize px-2 py-3">
             {single.group}
