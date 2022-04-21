@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { LocalSections } from "../../utilitis/LocalSections";
 import AuthContext from "../../Context/Context";
 
-
 const Preview = (props) => {
   const ctx = useContext(AuthContext);
   const CreateComponent = ({ component }) => {
@@ -12,7 +11,12 @@ const Preview = (props) => {
   return (
     <div
       className="col-10 p-2 special-scroll"
-      style={{ height: "91vh", overflowX: "hidden", overflowY: "auto" }}
+      style={{
+        height: "91vh",
+        overflowX: "hidden",
+        overflowY: "auto",
+        scrollBehavior: "smooth",
+      }}
     >
       <h3 className="text-center p-2" style={{ color: "var(--primary)" }}>
         Campuzone provides you with various options

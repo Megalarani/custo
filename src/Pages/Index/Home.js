@@ -7,7 +7,8 @@ const useStyles = makeStyles(() =>
   createStyles({
     scrollbar: {
       maxHeight: "100vh",
-      overflow: "auto",
+      overflowX: "hidden",
+      overflowY: "auto",
       scrollBehavior: "smooth",
       "&::-webkit-scrollbar": {
         width: "5px",

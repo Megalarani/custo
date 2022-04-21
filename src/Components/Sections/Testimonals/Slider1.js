@@ -52,24 +52,7 @@ const Slider1 = (props) => {
     autoplayHoverPause: true,
     items: 1,
   };
-  const data = {
-    container: {
-      style: ` col-md-9 col-lg-7 m-auto ${styles.test}`,
-      value: "",
-    },
-    heading: {
-      style: `${styles.test_text_h2}`,
-      value: "",
-    },
-    slides: {
-      paragraph1:
-        "It is a long established fact that a reader will be distracted by the readable",
-      paragraph2:
-        "It is a long established fact that a reader will be distracted by the readable",
-      paragraph3:
-        "It is a long established fact that a reader will be distracted by the readable",
-    },
-  };
+
   const onChangeHandler = (e, details, index) => {
     setCard((prevState) => {
       let updatedData = null;
@@ -129,42 +112,52 @@ const Slider1 = (props) => {
         </>
       )}
       <section>
-        <div className={data.container.style}>
-          <div className="text-center ">
-            {ctx.isEditable ? (
-              <>
-                <input
-                  // className={classes.introHeader}
-                  placeholder="Header"
-                  id="header"
-                  onChange={onChange}
-                  value={localData.header}
-                />
+        <div
+          className={clsx(
+            ctx.isEditable
+              ? "h-100 col-md-9 col-lg-7 m-auto"
+              : "col-md-9 col-lg-7 m-auto",
+            styles.test
+          )}
+        >
+          {ctx.isEditable ? (
+            <div className="text-center ">
+              <input
+                className={clsx(styles.test_text_h2, styles.inputHeader)}
+                placeholder="Header"
+                id="header"
+                onChange={onChange}
+                value={localData.header}
+              />
+              {card.map((details, index) => (
+                <div
+                  className="row justify-content-center align-items-center mb-2"
+                  key={index}
+                >
+                  <h5 className="pr-4">{"Slider " + `${index + 1}`}</h5>
+                  <textarea
+                    key={index}
+                    onChange={(e) => onChangeHandler(e, details, index)}
+                    className={styles.inputPara}
+                    id="para"
+                    name="para"
+                    style={{ width: "75%" }}
+                    defaultValue={details.para}
+                  >
+                  </textarea>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center">
+              <h2 className={styles.test_text_h2}>{localData.header}</h2>
+              <OwlCarousel className="owl-theme" {...options}>
                 {card.map((details, index) => (
-                  <div className="row justify-content-center align-items-center mb-2">
-                    <h5 className="pr-4">{"Slider " + `${index + 1}`}</h5>
-                    <textarea
-                      key={index}
-                      onChange={(e) => onChangeHandler(e, details, index)}
-                      className={`${styles.inputPara}`}
-                      id="content"
-                      value={details.para}
-                      style={{ width: "75%" }}
-                    />
-                  </div>
+                  <p key={index}>{details.para}</p>
                 ))}
-              </>
-            ) : (
-              <>
-                <h2 className={data.heading.style}>{localData.header}</h2>
-                <OwlCarousel className="owl-theme" {...options}>
-                  {card.map((details, index) => (
-                    <p key={index}>{details.para}</p>
-                  ))}
-                </OwlCarousel>
-              </>
-            )}
-          </div>
+              </OwlCarousel>
+            </div>
+          )}
         </div>
       </section>
     </>

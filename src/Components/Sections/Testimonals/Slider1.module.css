@@ -15,6 +15,7 @@
   color: white;
   font-size: 2rem;
 }
+
 .inputPara {
   width: 100%;
   padding: 1rem;
@@ -53,4 +54,12 @@
   .test_text_p {
     padding: 50px;
   }
+}
+
+.inputHeader {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  outline: 0;
+  border: none;
 }

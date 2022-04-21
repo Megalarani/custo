@@ -39,7 +39,7 @@ const useStyles = makeStyles(() =>
       paddingBottom: "1.5rem",
       background: "transparent",
       outline: 0,
-      margin: "20px",
+      margin: "20px 0",
       border: "none",
       width: "100%",
       fontFamily: "Raleway",

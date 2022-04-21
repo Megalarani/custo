@@ -2,92 +2,77 @@ import React, { useContext, useState } from "react";
 import styles from "./Card1.module.css";
 import AuthContext from "../../../Context/Context";
 import Loader from "../../../loader/Loader";
+import clsx from "clsx";
 
-const Card1 = () => {
+const Card1 = (props) => {
+  // const classes = useStyles();
   const [loading, setloading] = useState(false);
   const ctx = useContext(AuthContext);
-  const data = {
-    container: {
-      style: `row ${styles.cards}`,
-      value: "",
+  const cardData = [
+    {
+      title: "Enrollement",
+      para: "It is a long established fact that a reader will be distracted",
+      id: "0",
     },
-    cards: {
-      card1: {
-        heading: {
-          style: "",
-          value: "Enrollement ",
-        },
-        paragraph: {
-          style: "",
-          value:
-            "It is a long established fact that a reader will be distracted",
-        },
-      },
-      card2: {
-        heading: {
-          style: "",
-          value: "Curriculam",
-        },
-        paragraph: {
-          style: "",
-          value:
-            "  It is a long established fact that a reader will be distracted",
-        },
-      },
-      card3: {
-        heading: {
-          style: "Programs",
-          value: "",
-        },
-        paragraph: {
-          style: "",
-          value:
-            "  It is a long established fact that a reader will be distracted",
-        },
-      },
+    {
+      title: "Curriculam",
+      para: "It is a long established fact that a reader will be distracted",
+      id: "1",
     },
-  };
+    {
+      title: "Programs",
+      para: "It is a long established fact that a reader will be distracted",
+      id: "2",
+    },
+  ];
 
   const [localData, setLocalData] = useState(
-   ctx.websiteData ? ctx.websiteData.card1 : []
+    ctx.websiteData[props.id] === undefined
+      ? cardData
+      : ctx.websiteData[props.id]
   );
-  let Identifier = "card1";
-  console.log(localData, "local");
   const onChangeHandler = (e, details, index) => {
     setLocalData((prevState) => {
       let updatedData = null;
-      if (e.target.id === "heading") {
+      if (e.target.id === "title") {
         updatedData = {
           ...details,
-          heading: e.target.value,
+          title: e.target.value,
         };
       } else {
         updatedData = {
           ...details,
-          content: e.target.value,
+          para: e.target.value,
         };
       }
       prevState[index] = updatedData;
       return [...prevState];
     });
   };
-
+  const onSaveHandler = () => {
+    setloading(true);
+    ctx.updateData(localData, props.id);
+    setTimeout(() => {
+      setloading(false);
+    }, 2000);
+  };
   return (
     <>
       {ctx.isEditable ? (
         <div className="row py-3 justify-content-end">
-          <div
-            className="saveButton"
-            onClick={() => {
-              setloading(true);
-              ctx.updateData(localData, Identifier);
-              setTimeout(() => {
-                setloading(false);
-              }, 2000);
+          <button
+            className="btn px-5"
+            onClick={onSaveHandler}
+            style={{
+              background: "#fff",
+              fontSize: "20px",
+              color: "#dc3545",
+              borderRadius: "20px",
+              boxShadow: "0 3px 6px #00000036",
             }}
           >
-            Save
-          </div>
+            Save<i className="fa fa-save mx-2"></i>{" "}
+          </button>
         </div>
       ) : (
         <></>
@@ -97,12 +82,15 @@ const Card1 = () => {
           <Loader />
         </>
       )}
-      <div className={data.container.style}>
+      <div className={clsx("row", styles.cards)}>
         {localData.map((details, index) => (
           <div className={`col-md-3  ${styles.card} `} key={index}>
             <div className={`${styles.cardin}`}>
               <div className={`${styles.round}`}>
-                <i className="fa fa-pencil-square-o icon" aria-hidden="true"></i>
+                <i
+                  className="fa fa-pencil-square-o icon"
+                  aria-hidden="true"
+                ></i>
               </div>
               {ctx.isEditable ? (
                 <>
@@ -110,22 +98,20 @@ const Card1 = () => {
                     type="text"
                     onChange={(e) => onChangeHandler(e, details, index)}
                     className={`${styles.inputHeading}`}
-                    id="heading"
-                    value={details.heading}
+                    id="title"
+                    value={details.title}
                   />
                   <textarea
                     onChange={(e) => onChangeHandler(e, details, index)}
                     className={`${styles.inputPara}`}
-                    id="content"
-                    value={details.content}
+                    id="para"
+                    value={details.para}
                   />
                 </>
               ) : (
                 <>
-                  <h2>{details.heading}</h2>
-                  <p className={data.cards.card1.paragraph.style}>
-                    {details.content}
-                  </p>
+                  <h2>{details.title}</h2>
+                  <p className="">{details.para}</p>
                 </>
               )}
             </div>

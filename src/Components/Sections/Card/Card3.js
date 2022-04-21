@@ -138,7 +138,6 @@ export const Card3 = (props) => {
       ? cardData
       : ctx.websiteData[props.id]
   );
-  console.log(localData, "ak");
   const onChangeHandler = (e, details, index) => {
     setLocalData((prevState) => {
       let updatedData = null;
